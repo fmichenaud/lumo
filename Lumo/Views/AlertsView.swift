@@ -101,10 +101,10 @@ struct AlertsView: View {
 
     private func blockHeader(_ title: String, icon: String, desc: String) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Label(title, systemImage: icon)
+            Label(LocalizedStringKey(title), systemImage: icon)
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(Theme.textPrimary)
-            Text(desc).font(.caption).foregroundStyle(Theme.textSecondary)
+            Text(LocalizedStringKey(desc)).font(.caption).foregroundStyle(Theme.textSecondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -112,8 +112,8 @@ struct AlertsView: View {
     private func optionRow<Trailing: View>(_ title: String, _ desc: String, @ViewBuilder trailing: () -> Trailing) -> some View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 1) {
-                Text(title).font(.callout).foregroundStyle(Theme.textPrimary)
-                Text(desc).font(.caption2).foregroundStyle(Theme.textSecondary)
+                Text(LocalizedStringKey(title)).font(.callout).foregroundStyle(Theme.textPrimary)
+                Text(LocalizedStringKey(desc)).font(.caption2).foregroundStyle(Theme.textSecondary)
             }
             Spacer()
             trailing()

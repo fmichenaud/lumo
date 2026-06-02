@@ -2,6 +2,7 @@ name: Lumo
 options:
   bundleIdPrefix: com.florent
   createIntermediateGroups: true
+  developmentLanguage: fr
   deploymentTarget:
     macOS: "26.0"
 settings:

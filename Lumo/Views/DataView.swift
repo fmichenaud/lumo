@@ -34,8 +34,8 @@ struct DataView: View {
                 Image(systemName: icon).foregroundStyle(Theme.accent).font(.system(size: 15, weight: .semibold))
             }
             VStack(alignment: .leading, spacing: 1) {
-                Text(title).foregroundStyle(Theme.textPrimary)
-                Text(subtitle).font(.caption).foregroundStyle(Theme.textSecondary)
+                Text(LocalizedStringKey(title)).foregroundStyle(Theme.textPrimary)
+                Text(LocalizedStringKey(subtitle)).font(.caption).foregroundStyle(Theme.textSecondary)
             }
             Spacer()
             if isOn {
