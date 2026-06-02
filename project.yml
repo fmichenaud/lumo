@@ -1,0 +1,56 @@
+name: Lumo
+options:
+  bundleIdPrefix: com.florent
+  createIntermediateGroups: true
+  deploymentTarget:
+    macOS: "26.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: "-"
+    ENABLE_HARDENED_RUNTIME: NO
+targets:
+  Lumo:
+    type: application
+    platform: macOS
+    sources:
+      - Lumo
+    configFiles:
+      Debug: Config/Secrets.xcconfig
+      Release: Config/Secrets.xcconfig
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.florent.Lumo
+        PRODUCT_NAME: Lumo
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: Lumo/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Lumo/Lumo.entitlements
+        COMBINE_HIDPI_IMAGES: YES
+        ENABLE_PREVIEWS: YES
+        ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        MACOSX_DEPLOYMENT_TARGET: "26.0"
+  LumoTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - LumoTests
+    dependencies:
+      - target: Lumo
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.florent.LumoTests
+        MACOSX_DEPLOYMENT_TARGET: "26.0"
+schemes:
+  Lumo:
+    build:
+      targets:
+        Lumo: all
+        LumoTests: [test]
+    test:
+      targets:
+        - LumoTests

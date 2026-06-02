@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Xcode / build
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+
+# Projet généré par XcodeGen (on versionne project.yml, pas le .xcodeproj)
+*.xcodeproj/
+
+# Swift Package Manager
+.swiftpm/
+.build/
