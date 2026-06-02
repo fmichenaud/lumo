@@ -6,6 +6,8 @@ L'interface officielle est austère et demande des manipulations techniques ; Lu
 
 > ⚠️ Projet communautaire, non affilié à Ulanzi ni au projet AWTRIX.
 
+![Lumo](docs/screenshot.png)
+
 ## ⬇️ Télécharger
 
 Récupérez le `.dmg` dans la page [Releases](../../releases). L'app n'est pas notarisée (pas de compte Apple Developer payant) : au **premier lancement**, faites **clic droit → Ouvrir** (une seule fois). Ou compilez depuis les sources (voir plus bas).
@@ -93,7 +95,7 @@ Il est injecté dans l'app via `Info.plist` — aucun secret n'est commité dans
 
 ## 🤝 Contribuer
 
-Issues et PR bienvenues : support d'autres afficheurs (LaMetric, Pixoo/Divoom, WLED), nouveaux modèles de connecteurs, traductions…
+Issues et PR bienvenues : support d'autres afficheurs (LaMetric, Pixoo/Divoom, WLED), nouveaux modèles de connecteurs, traductions… Voir [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## 📄 Licence
 
