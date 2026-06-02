@@ -22,7 +22,11 @@ jobs:
       - name: Générer le projet
         run: xcodegen generate
 
-      - name: Build & Tests
+      # Les runners GitHub tournent sous macOS 15 : on compile (cross-build vers la
+      # cible macOS 26), mais l'exécution des tests nécessite un hôte macOS 26
+      # → lancez `xcodebuild … test` en local. Bascule possible vers un runner macOS 26
+      # quand l'image sera disponible.
+      - name: Build (vérification de compilation)
         run: |
           xcodebuild -project Lumo.xcodeproj -scheme Lumo \
-            -destination 'platform=macOS' test
+            -destination 'platform=macOS' build
