@@ -115,7 +115,7 @@ private struct TemplatePicker: View {
                 VStack(alignment: .leading, spacing: 22) {
                     ForEach(categories, id: \.self) { category in
                         VStack(alignment: .leading, spacing: 10) {
-                            Text(category.uppercased())
+                            Text(String(localized: String.LocalizationValue(category)).uppercased())
                                 .font(.caption.weight(.semibold)).tracking(0.8)
                                 .foregroundStyle(Theme.textSecondary)
                             LazyVGrid(columns: columns, spacing: 12) {
@@ -331,7 +331,7 @@ private struct ConnectorEditor: View {
                 .frame(width: 16, height: 16)
                 .background(Theme.accent.opacity(0.2), in: Circle())
                 .foregroundStyle(Theme.accent)
-            Text(text).font(.caption).foregroundStyle(Theme.textPrimary)
+            Text(LocalizedStringKey(text)).font(.caption).foregroundStyle(Theme.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 4)
             trailing()
@@ -377,7 +377,7 @@ private struct ConnectorEditor: View {
 
     private func group<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(title.uppercased()).font(.caption.weight(.semibold)).tracking(0.8)
+            Text(String(localized: String.LocalizationValue(title)).uppercased()).font(.caption.weight(.semibold)).tracking(0.8)
                 .foregroundStyle(Theme.textSecondary)
             content()
         }
@@ -385,12 +385,12 @@ private struct ConnectorEditor: View {
 
     private func field(_ title: String, _ placeholder: String, text: Binding<String>) -> some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text(title).font(.caption2).foregroundStyle(Theme.textSecondary)
+            Text(LocalizedStringKey(title)).font(.caption2).foregroundStyle(Theme.textSecondary)
             TextField(placeholder, text: text).textFieldStyle(.roundedBorder)
         }
     }
 
     private func caption(_ t: String) -> some View {
-        Text(t).font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
+        Text(LocalizedStringKey(t)).font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
     }
 }

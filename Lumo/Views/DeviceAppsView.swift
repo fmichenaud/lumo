@@ -72,7 +72,7 @@ struct DeviceAppsView: View {
     }
 
     private func groupLabel(_ text: String) -> some View {
-        Text(text.uppercased())
+        Text(String(localized: String.LocalizationValue(text)).uppercased())
             .font(.caption2.weight(.semibold)).tracking(0.8)
             .foregroundStyle(Theme.textSecondary)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -111,13 +111,13 @@ struct DeviceAppsView: View {
                     iconBadge(icon, active: isCurrent)
                     VStack(alignment: .leading, spacing: 1) {
                         HStack(spacing: 6) {
-                            Text(title).foregroundStyle(Theme.textPrimary)
+                            Text(LocalizedStringKey(title)).foregroundStyle(Theme.textPrimary)
                             if isCurrent {
                                 Image(systemName: "dot.radiowaves.left.and.right")
                                     .font(.caption2).foregroundStyle(Theme.accent)
                             }
                         }
-                        Text(isCurrent ? "À l'écran maintenant" : (isOn ? "Active" : "Inactive"))
+                        Text(LocalizedStringKey(isCurrent ? "À l'écran maintenant" : (isOn ? "Active" : "Inactive")))
                             .font(.caption2).foregroundStyle(Theme.textSecondary)
                     }
                     Spacer()
@@ -135,7 +135,7 @@ struct DeviceAppsView: View {
             iconBadge("app.dashed", active: isCurrent)
             VStack(alignment: .leading, spacing: 1) {
                 Text(app.name.capitalized).foregroundStyle(Theme.textPrimary)
-                Text(isCurrent ? "À l'écran maintenant" : "App personnalisée")
+                Text(LocalizedStringKey(isCurrent ? "À l'écran maintenant" : "App personnalisée"))
                     .font(.caption2).foregroundStyle(Theme.textSecondary)
             }
             Spacer()

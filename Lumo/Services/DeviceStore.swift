@@ -8,15 +8,15 @@ enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
 
     var title: String {
         switch self {
-        case .compose:      return "Composer"
-        case .scenes:       return "Scènes"
-        case .weather:      return "Météo"
-        case .data:         return "Données"
-        case .integrations: return "Intégrations"
-        case .alerts:       return "Alertes"
-        case .draw:         return "Dessin"
-        case .apps:         return "Apps"
-        case .settings:     return "Réglages"
+        case .compose:      return String(localized: "Composer")
+        case .scenes:       return String(localized: "Scènes")
+        case .weather:      return String(localized: "Météo")
+        case .data:         return String(localized: "Données")
+        case .integrations: return String(localized: "Intégrations")
+        case .alerts:       return String(localized: "Alertes")
+        case .draw:         return String(localized: "Dessin")
+        case .apps:         return String(localized: "Apps")
+        case .settings:     return String(localized: "Réglages")
         }
     }
 
@@ -37,15 +37,15 @@ enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
     /// Phrase d'explication affichée en tête de chaque section.
     var summary: String {
         switch self {
-        case .compose:  return "Crée un affichage permanent (texte, couleur, icône) ajouté à la rotation de l'écran."
-        case .scenes:   return "Sauvegarde tes compositions et renvoie-les en 1 clic. Elles survivent au redémarrage du device."
-        case .weather:  return "Affiche la météo de ta ville sur l'écran, avec mise à jour automatique possible."
-        case .alerts:   return "Signaux ponctuels : une notification qui s'affiche puis disparaît, et les 3 LED témoins."
-        case .data:     return "Affiche des graphiques, le cours d'une crypto ou les stats de ton Mac."
-        case .integrations: return "Connecte n'importe quelle API (la tienne ou une externe) et affiche-la en direct."
-        case .draw:     return "Dessine pixel par pixel et envoie ton image sur la matrice."
-        case .apps:     return "Gère la rotation : affiche ou supprime les apps présentes sur le device."
-        case .settings: return "Écran, luminosité, défilement, apps intégrées et lampe d'ambiance."
+        case .compose:  return String(localized: "Crée un affichage permanent (texte, couleur, icône) ajouté à la rotation de l'écran.")
+        case .scenes:   return String(localized: "Sauvegarde tes compositions et renvoie-les en 1 clic. Elles survivent au redémarrage du device.")
+        case .weather:  return String(localized: "Affiche la météo de ta ville sur l'écran, avec mise à jour automatique possible.")
+        case .alerts:   return String(localized: "Signaux ponctuels : une notification qui s'affiche puis disparaît, et les 3 LED témoins.")
+        case .data:     return String(localized: "Affiche des graphiques, le cours d'une crypto ou les stats de ton Mac.")
+        case .integrations: return String(localized: "Connecte n'importe quelle API (la tienne ou une externe) et affiche-la en direct.")
+        case .draw:     return String(localized: "Dessine pixel par pixel et envoie ton image sur la matrice.")
+        case .apps:     return String(localized: "Gère la rotation : affiche ou supprime les apps présentes sur le device.")
+        case .settings: return String(localized: "Écran, luminosité, défilement, apps intégrées et lampe d'ambiance.")
         }
     }
 }

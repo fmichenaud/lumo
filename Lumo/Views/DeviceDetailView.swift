@@ -163,7 +163,7 @@ struct DeviceDetailView: View {
     }
 
     private func sectionTitle(_ text: String) -> some View {
-        Text(text.uppercased())
+        Text(String(localized: String.LocalizationValue(text)).uppercased())
             .font(.caption.weight(.semibold))
             .tracking(0.8)
             .foregroundStyle(Theme.textSecondary)
@@ -177,7 +177,7 @@ struct DeviceDetailView: View {
 
     @ViewBuilder private var bannerView: some View {
         if let banner {
-            Text(banner)
+            Text(LocalizedStringKey(banner))
                 .font(.callout.weight(.medium))
                 .padding(.horizontal, 16).padding(.vertical, 10)
                 .background(Theme.surfaceHover, in: Capsule())
@@ -248,9 +248,9 @@ struct ControlRow<Trailing: View>: View {
                     .foregroundStyle(Theme.accent)
             }
             VStack(alignment: .leading, spacing: 1) {
-                Text(title).foregroundStyle(Theme.textPrimary)
+                Text(LocalizedStringKey(title)).foregroundStyle(Theme.textPrimary)
                 if let subtitle {
-                    Text(subtitle).font(.caption).foregroundStyle(Theme.textSecondary)
+                    Text(LocalizedStringKey(subtitle)).font(.caption).foregroundStyle(Theme.textSecondary)
                 }
             }
             Spacer(minLength: 12)
