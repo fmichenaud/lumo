@@ -6,6 +6,10 @@ L'interface officielle est austère et demande des manipulations techniques ; Lu
 
 > ⚠️ Projet communautaire, non affilié à Ulanzi ni au projet AWTRIX.
 
+## ⬇️ Télécharger
+
+Récupérez le `.dmg` dans la page [Releases](../../releases). L'app n'est pas notarisée (pas de compte Apple Developer payant) : au **premier lancement**, faites **clic droit → Ouvrir** (une seule fois). Ou compilez depuis les sources (voir plus bas).
+
 ## ✨ Fonctionnalités
 
 - **Découverte automatique** des afficheurs sur le réseau (scan, sans mDNS) + ajout manuel par IP, multi-device.

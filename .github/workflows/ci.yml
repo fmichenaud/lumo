@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sélectionner Xcode 26
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable   # nécessite Xcode 26+ (APIs Liquid Glass)
+
+      - name: Installer XcodeGen
+        run: brew install xcodegen
+
+      - name: Générer le projet
+        run: xcodegen generate
+
+      - name: Build & Tests
+        run: |
+          xcodebuild -project Lumo.xcodeproj -scheme Lumo \
+            -destination 'platform=macOS' test
