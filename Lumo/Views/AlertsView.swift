@@ -71,14 +71,17 @@ struct AlertsView: View {
                 RoundedRectangle(cornerRadius: 7)
                     .fill(isActive ? Color.red.opacity(0.2) : Color.white.opacity(0.05))
                     .frame(width: 32, height: 32)
-                Image(systemName: rule.metric.symbol)
+                Image(systemName: rule.trigger == .schedule ? "clock.badge" : rule.metric.symbol)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(isActive ? .red : Theme.textSecondary)
             }
             VStack(alignment: .leading, spacing: 1) {
                 Text(rule.conditionSummary(connectorName: connectorName(rule)))
                     .foregroundStyle(Theme.textPrimary)
-                if isActive {
+                if rule.trigger == .schedule {
+                    Text(LocalizedStringKey(rule.enabled ? "Planifiée" : "Inactive"))
+                        .font(.caption2).foregroundStyle(Theme.textSecondary)
+                } else if isActive {
                     Text("Alerte en cours").font(.caption2).foregroundStyle(.red)
                 } else if let v = alerts.lastValues[rule.id] {
                     Text("Actuellement : \(AlertRule.format(v))\(rule.metric.unit)")
@@ -123,34 +126,57 @@ private struct RuleEditor: View {
         VStack(alignment: .leading, spacing: 18) {
             Text("Règle d'alerte").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
 
-            group("Condition") {
-                Picker("Surveiller", selection: $rule.metric) {
-                    ForEach(AlertRule.Metric.allCases.filter { $0 != .connector || !connectors.connectors.isEmpty }) {
-                        Text($0.label).tag($0)
-                    }
+            group("Quand") {
+                Picker("", selection: $rule.trigger) {
+                    Text("Seuil franchi").tag(AlertRule.Trigger.threshold)
+                    Text("À heure fixe").tag(AlertRule.Trigger.schedule)
                 }
-                if rule.metric == .connector {
-                    Picker("Connecteur", selection: $rule.connectorID) {
-                        Text("Choisir…").tag(UUID?.none)
-                        ForEach(connectors.connectors) { c in
-                            Text(c.name.isEmpty ? "Sans nom" : c.name).tag(UUID?.some(c.id))
+                .pickerStyle(.segmented).labelsHidden()
+            }
+
+            if rule.trigger == .threshold {
+                group("Condition") {
+                    Picker("Surveiller", selection: $rule.metric) {
+                        ForEach(AlertRule.Metric.allCases.filter { $0 != .connector || !connectors.connectors.isEmpty }) {
+                            Text($0.label).tag($0)
                         }
                     }
-                }
-                HStack(spacing: 10) {
-                    Picker("", selection: $rule.comparison) {
-                        ForEach(AlertRule.Comparison.allCases) { Text($0.label).tag($0) }
+                    if rule.metric == .connector {
+                        Picker("Connecteur", selection: $rule.connectorID) {
+                            Text("Choisir…").tag(UUID?.none)
+                            ForEach(connectors.connectors) { c in
+                                Text(c.name.isEmpty ? "Sans nom" : c.name).tag(UUID?.some(c.id))
+                            }
+                        }
                     }
-                    .pickerStyle(.segmented).frame(width: 220)
-                    TextField("Seuil", value: $rule.threshold, format: .number)
-                        .textFieldStyle(.roundedBorder).frame(width: 80)
-                    Text(rule.metric.unit).foregroundStyle(Theme.textSecondary)
+                    HStack(spacing: 10) {
+                        Picker("", selection: $rule.comparison) {
+                            ForEach(AlertRule.Comparison.allCases) { Text($0.label).tag($0) }
+                        }
+                        .pickerStyle(.segmented).frame(width: 220)
+                        TextField("Seuil", value: $rule.threshold, format: .number)
+                            .textFieldStyle(.roundedBorder).frame(width: 80)
+                        Text(rule.metric.unit).foregroundStyle(Theme.textSecondary)
+                    }
+                }
+            } else {
+                group("Horaire") {
+                    HStack(spacing: 14) {
+                        DatePicker("", selection: scheduleTime, displayedComponents: .hourAndMinute)
+                            .labelsHidden()
+                        dayTogglesRow
+                    }
+                    Text("Aucun jour coché = tous les jours.")
+                        .font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
                 }
             }
 
             group("Quand ça se déclenche") {
                 HStack(spacing: 10) {
-                    TextField("Message ({value} = valeur mesurée, vide = automatique)", text: $rule.message)
+                    TextField(rule.trigger == .schedule
+                              ? "Message (vide = automatique)"
+                              : "Message ({value} = valeur mesurée, vide = automatique)",
+                              text: $rule.message)
                         .textFieldStyle(.roundedBorder)
                     ColorPicker("", selection: Binding(
                         get: { color },
@@ -169,8 +195,15 @@ private struct RuleEditor: View {
                     .frame(width: 180)
                     Spacer()
                 }
-                Text("La LED s'allume pendant l'alerte et s'éteint quand la valeur revient à la normale.")
-                    .font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
+                if rule.trigger == .schedule {
+                    TextField("App à afficher (ex. weather, optionnel)", text: $rule.switchToApp)
+                        .textFieldStyle(.roundedBorder).frame(width: 260)
+                    Text("Si une app est renseignée, l'écran bascule dessus au lieu d'afficher la notification.")
+                        .font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
+                } else {
+                    Text("La LED s'allume pendant l'alerte et s'éteint quand la valeur revient à la normale.")
+                        .font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
+                }
             }
 
             Divider().overlay(Theme.stroke)
@@ -183,7 +216,7 @@ private struct RuleEditor: View {
                 Spacer()
                 Button("Annuler") { dismiss() }.buttonStyle(PillButtonStyle(prominent: false))
                 Button("Enregistrer") { save() }.buttonStyle(PillButtonStyle())
-                    .disabled(rule.metric == .connector && rule.connectorID == nil)
+                    .disabled(rule.trigger == .threshold && rule.metric == .connector && rule.connectorID == nil)
             }
         }
         .padding(22)
@@ -198,6 +231,47 @@ private struct RuleEditor: View {
             alerts.add(rule)
         }
         dismiss()
+    }
+
+    // MARK: - Planification
+
+    /// Pont Date ↔ minutes depuis minuit pour le DatePicker.
+    private var scheduleTime: Binding<Date> {
+        Binding(
+            get: {
+                Calendar.current.date(bySettingHour: rule.scheduleMinutes / 60,
+                                      minute: rule.scheduleMinutes % 60,
+                                      second: 0, of: Date()) ?? Date()
+            },
+            set: { date in
+                let c = Calendar.current.dateComponents([.hour, .minute], from: date)
+                rule.scheduleMinutes = (c.hour ?? 0) * 60 + (c.minute ?? 0)
+            }
+        )
+    }
+
+    /// Rangée compacte L M M J V S D (weekday Calendar : 1=dim…7=sam).
+    private var dayTogglesRow: some View {
+        HStack(spacing: 5) {
+            ForEach(AlertRule.weekOrder, id: \.self) { day in
+                dayToggle(day, String(AlertRule.dayShortNames[day - 1].prefix(1)).uppercased())
+            }
+        }
+    }
+
+    private func dayToggle(_ day: Int, _ label: String) -> some View {
+        let selected = rule.scheduleDays.contains(day)
+        return Button {
+            if selected { rule.scheduleDays.remove(day) } else { rule.scheduleDays.insert(day) }
+        } label: {
+            Text(label)
+                .font(.caption.weight(.semibold))
+                .frame(width: 24, height: 24)
+                .background(Circle().fill(selected ? Theme.accent : Color.white.opacity(0.08)))
+                .foregroundStyle(selected ? Color.black : Theme.textSecondary)
+        }
+        .buttonStyle(.plain)
+        .help(AlertRule.dayShortNames[day - 1])
     }
 
     private func group<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
