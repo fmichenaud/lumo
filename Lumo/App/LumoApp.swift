@@ -39,6 +39,8 @@ struct LumoApp: App {
             MenuBarView()
                 .environmentObject(store)
                 .environmentObject(weatherStation)
+                .environmentObject(connectors)
+                .environmentObject(pomodoro)
         }
         .menuBarExtraStyle(.window)
     }
