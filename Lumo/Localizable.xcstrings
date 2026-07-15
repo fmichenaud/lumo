@@ -1,186 +1,23 @@
 {
   "sourceLanguage": "fr",
-  "version": "1.0",
   "strings": {
-    "Composer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Compose"
-          }
-        }
-      }
+    "": {
+      "shouldTranslate": false
     },
-    "Scènes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scenes"
-          }
-        }
-      }
+    "%@%@": {
+      "shouldTranslate": false
     },
-    "Météo": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weather"
-          }
-        }
-      }
+    "%lld": {
+      "shouldTranslate": false
     },
-    "Données": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data"
-          }
-        }
-      }
+    "%lld s": {
+      "shouldTranslate": false
     },
-    "Intégrations": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Integrations"
-          }
-        }
-      }
+    "%lld%%": {
+      "shouldTranslate": false
     },
-    "Alertes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alerts"
-          }
-        }
-      }
-    },
-    "Dessin": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drawing"
-          }
-        }
-      }
-    },
-    "Apps": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apps"
-          }
-        }
-      }
-    },
-    "Réglages": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
-          }
-        }
-      }
-    },
-    "Crée un affichage permanent (texte, couleur, icône) ajouté à la rotation de l'écran.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Create a permanent display (text, color, icon) added to the screen rotation."
-          }
-        }
-      }
-    },
-    "Sauvegarde tes compositions et renvoie-les en 1 clic. Elles survivent au redémarrage du device.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save your compositions and resend them in one click. They survive a device reboot."
-          }
-        }
-      }
-    },
-    "Affiche la météo de ta ville sur l'écran, avec mise à jour automatique possible.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show your city's weather on the screen, with optional auto-refresh."
-          }
-        }
-      }
-    },
-    "Signaux ponctuels : une notification qui s'affiche puis disparaît, et les 3 LED témoins.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One-off signals: a notification that appears then disappears, and the 3 indicator LEDs."
-          }
-        }
-      }
-    },
-    "Affiche des graphiques, le cours d'une crypto ou les stats de ton Mac.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show charts, a crypto price, or your Mac's stats."
-          }
-        }
-      }
-    },
-    "Connecte n'importe quelle API (la tienne ou une externe) et affiche-la en direct.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connect any API (yours or third-party) and display it live."
-          }
-        }
-      }
-    },
-    "Dessine pixel par pixel et envoie ton image sur la matrice.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Draw pixel by pixel and send your image to the matrix."
-          }
-        }
-      }
-    },
-    "Gère la rotation : affiche ou supprime les apps présentes sur le device.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manage the rotation: show or delete the apps on the device."
-          }
-        }
-      }
-    },
-    "Écran, luminosité, défilement, apps intégrées et lampe d'ambiance.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Screen, brightness, transitions, built-in apps and mood light."
-          }
-        }
-      }
+    "192.168.1.41": {
+      "shouldTranslate": false
     },
     "APERÇU LIVE": {
       "localizations": {
@@ -192,167 +29,19 @@
         }
       }
     },
-    "HORS LIGNE": {
+    "API personnalisée": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "OFFLINE"
-          }
-        }
-      }
-    },
-    "Connecté": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connected"
-          }
-        }
-      }
-    },
-    "Hors ligne": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Offline"
-          }
-        }
-      }
-    },
-    "MES AFFICHEURS": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MY DISPLAYS"
-          }
-        }
-      }
-    },
-    "CENTRE DE CONTRÔLE": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CONTROL CENTER"
-          }
-        }
-      }
-    },
-    "en direct": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "live"
-          }
-        }
-      }
-    },
-    "Système": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "System"
-          }
-        }
-      }
-    },
-    "Autres apps": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Other apps"
-          }
-        }
-      }
-    },
-    "Contrôles": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Controls"
-          }
-        }
-      }
-    },
-    "Ambiance": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mood light"
-          }
-        }
-      }
-    },
-    "Apps intégrées": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Built-in apps"
-          }
-        }
-      }
-    },
-    "NOUVELLE SCÈNE": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "NEW SCENE"
-          }
-        }
-      }
-    },
-    "MES SCÈNES": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MY SCENES"
-          }
-        }
-      }
-    },
-    "MÉTÉO": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "WEATHER"
-          }
-        }
-      }
-    },
-    "ÉDITEUR PIXEL ART": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "PIXEL ART EDITOR"
-          }
-        }
-      }
-    },
-    "ROTATION ACTUELLE": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CURRENT ROTATION"
+            "value": "Custom API"
           }
         }
       }
     },
     "AUTRES APPS": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -362,242 +51,34 @@
         }
       }
     },
-    "Source": {
+    "Abonnés GitHub": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Source"
+            "value": "GitHub followers"
           }
         }
       }
     },
-    "Authentification": {
+    "Actions manuelles (notification ponctuelle, LED)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Authentication"
+            "value": "Manual actions (one-off notification, LEDs)"
           }
         }
       }
     },
-    "Donnée à afficher": {
+    "Active": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Data to display"
-          }
-        }
-      }
-    },
-    "Apparence": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Appearance"
-          }
-        }
-      }
-    },
-    "Rechercher": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scan"
-          }
-        }
-      }
-    },
-    "Recherche…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scanning…"
-          }
-        }
-      }
-    },
-    "Oublier ce device": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Forget this device"
-          }
-        }
-      }
-    },
-    "Bienvenue dans Lumo": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Welcome to Lumo"
-          }
-        }
-      }
-    },
-    "Recherche de ton afficheur…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Looking for your display…"
-          }
-        }
-      }
-    },
-    "Si macOS demande l'accès au réseau local, autorise-le :\nla recherche reprend toute seule.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "If macOS asks for local network access, allow it:\nthe search resumes on its own."
-          }
-        }
-      }
-    },
-    "Branche ton afficheur AWTRIX sur le même réseau,\nLumo le trouve automatiquement.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connect your AWTRIX display to the same network,\nLumo finds it automatically."
-          }
-        }
-      }
-    },
-    "Ajouter par IP": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add by IP"
-          }
-        }
-      }
-    },
-    "Ton afficheur n'apparaît pas ? Il doit être sous AWTRIX — guide d'installation": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Display not showing? It must be running AWTRIX — installation guide"
-          }
-        }
-      }
-    },
-    "Ajouter un afficheur": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add a display"
-          }
-        }
-      }
-    },
-    "Saisis l'adresse IP de ton AWTRIX (visible dans l'app Ulanzi ou ta box).": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enter your AWTRIX's IP address (visible in the Ulanzi app or your router)."
-          }
-        }
-      }
-    },
-    "Aucun appareil joignable à cette adresse.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No device reachable at this address."
-          }
-        }
-      }
-    },
-    "Cet appareil répond, mais ne semble pas être sous AWTRIX.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This device responds but doesn't seem to be running AWTRIX."
-          }
-        }
-      }
-    },
-    "Cet afficheur doit être sous AWTRIX — voir comment l'installer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This display must be running AWTRIX — see how to install it"
-          }
-        }
-      }
-    },
-    "Connecter": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connect"
-          }
-        }
-      }
-    },
-    "Fermer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Close"
-          }
-        }
-      }
-    },
-    "Annuler": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancel"
-          }
-        }
-      }
-    },
-    "Enregistrer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save"
-          }
-        }
-      }
-    },
-    "Tester": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Test"
-          }
-        }
-      }
-    },
-    "Envoyer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send"
+            "value": "Active"
           }
         }
       }
@@ -612,62 +93,61 @@
         }
       }
     },
-    "Ajouter un connecteur": {
+    "Actuellement : %@%@": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Add a connector"
+            "value": "Currently: %@%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Actuellement : %1$@%2$@"
           }
         }
       }
     },
-    "Choisir une icône": {
+    "Affichage normal restauré": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choose an icon"
+            "value": "Normal display restored"
           }
         }
       }
     },
-    "Se connecter": {
+    "Affiche des graphiques, le cours d'une crypto ou les stats de ton Mac.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sign in"
+            "value": "Show charts, a crypto price, or your Mac's stats."
           }
         }
       }
     },
-    "Reconnecter": {
+    "Affiche la météo de ta ville sur l'écran, avec mise à jour automatique possible.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reconnect"
+            "value": "Show your city's weather on the screen, with optional auto-refresh."
           }
         }
       }
     },
-    "Allumer": {
+    "Affiche un message par-dessus l'écran quelques secondes, puis disparaît. Pour une alerte ponctuelle.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Turn on"
-          }
-        }
-      }
-    },
-    "Éteindre": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turn off"
+            "value": "Shows a message over the screen for a few seconds, then disappears. For a one-off alert."
           }
         }
       }
@@ -682,162 +162,42 @@
         }
       }
     },
-    "Chercher": {
+    "Ajouter par IP": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Search"
+            "value": "Add by IP"
           }
         }
       }
     },
-    "Ouvrir": {
+    "Ajouter un afficheur": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Open"
+            "value": "Add a display"
           }
         }
       }
     },
-    "Quitter": {
+    "Ajouter un connecteur": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quit"
+            "value": "Add a connector"
           }
         }
       }
     },
-    "Ouvrir Lumo": {
+    "Ajouter une règle": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Open Lumo"
-          }
-        }
-      }
-    },
-    "Fichier…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "File…"
-          }
-        }
-      }
-    },
-    "Tout effacer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clear all"
-          }
-        }
-      }
-    },
-    "Gomme": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eraser"
-          }
-        }
-      }
-    },
-    "Pinceau": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brush"
-          }
-        }
-      }
-    },
-    "Auto": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
-          }
-        }
-      }
-    },
-    "Composer un affichage": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Compose a display"
-          }
-        }
-      }
-    },
-    "Texte": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Text"
-          }
-        }
-      }
-    },
-    "Ton message": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your message"
-          }
-        }
-      }
-    },
-    "Icône": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Icon"
-          }
-        }
-      }
-    },
-    "Couleur": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Color"
-          }
-        }
-      }
-    },
-    "Nom de l'app": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "App name"
-          }
-        }
-      }
-    },
-    "Garder après reboot": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Keep after reboot"
+            "value": "Add a rule"
           }
         }
       }
@@ -852,42 +212,223 @@
         }
       }
     },
-    "Sauvegarde l'app dans la mémoire du device pour qu'elle survive au redémarrage": {
+    "Alerte en cours": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Saves the app to the device's memory so it survives a reboot"
+            "value": "Alert active"
           }
         }
       }
     },
-    "Parcourir la galerie / importer une icône": {
+    "Alerte testée": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Browse the gallery / import an icon"
+            "value": "Alert tested"
           }
         }
       }
     },
-    "Galerie d'icônes": {
+    "Alertes": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Icon gallery"
+            "value": "Alerts"
           }
         }
       }
     },
-    "Cherche, clique : l'icône part directement sur l'afficheur.": {
+    "Allume la dalle si elle est éteinte": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Search, click: the icon goes straight to the display."
+            "value": "Turns the panel on if it's off"
+          }
+        }
+      }
+    },
+    "Allumer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on"
+          }
+        }
+      }
+    },
+    "Allumé": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On"
+          }
+        }
+      }
+    },
+    "Altitude ISS": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ISS altitude"
+          }
+        }
+      }
+    },
+    "Ambiance": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mood light"
+          }
+        }
+      }
+    },
+    "Ambiance allumée": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mood light on"
+          }
+        }
+      }
+    },
+    "Anecdote féline": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feline trivia"
+          }
+        }
+      }
+    },
+    "Animation derrière le texte": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animation behind the text"
+          }
+        }
+      }
+    },
+    "Annuler": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "App personnalisée": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custom app"
+          }
+        }
+      }
+    },
+    "Apparence": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appearance"
+          }
+        }
+      }
+    },
+    "Apps": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apps"
+          }
+        }
+      }
+    },
+    "Apps intégrées": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Built-in apps"
+          }
+        }
+      }
+    },
+    "Aucun": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None"
+          }
+        }
+      }
+    },
+    "Aucun appareil joignable à cette adresse.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No device reachable at this address."
+          }
+        }
+      }
+    },
+    "Aucun connecteur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No connector"
+          }
+        }
+      }
+    },
+    "Aucun modèle pour « %@ »": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No template for « %@ »"
+          }
+        }
+      }
+    },
+    "Aucune": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None"
           }
         }
       }
@@ -902,22 +443,709 @@
         }
       }
     },
-    "Rechercher (trophy, clock, heart, fire…)": {
+    "Aucune règle": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Search (trophy, clock, heart, fire…)"
+            "value": "No rules yet"
           }
         }
       }
     },
-    "Nom (ex. Compteurs)": {
+    "Aucune ville trouvée": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Name (e.g. Counters)"
+            "value": "No city found"
+          }
+        }
+      }
+    },
+    "Authentification": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Authentication"
+          }
+        }
+      }
+    },
+    "Auto": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto"
+          }
+        }
+      }
+    },
+    "Autres apps": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other apps"
+          }
+        }
+      }
+    },
+    "Batterie": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Battery"
+          }
+        }
+      }
+    },
+    "Batterie de l'afficheur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display battery"
+          }
+        }
+      }
+    },
+    "Bienvenue dans Lumo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to Lumo"
+          }
+        }
+      }
+    },
+    "Blague": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Joke"
+          }
+        }
+      }
+    },
+    "Branche des sources de données — ton Mac, les cryptos ou n'importe quelle API — et affiche-les en direct.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plug in data sources — your Mac, crypto prices or any API — and show them live."
+          }
+        }
+      }
+    },
+    "Branche ta propre API ou une API externe (cours, capteurs, compteurs…).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect your own API or a third-party one (prices, sensors, counters…)."
+          }
+        }
+      }
+    },
+    "Branche ton afficheur AWTRIX sur le même réseau,\nLumo le trouve automatiquement.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect your AWTRIX display to the same network,\nLumo finds it automatically."
+          }
+        }
+      }
+    },
+    "CENTRE DE CONTRÔLE": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CONTROL CENTER"
+          }
+        }
+      }
+    },
+    "CPU du Mac": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac CPU"
+          }
+        }
+      }
+    },
+    "Cet afficheur doit être sous AWTRIX — voir comment l'installer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This display must be running AWTRIX — see how to install it"
+          }
+        }
+      }
+    },
+    "Cet appareil répond, mais ne semble pas être sous AWTRIX.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This device responds but doesn't seem to be running AWTRIX."
+          }
+        }
+      }
+    },
+    "Charge processeur · mise à jour toutes les 5 s": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU load · updated every 5 s"
+          }
+        }
+      }
+    },
+    "Chemin JSON": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JSON path"
+          }
+        }
+      }
+    },
+    "Cherche, clique : l'icône part directement sur l'afficheur.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search, click: the icon goes straight to the display."
+          }
+        }
+      }
+    },
+    "Chercher": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search"
+          }
+        }
+      }
+    },
+    "Choisir une icône": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose an icon"
+          }
+        }
+      }
+    },
+    "Choisir…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose…"
+          }
+        }
+      }
+    },
+    "Choisis un modèle — tout reste ajustable ensuite.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick a template — everything stays adjustable afterwards."
+          }
+        }
+      }
+    },
+    "Client ID": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Client ID"
+          }
+        }
+      }
+    },
+    "Client Secret (optionnel)": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Client Secret (optional)"
+          }
+        }
+      }
+    },
+    "Clé API (en-tête)": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API key (header)"
+          }
+        }
+      }
+    },
+    "Colle cette URL de redirection dans l'app créée :": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste this redirect URI in the app you created:"
+          }
+        }
+      }
+    },
+    "Composer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compose"
+          }
+        }
+      }
+    },
+    "Composer un affichage": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compose a display"
+          }
+        }
+      }
+    },
+    "Condition": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Condition"
+          }
+        }
+      }
+    },
+    "Connecte n'importe quelle API (la tienne ou une externe) et affiche-la en direct.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect any API (yours or third-party) and display it live."
+          }
+        }
+      }
+    },
+    "Connecte ton compte %@ en un clic.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect your %@ account in one click."
+          }
+        }
+      }
+    },
+    "Connecte ton compte en un clic. Un « Client ID » (gratuit, fourni par le service) peut être requis.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect your account in one click. A “Client ID” (free, provided by the service) may be required."
+          }
+        }
+      }
+    },
+    "Connecter": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect"
+          }
+        }
+      }
+    },
+    "Connecteur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connector"
+          }
+        }
+      }
+    },
+    "Connecteurs API": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API connectors"
+          }
+        }
+      }
+    },
+    "Connecté": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connected"
+          }
+        }
+      }
+    },
+    "Connexion à %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect to %@"
+          }
+        }
+      }
+    },
+    "Conseil du jour": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Advice of the day"
+          }
+        }
+      }
+    },
+    "Contrôles": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Controls"
+          }
+        }
+      }
+    },
+    "Copie le « Client ID » et colle-le ci-dessous :": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy the “Client ID” and paste it below:"
+          }
+        }
+      }
+    },
+    "Couleur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color"
+          }
+        }
+      }
+    },
+    "Cours ADA en euros": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ADA price in euros"
+          }
+        }
+      }
+    },
+    "Cours BTC en euros": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BTC price in euros"
+          }
+        }
+      }
+    },
+    "Cours DOGE en euros": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DOGE price in euros"
+          }
+        }
+      }
+    },
+    "Cours ETH en euros": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ETH price in euros"
+          }
+        }
+      }
+    },
+    "Cours SOL en euros": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SOL price in euros"
+          }
+        }
+      }
+    },
+    "Cours XRP en euros": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XRP price in euros"
+          }
+        }
+      }
+    },
+    "Cours en direct · mise à jour toutes les 60 s": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Live price · updated every 60 s"
+          }
+        }
+      }
+    },
+    "Crypto": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crypto"
+          }
+        }
+      }
+    },
+    "Crée un affichage permanent (texte, couleur, icône) ajouté à la rotation de l'écran.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a permanent display (text, color, icon) added to the screen rotation."
+          }
+        }
+      }
+    },
+    "Custom": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custom"
+          }
+        }
+      }
+    },
+    "Dad joke (en-tête Accept)": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dad joke (Accept header)"
+          }
+        }
+      }
+    },
+    "Date": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date"
+          }
+        }
+      }
+    },
+    "Dessin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drawing"
+          }
+        }
+      }
+    },
+    "Dessine pixel par pixel et envoie ton image sur la matrice.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Draw pixel by pixel and send your image to the matrix."
+          }
+        }
+      }
+    },
+    "Devises": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Currencies"
+          }
+        }
+      }
+    },
+    "Donnée absente pour le moment": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No data right now"
+          }
+        }
+      }
+    },
+    "Donnée à afficher": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data to display"
+          }
+        }
+      }
+    },
+    "Données": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data"
+          }
+        }
+      }
+    },
+    "Downloads/semaine d'un paquet": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A package's weekly downloads"
+          }
+        }
+      }
+    },
+    "Durée par app": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time per app"
+          }
+        }
+      }
+    },
+    "Défilement auto": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto transition"
+          }
+        }
+      }
+    },
+    "Développeur": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Developer"
+          }
+        }
+      }
+    },
+    "EUR": {
+      "shouldTranslate": false
+    },
+    "Effet de fond": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background effect"
+          }
+        }
+      }
+    },
+    "En attente de données…": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for data…"
+          }
+        }
+      }
+    },
+    "Enregistrer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
           }
         }
       }
@@ -932,52 +1160,42 @@
         }
       }
     },
-    "Sans nom": {
+    "Envoyer": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Untitled"
+            "value": "Send"
           }
         }
       }
     },
-    "Scène": {
+    "Envoyer la météo": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Scene"
+            "value": "Send the weather"
           }
         }
       }
     },
-    "Scène enregistrée": {
+    "Envoyer la notification": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Scene saved"
+            "value": "Send the notification"
           }
         }
       }
     },
-    "Ville (Paris, Lyon, Bordeaux…)": {
+    "Envoyer le dessin": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "City (Paris, London, Berlin…)"
-          }
-        }
-      }
-    },
-    "Aucune ville trouvée": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No city found"
+            "value": "Send the drawing"
           }
         }
       }
@@ -992,12 +1210,404 @@
         }
       }
     },
-    "Météo non configurée": {
+    "Espace": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Weather not set up"
+            "value": "Space"
+          }
+        }
+      }
+    },
+    "Exemple : « si le CPU du Mac dépasse 90 %, affiche une alerte rouge ».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Example: “if the Mac's CPU goes above 90%, show a red alert”."
+          }
+        }
+      }
+    },
+    "Fait sur les chats": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cat fact"
+          }
+        }
+      }
+    },
+    "Fermer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        }
+      }
+    },
+    "Fichier…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File…"
+          }
+        }
+      }
+    },
+    "Followers d'un utilisateur": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A user's followers"
+          }
+        }
+      }
+    },
+    "Format affiché": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Displayed format"
+          }
+        }
+      }
+    },
+    "Fun": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fun"
+          }
+        }
+      }
+    },
+    "Galerie d'icônes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icon gallery"
+          }
+        }
+      }
+    },
+    "Garder affichée": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep displayed"
+          }
+        }
+      }
+    },
+    "Garder après reboot": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep after reboot"
+          }
+        }
+      }
+    },
+    "Gomme": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eraser"
+          }
+        }
+      }
+    },
+    "Gère la rotation : affiche ou supprime les apps présentes sur le device.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manage the rotation: show or delete the apps on the device."
+          }
+        }
+      }
+    },
+    "HORS LIGNE": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OFFLINE"
+          }
+        }
+      }
+    },
+    "Heure": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time"
+          }
+        }
+      }
+    },
+    "Hors ligne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offline"
+          }
+        }
+      }
+    },
+    "Humidité": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Humidity"
+          }
+        }
+      }
+    },
+    "Humidité (capteur)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Humidity (sensor)"
+          }
+        }
+      }
+    },
+    "ID": {
+      "shouldTranslate": false
+    },
+    "Icône": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icon"
+          }
+        }
+      }
+    },
+    "Icône (ID)": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icon (ID)"
+          }
+        }
+      }
+    },
+    "Inactive": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inactive"
+          }
+        }
+      }
+    },
+    "Indicateur %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indicator %lld"
+          }
+        }
+      }
+    },
+    "Indicateurs LED": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LED indicators"
+          }
+        }
+      }
+    },
+    "Indice de sentiment crypto": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crypto sentiment index"
+          }
+        }
+      }
+    },
+    "Intégrations": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Integrations"
+          }
+        }
+      }
+    },
+    "L'afficheur redémarre pour appliquer les changements…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The display is rebooting to apply the changes…"
+          }
+        }
+      }
+    },
+    "LED %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LED %lld"
+          }
+        }
+      }
+    },
+    "LED témoin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indicator LED"
+          }
+        }
+      }
+    },
+    "La LED s'allume pendant l'alerte et s'éteint quand la valeur revient à la normale.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The LED lights up while the alert is active and turns off when the value returns to normal."
+          }
+        }
+      }
+    },
+    "La « route » vers la valeur dans la réponse JSON. Laisse vide si la réponse est déjà la valeur.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “route” to the value in the JSON response. Leave empty if the response is already the value."
+          }
+        }
+      }
+    },
+    "Lampe d'ambiance": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mood light"
+          }
+        }
+      }
+    },
+    "Les 3 petites LED sur le bord de l'écran. Pratiques comme témoins de statut (ex. rouge = alerte).": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The 3 small LEDs on the edge of the screen. Handy as status lights (e.g. red = alert)."
+          }
+        }
+      }
+    },
+    "Luminosité": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brightness"
+          }
+        }
+      }
+    },
+    "Lumo": {
+      "shouldTranslate": false
+    },
+    "MES AFFICHEURS": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MY DISPLAYS"
+          }
+        }
+      }
+    },
+    "MES SCÈNES": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MY SCENES"
+          }
+        }
+      }
+    },
+    "Maison": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Home"
+          }
+        }
+      }
+    },
+    "Message ({value} = valeur mesurée, vide = automatique)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message ({value} = measured value, empty = automatic)"
+          }
+        }
+      }
+    },
+    "Message à afficher": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message to display"
           }
         }
       }
@@ -1022,472 +1632,44 @@
         }
       }
     },
-    "Envoyer la météo": {
+    "Mon API": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Send the weather"
+            "value": "My API"
           }
         }
       }
     },
-    "CPU du Mac": {
+    "Mon Mac & marchés": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mac CPU"
+            "value": "My Mac & markets"
           }
         }
       }
     },
-    "RAM du Mac": {
+    "MÉTÉO": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mac RAM"
-          }
-        }
-      }
-    },
-    "Crypto": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Crypto"
-          }
-        }
-      }
-    },
-    "Charge processeur · mise à jour toutes les 5 s": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CPU load · updated every 5 s"
+            "value": "WEATHER"
           }
         }
       }
     },
     "Mémoire utilisée · mise à jour toutes les 5 s": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Memory used · updated every 5 s"
-          }
-        }
-      }
-    },
-    "Cours en direct · mise à jour toutes les 60 s": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Live price · updated every 60 s"
-          }
-        }
-      }
-    },
-    "Notification": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notification"
-          }
-        }
-      }
-    },
-    "Affiche un message par-dessus l'écran quelques secondes, puis disparaît. Pour une alerte ponctuelle.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Shows a message over the screen for a few seconds, then disappears. For a one-off alert."
-          }
-        }
-      }
-    },
-    "Message à afficher": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Message to display"
-          }
-        }
-      }
-    },
-    "Options avancées": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Advanced options"
-          }
-        }
-      }
-    },
-    "Effet de fond": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Background effect"
-          }
-        }
-      }
-    },
-    "Animation derrière le texte": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Animation behind the text"
-          }
-        }
-      }
-    },
-    "Son": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sound"
-          }
-        }
-      }
-    },
-    "Nom d'une mélodie présente sur l'appareil": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Name of a melody on the device"
-          }
-        }
-      }
-    },
-    "Garder affichée": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Keep displayed"
-          }
-        }
-      }
-    },
-    "Reste jusqu'à appui sur le bouton central": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stays until you press the middle button"
-          }
-        }
-      }
-    },
-    "Réveiller l'écran": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wake the screen"
-          }
-        }
-      }
-    },
-    "Allume la dalle si elle est éteinte": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turns the panel on if it's off"
-          }
-        }
-      }
-    },
-    "Envoyer la notification": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send the notification"
-          }
-        }
-      }
-    },
-    "Indicateurs LED": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "LED indicators"
-          }
-        }
-      }
-    },
-    "Les 3 petites LED sur le bord de l'écran. Pratiques comme témoins de statut (ex. rouge = alerte).": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The 3 small LEDs on the edge of the screen. Handy as status lights (e.g. red = alert)."
-          }
-        }
-      }
-    },
-    "Aucune": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "None"
-          }
-        }
-      }
-    },
-    "Écran": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Screen"
-          }
-        }
-      }
-    },
-    "Allumé": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "On"
-          }
-        }
-      }
-    },
-    "Éteint": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Off"
-          }
-        }
-      }
-    },
-    "Luminosité": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brightness"
-          }
-        }
-      }
-    },
-    "Défilement auto": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto transition"
-          }
-        }
-      }
-    },
-    "Rotation entre les apps": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rotation between apps"
-          }
-        }
-      }
-    },
-    "Heure": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time"
-          }
-        }
-      }
-    },
-    "Date": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Date"
-          }
-        }
-      }
-    },
-    "Température": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Temperature"
-          }
-        }
-      }
-    },
-    "Humidité": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Humidity"
-          }
-        }
-      }
-    },
-    "Batterie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Battery"
-          }
-        }
-      }
-    },
-    "Lampe d'ambiance": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mood light"
-          }
-        }
-      }
-    },
-    "Transforme tout l'écran en couleur unie. Masque l'affichage normal tant que c'est allumé.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turns the whole screen a solid color. Hides the normal display while it's on."
-          }
-        }
-      }
-    },
-    "À l'écran maintenant": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "On screen now"
-          }
-        }
-      }
-    },
-    "Active": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Active"
-          }
-        }
-      }
-    },
-    "Inactive": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Inactive"
-          }
-        }
-      }
-    },
-    "Native": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Built-in"
-          }
-        }
-      }
-    },
-    "Envoyer le dessin": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send the drawing"
-          }
-        }
-      }
-    },
-    "App personnalisée": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Custom app"
-          }
-        }
-      }
-    },
-    "Aucun connecteur": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No connector"
-          }
-        }
-      }
-    },
-    "Branche ta propre API ou une API externe (cours, capteurs, compteurs…).": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connect your own API or a third-party one (prices, sensors, counters…)."
-          }
-        }
-      }
-    },
-    "Choisis un modèle — tout reste ajustable ensuite.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pick a template — everything stays adjustable afterwards."
-          }
-        }
-      }
-    },
-    "Rechercher un modèle…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Search a template…"
-          }
-        }
-      }
-    },
-    "Nouveau connecteur": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New connector"
           }
         }
       }
@@ -1502,37 +1684,80 @@
         }
       }
     },
-    "Clé API (en-tête)": {
+    "Météo": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "API key (header)"
+            "value": "Weather"
           }
         }
       }
     },
-    "Token Bearer": {
+    "Météo non configurée": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bearer token"
+            "value": "Weather not set up"
           }
         }
       }
     },
-    "OAuth 2.0": {
+    "NOUVELLE SCÈNE": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "OAuth 2.0"
+            "value": "NEW SCENE"
+          }
+        }
+      }
+    },
+    "Native": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Built-in"
+          }
+        }
+      }
+    },
+    "Nom (ex. Compteurs)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name (e.g. Counters)"
+          }
+        }
+      }
+    },
+    "Nom d'une mélodie présente sur l'appareil": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name of a melody on the device"
+          }
+        }
+      }
+    },
+    "Nom de l'app": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App name"
           }
         }
       }
     },
     "Nom de l'en-tête": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1542,92 +1767,180 @@
         }
       }
     },
-    "Valeur de la clé": {
+    "Notification": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Key value"
+            "value": "Notification"
           }
         }
       }
     },
-    "votre clé": {
+    "Notification envoyée": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "your key"
+            "value": "Notification sent"
           }
         }
       }
     },
-    "Token": {
+    "Nouveau connecteur": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Token"
+            "value": "New connector"
           }
         }
       }
     },
-    "votre token d'accès": {
+    "OAuth 2.0": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "your access token"
+            "value": "OAuth 2.0"
           }
         }
       }
     },
-    "Chemin JSON": {
+    "OAuth 2.0 (client requis)": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "JSON path"
+            "value": "OAuth 2.0 (client required)"
           }
         }
       }
     },
-    "data.price ou items[0].value": {
+    "Options avancées": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "data.price or items[0].value"
+            "value": "Advanced options"
           }
         }
       }
     },
-    "La « route » vers la valeur dans la réponse JSON. Laisse vide si la réponse est déjà la valeur.": {
+    "Oublier ce device": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The “route” to the value in the JSON response. Leave empty if the response is already the value."
+            "value": "Forget this device"
           }
         }
       }
     },
-    "Format affiché": {
+    "Ouvre l'espace développeur et crée une app (gratuit).": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Displayed format"
+            "value": "Open the developer portal and create an app (free)."
           }
         }
       }
     },
-    "« {value} » est remplacé par la valeur récupérée.": {
+    "Ouvrir": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "“{value}” is replaced by the fetched value."
+            "value": "Open"
+          }
+        }
+      }
+    },
+    "Ouvrir Lumo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Lumo"
+          }
+        }
+      }
+    },
+    "Parcourir la galerie / importer une icône": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Browse the gallery / import an icon"
+          }
+        }
+      }
+    },
+    "Pars d'une page vierge": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start from a blank page"
+          }
+        }
+      }
+    },
+    "Pinceau": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brush"
+          }
+        }
+      }
+    },
+    "Quand ça se déclenche": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When it triggers"
+          }
+        }
+      }
+    },
+    "Quitter": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit"
+          }
+        }
+      }
+    },
+    "RAM du Mac": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac RAM"
+          }
+        }
+      }
+    },
+    "ROTATION ACTUELLE": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CURRENT ROTATION"
           }
         }
       }
@@ -1642,82 +1955,136 @@
         }
       }
     },
-    "Icône (ID)": {
+    "Recherche de ton afficheur…": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Icon (ID)"
+            "value": "Looking for your display…"
           }
         }
       }
     },
-    "ex. 72761": {
+    "Recherche indisponible (vérifie ta connexion).": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "e.g. 72761"
+            "value": "Search unavailable (check your connection)."
           }
         }
       }
     },
-    "URL d'autorisation": {
+    "Rechercher": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Authorization URL"
+            "value": "Scan"
           }
         }
       }
     },
-    "URL de token": {
+    "Rechercher (trophy, clock, heart, fire…)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Token URL"
+            "value": "Search (trophy, clock, heart, fire…)"
           }
         }
       }
     },
-    "Client ID": {
+    "Rechercher un modèle…": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Client ID"
+            "value": "Search a template…"
           }
         }
       }
     },
-    "Scope": {
+    "Recherche…": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Scope"
+            "value": "Scanning…"
           }
         }
       }
     },
-    "Client Secret (optionnel)": {
+    "Reconnecter": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Client Secret (optional)"
+            "value": "Reconnect"
           }
         }
       }
     },
-    "rarement nécessaire": {
+    "Redirection à autoriser côté service : lumo://oauth": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "rarely needed"
+            "value": "Redirect URI to allow on the service side: lumo://oauth"
+          }
+        }
+      }
+    },
+    "Reste jusqu'à appui sur le bouton central": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stays until you press the middle button"
+          }
+        }
+      }
+    },
+    "Rotation entre les apps": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rotation between apps"
+          }
+        }
+      }
+    },
+    "Règle d'alerte": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alert rule"
+          }
+        }
+      }
+    },
+    "Règles d'alerte": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alert rules"
+          }
+        }
+      }
+    },
+    "Réglages": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
           }
         }
       }
@@ -1732,92 +2099,381 @@
         }
       }
     },
-    "Redirection à autoriser côté service : lumo://oauth": {
+    "Réveiller l'écran": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Redirect URI to allow on the service side: lumo://oauth"
+            "value": "Wake the screen"
           }
         }
       }
     },
-    "Connecte ton compte en un clic. Un « Client ID » (gratuit, fourni par le service) peut être requis.": {
+    "Saisis l'adresse IP de ton AWTRIX (visible dans l'app Ulanzi ou ta box).": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Connect your account in one click. A “Client ID” (free, provided by the service) may be required."
+            "value": "Enter your AWTRIX's IP address (visible in the Ulanzi app or your router)."
           }
         }
       }
     },
-    "fourni par le service": {
+    "Sans nom": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "provided by the service"
+            "value": "Untitled"
           }
         }
       }
     },
-    "Mon API": {
+    "Sauvegarde l'app dans la mémoire du device pour qu'elle survive au redémarrage": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "My API"
+            "value": "Saves the app to the device's memory so it survives a reboot"
           }
         }
       }
     },
-    "Une seule fois, en 3 étapes :": {
+    "Sauvegarde tes compositions et renvoie-les en 1 clic. Elles survivent au redémarrage du device.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "One time, in 3 steps:"
+            "value": "Save your compositions and resend them in one click. They survive a device reboot."
           }
         }
       }
     },
-    "Ouvre l'espace développeur et crée une app (gratuit).": {
+    "Scope": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Open the developer portal and create an app (free)."
+            "value": "Scope"
           }
         }
       }
     },
-    "Colle cette URL de redirection dans l'app créée :": {
+    "Scène": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Paste this redirect URI in the app you created:"
+            "value": "Scene"
           }
         }
       }
     },
-    "Copie le « Client ID » et colle-le ci-dessous :": {
+    "Scène enregistrée": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Copy the “Client ID” and paste it below:"
+            "value": "Scene saved"
           }
         }
       }
     },
-    "↑ colle d'abord ton Client ID": {
+    "Scènes": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "↑ paste your Client ID first"
+            "value": "Scenes"
+          }
+        }
+      }
+    },
+    "Se connecter": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in"
+          }
+        }
+      }
+    },
+    "Services": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Services"
+          }
+        }
+      }
+    },
+    "Seuil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Threshold"
+          }
+        }
+      }
+    },
+    "Si macOS demande l'accès au réseau local, autorise-le :\nla recherche reprend toute seule.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If macOS asks for local network access, allow it:\nthe search resumes on its own."
+          }
+        }
+      }
+    },
+    "Signaux ponctuels : une notification qui s'affiche puis disparaît, et les 3 LED témoins.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One-off signals: a notification that appears then disappears, and the 3 indicator LEDs."
+          }
+        }
+      }
+    },
+    "Son": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sound"
+          }
+        }
+      }
+    },
+    "Son (ex. alarm, optionnel)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sound (e.g. alarm, optional)"
+          }
+        }
+      }
+    },
+    "Source": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source"
+          }
+        }
+      }
+    },
+    "Spotify – titre en cours": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotify – now playing"
+          }
+        }
+      }
+    },
+    "Stars d'un dépôt (édite l'URL)": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A repo's stars (edit the URL)"
+          }
+        }
+      }
+    },
+    "Station spatiale en direct": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Space station, live"
+          }
+        }
+      }
+    },
+    "Surveille des seuils (CPU, batterie, connecteurs…) et déclenche notification ou LED automatiquement.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watches thresholds (CPU, battery, connectors…) and automatically triggers a notification or LED."
+          }
+        }
+      }
+    },
+    "Surveiller": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watch"
+          }
+        }
+      }
+    },
+    "Système": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System"
+          }
+        }
+      }
+    },
+    "Taux EUR/GBP": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EUR/GBP rate"
+          }
+        }
+      }
+    },
+    "Taux EUR/JPY": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EUR/JPY rate"
+          }
+        }
+      }
+    },
+    "Taux EUR/USD": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EUR/USD rate"
+          }
+        }
+      }
+    },
+    "Temps d'affichage avant de passer à la suivante": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How long each app stays on screen before the next one"
+          }
+        }
+      }
+    },
+    "Température": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temperature"
+          }
+        }
+      }
+    },
+    "Température (capteur)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temperature (sensor)"
+          }
+        }
+      }
+    },
+    "Tester": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Test"
+          }
+        }
+      }
+    },
+    "Texte": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text"
+          }
+        }
+      }
+    },
+    "Token": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token"
+          }
+        }
+      }
+    },
+    "Token Bearer": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bearer token"
+          }
+        }
+      }
+    },
+    "Ton afficheur n'apparaît pas ? Il doit être sous AWTRIX — guide d'installation": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display not showing? It must be running AWTRIX — installation guide"
+          }
+        }
+      }
+    },
+    "Ton message": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your message"
+          }
+        }
+      }
+    },
+    "Tout effacer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear all"
           }
         }
       }
@@ -1832,227 +2488,18 @@
         }
       }
     },
-    "Devises": {
+    "Transforme tout l'écran en couleur unie. Masque l'affichage normal tant que c'est allumé.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Currencies"
-          }
-        }
-      }
-    },
-    "Développeur": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Developer"
-          }
-        }
-      }
-    },
-    "Espace": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Space"
-          }
-        }
-      }
-    },
-    "Fun": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fun"
-          }
-        }
-      }
-    },
-    "Maison": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Home"
-          }
-        }
-      }
-    },
-    "Services": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Services"
-          }
-        }
-      }
-    },
-    "Custom": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Custom"
-          }
-        }
-      }
-    },
-    "Cours BTC en euros": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "BTC price in euros"
-          }
-        }
-      }
-    },
-    "Cours ETH en euros": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ETH price in euros"
-          }
-        }
-      }
-    },
-    "Cours SOL en euros": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "SOL price in euros"
-          }
-        }
-      }
-    },
-    "Cours DOGE en euros": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "DOGE price in euros"
-          }
-        }
-      }
-    },
-    "Cours ADA en euros": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ADA price in euros"
-          }
-        }
-      }
-    },
-    "Cours XRP en euros": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XRP price in euros"
-          }
-        }
-      }
-    },
-    "Évolution sur 24 h": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "24h change"
-          }
-        }
-      }
-    },
-    "Indice de sentiment crypto": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Crypto sentiment index"
-          }
-        }
-      }
-    },
-    "Taux EUR/USD": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EUR/USD rate"
-          }
-        }
-      }
-    },
-    "Taux EUR/GBP": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EUR/GBP rate"
-          }
-        }
-      }
-    },
-    "Taux EUR/JPY": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EUR/JPY rate"
-          }
-        }
-      }
-    },
-    "Étoiles GitHub": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "GitHub stars"
-          }
-        }
-      }
-    },
-    "Stars d'un dépôt (édite l'URL)": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A repo's stars (edit the URL)"
-          }
-        }
-      }
-    },
-    "Abonnés GitHub": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "GitHub followers"
-          }
-        }
-      }
-    },
-    "Followers d'un utilisateur": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A user's followers"
+            "value": "Turns the whole screen a solid color. Hides the normal display while it's on."
           }
         }
       }
     },
     "Téléchargements npm": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2062,37 +2509,85 @@
         }
       }
     },
-    "Downloads/semaine d'un paquet": {
+    "URL d'autorisation": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A package's weekly downloads"
+            "value": "Authorization URL"
           }
         }
       }
     },
-    "Altitude ISS": {
+    "URL de token": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "ISS altitude"
+            "value": "Token URL"
           }
         }
       }
     },
-    "Station spatiale en direct": {
+    "USD": {
+      "shouldTranslate": false
+    },
+    "Une phrase de sagesse": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Space station, live"
+            "value": "A bit of wisdom"
+          }
+        }
+      }
+    },
+    "Une seule fois, en 3 étapes :": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One time, in 3 steps:"
+          }
+        }
+      }
+    },
+    "Valeur d'un connecteur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connector value"
+          }
+        }
+      }
+    },
+    "Valeur de la clé": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Key value"
+          }
+        }
+      }
+    },
+    "Ville (Paris, Lyon, Bordeaux…)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "City (Paris, London, Berlin…)"
           }
         }
       }
     },
     "Vitesse ISS": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2103,6 +2598,7 @@
       }
     },
     "Vitesse orbitale": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2112,167 +2608,152 @@
         }
       }
     },
-    "Conseil du jour": {
+    "data.price ou items[0].value": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Advice of the day"
+            "value": "data.price or items[0].value"
           }
         }
       }
     },
-    "Une phrase de sagesse": {
+    "descend sous": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A bit of wisdom"
+            "value": "drops below"
           }
         }
       }
     },
-    "Fait sur les chats": {
+    "dépasse": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cat fact"
+            "value": "goes above"
           }
         }
       }
     },
-    "Anecdote féline": {
+    "en direct": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Feline trivia"
+            "value": "live"
           }
         }
       }
     },
-    "Blague": {
+    "ex. 72761": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Joke"
+            "value": "e.g. 72761"
           }
         }
       }
     },
-    "Dad joke (en-tête Accept)": {
+    "ex. alarm": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dad joke (Accept header)"
+            "value": "e.g. alarm"
           }
         }
       }
     },
-    "État d'un capteur (token)": {
+    "fourni par le service": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A sensor's state (token)"
+            "value": "provided by the service"
           }
         }
       }
     },
-    "Spotify – titre en cours": {
+    "lumo://oauth": {
+      "shouldTranslate": false
+    },
+    "rarement nécessaire": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Spotify – now playing"
+            "value": "rarely needed"
           }
         }
       }
     },
-    "OAuth 2.0 (client requis)": {
+    "votre clé": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "OAuth 2.0 (client required)"
+            "value": "your key"
           }
         }
       }
     },
-    "API personnalisée": {
+    "votre token d'accès": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Custom API"
+            "value": "your access token"
           }
         }
       }
     },
-    "Pars d'une page vierge": {
+    "« {value} » est remplacé par la valeur récupérée.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Start from a blank page"
+            "value": "“{value}” is replaced by the fetched value."
           }
         }
       }
     },
-    "En attente de données…": {
+    "· AWTRIX %@": {
+      "shouldTranslate": false
+    },
+    "À l'écran maintenant": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Waiting for data…"
+            "value": "On screen now"
           }
         }
       }
     },
-    "Donnée absente pour le moment": {
+    "ÉDITEUR PIXEL ART": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No data right now"
-          }
-        }
-      }
-    },
-    "Recherche indisponible (vérifie ta connexion).": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Search unavailable (check your connection)."
-          }
-        }
-      }
-    },
-    "Notification envoyée": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notification sent"
-          }
-        }
-      }
-    },
-    "Échec de l'envoi": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send failed"
+            "value": "PIXEL ART EDITOR"
           }
         }
       }
     },
     "Échec de l'ajout": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2282,17 +2763,19 @@
         }
       }
     },
-    "Échec de la notification": {
+    "Échec de l'envoi": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Notification failed"
+            "value": "Send failed"
           }
         }
       }
     },
     "Échec de l'envoi du dessin": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2303,6 +2786,7 @@
       }
     },
     "Échec de l'import du fichier.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2312,27 +2796,30 @@
         }
       }
     },
-    "Affichage normal restauré": {
+    "Échec de la notification": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Normal display restored"
+            "value": "Notification failed"
           }
         }
       }
     },
-    "Ambiance allumée": {
+    "Écran": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mood light on"
+            "value": "Screen"
           }
         }
       }
     },
     "Écran allumé": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2343,6 +2830,7 @@
       }
     },
     "Écran éteint": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2352,35 +2840,101 @@
         }
       }
     },
-    "Connecte ton compte %@ en un clic.": {
+    "Écran, luminosité, défilement, apps intégrées et lampe d'ambiance.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Connect your %@ account in one click."
+            "value": "Screen, brightness, transitions, built-in apps and mood light."
           }
         }
       }
     },
-    "Connexion à %@": {
+    "Écran, luminosité, défilement, durée par app et lampe d'ambiance.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Connect to %@"
+            "value": "Screen, brightness, rotation, per-app duration and mood light."
           }
         }
       }
     },
-    "Aucun modèle pour « %@ »": {
+    "État d'un capteur (token)": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No template for « %@ »"
+            "value": "A sensor's state (token)"
+          }
+        }
+      }
+    },
+    "Éteindre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn off"
+          }
+        }
+      }
+    },
+    "Éteint": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off"
+          }
+        }
+      }
+    },
+    "Étoiles GitHub": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub stars"
+          }
+        }
+      }
+    },
+    "Évolution sur 24 h": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "24h change"
+          }
+        }
+      }
+    },
+    "↑ colle d'abord ton Client ID": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↑ paste your Client ID first"
+          }
+        }
+      }
+    },
+    "→ « %@ »": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "→ “%@”"
           }
         }
       }
     }
-  }
+  },
+  "version": "1.0"
 }

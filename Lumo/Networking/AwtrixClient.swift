@@ -118,6 +118,12 @@ struct AwtrixClient: Sendable {
         try await post("/api/power", json: ["power": on])
     }
 
+    /// Redémarre l'afficheur. Nécessaire pour appliquer les toggles d'apps natives (TIM, DAT, TEMP…) :
+    /// AWTRIX 0.94 ne reconstruit la rotation qu'au boot (vérifié sur device).
+    func reboot() async throws {
+        try await postEmpty("/api/reboot")
+    }
+
     // MARK: - Affichage
 
     func notify(_ payload: PushPayload) async throws {

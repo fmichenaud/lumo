@@ -1,8 +1,217 @@
 import SwiftUI
 
-/// Alertes & ambiance : actions ponctuelles indépendantes de la rotation d'apps.
-/// Tout est basé sur des actions explicites (pas de toggle à état) pour éviter toute désynchro.
+/// Alertes programmables : des règles à seuil (CPU, batterie, connecteur…) qui déclenchent
+/// automatiquement une notification et/ou une LED témoin. Les actions manuelles
+/// (notification ponctuelle, LED) restent disponibles, repliées en bas.
 struct AlertsView: View {
+    let device: Device
+    @EnvironmentObject var store: DeviceStore
+    @EnvironmentObject var alerts: AlertsStation
+    @EnvironmentObject var connectors: ConnectorsStation
+    var onResult: (String) -> Void = { _ in }
+
+    @State private var editing: AlertRule?
+    @State private var showManual = false
+
+    private var client: AwtrixClient { store.client(for: device) }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            rulesBlock
+            Divider().overlay(Theme.stroke)
+            DisclosureGroup(isExpanded: $showManual) {
+                ManualActionsView(device: device, onResult: onResult)
+                    .padding(.top, 12)
+            } label: {
+                Label("Actions manuelles (notification ponctuelle, LED)", systemImage: "hand.tap.fill")
+                    .font(.caption.weight(.medium)).foregroundStyle(Theme.textSecondary)
+            }
+        }
+        .card()
+        .sheet(item: $editing) { rule in
+            RuleEditor(device: device, rule: rule)
+                .environmentObject(alerts)
+                .environmentObject(connectors)
+        }
+    }
+
+    // MARK: - Règles
+
+    private var rulesBlock: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(String(localized: "Règles d'alerte").uppercased())
+                .font(.caption.weight(.semibold)).tracking(0.8)
+                .foregroundStyle(Theme.textSecondary)
+
+            if alerts.rules.isEmpty {
+                VStack(spacing: 6) {
+                    Image(systemName: "bell.badge.fill").font(.title2)
+                    Text("Aucune règle").font(.callout)
+                    Text("Exemple : « si le CPU du Mac dépasse 90 %, affiche une alerte rouge ».")
+                        .font(.caption).multilineTextAlignment(.center)
+                }
+                .foregroundStyle(Theme.textSecondary)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 8)
+            } else {
+                ForEach(alerts.rules) { ruleRow($0) }
+            }
+
+            Button { editing = AlertRule() } label: {
+                Label("Ajouter une règle", systemImage: "plus")
+            }
+            .buttonStyle(PillButtonStyle(prominent: false))
+        }
+    }
+
+    private func ruleRow(_ rule: AlertRule) -> some View {
+        let isActive = alerts.active.contains(rule.id)
+        return HStack(spacing: 12) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 7)
+                    .fill(isActive ? Color.red.opacity(0.2) : Color.white.opacity(0.05))
+                    .frame(width: 32, height: 32)
+                Image(systemName: rule.metric.symbol)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(isActive ? .red : Theme.textSecondary)
+            }
+            VStack(alignment: .leading, spacing: 1) {
+                Text(rule.conditionSummary(connectorName: connectorName(rule)))
+                    .foregroundStyle(Theme.textPrimary)
+                if isActive {
+                    Text("Alerte en cours").font(.caption2).foregroundStyle(.red)
+                } else if let v = alerts.lastValues[rule.id] {
+                    Text("Actuellement : \(AlertRule.format(v))\(rule.metric.unit)")
+                        .font(.caption2).foregroundStyle(Theme.textSecondary)
+                } else {
+                    Text(LocalizedStringKey(rule.enabled ? "En attente de données…" : "Inactive"))
+                        .font(.caption2).foregroundStyle(Theme.textSecondary)
+                }
+            }
+            Spacer()
+            Button("Tester") { Task { await alerts.test(rule); onResult("Alerte testée") } }
+                .buttonStyle(PillButtonStyle(prominent: false)).controlSize(.small)
+            Button { editing = rule } label: { Image(systemName: "pencil") }
+                .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
+            Toggle("", isOn: Binding(get: { rule.enabled }, set: { alerts.setEnabled(rule, $0) }))
+                .labelsHidden().tint(Theme.accent)
+        }
+    }
+
+    private func connectorName(_ rule: AlertRule) -> String? {
+        guard rule.metric == .connector, let id = rule.connectorID else { return nil }
+        return connectors.connectors.first { $0.id == id }?.name
+    }
+}
+
+/// Éditeur d'une règle d'alerte.
+private struct RuleEditor: View {
+    let device: Device
+    @EnvironmentObject var alerts: AlertsStation
+    @EnvironmentObject var connectors: ConnectorsStation
+    @Environment(\.dismiss) private var dismiss
+    @State var rule: AlertRule
+    @State private var color: Color
+
+    init(device: Device, rule: AlertRule) {
+        self.device = device
+        _rule = State(initialValue: rule)
+        _color = State(initialValue: Color(hex: rule.colorHex))
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            Text("Règle d'alerte").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
+
+            group("Condition") {
+                Picker("Surveiller", selection: $rule.metric) {
+                    ForEach(AlertRule.Metric.allCases.filter { $0 != .connector || !connectors.connectors.isEmpty }) {
+                        Text($0.label).tag($0)
+                    }
+                }
+                if rule.metric == .connector {
+                    Picker("Connecteur", selection: $rule.connectorID) {
+                        Text("Choisir…").tag(UUID?.none)
+                        ForEach(connectors.connectors) { c in
+                            Text(c.name.isEmpty ? "Sans nom" : c.name).tag(UUID?.some(c.id))
+                        }
+                    }
+                }
+                HStack(spacing: 10) {
+                    Picker("", selection: $rule.comparison) {
+                        ForEach(AlertRule.Comparison.allCases) { Text($0.label).tag($0) }
+                    }
+                    .pickerStyle(.segmented).frame(width: 220)
+                    TextField("Seuil", value: $rule.threshold, format: .number)
+                        .textFieldStyle(.roundedBorder).frame(width: 80)
+                    Text(rule.metric.unit).foregroundStyle(Theme.textSecondary)
+                }
+            }
+
+            group("Quand ça se déclenche") {
+                HStack(spacing: 10) {
+                    TextField("Message ({value} = valeur mesurée, vide = automatique)", text: $rule.message)
+                        .textFieldStyle(.roundedBorder)
+                    ColorPicker("", selection: Binding(
+                        get: { color },
+                        set: { color = $0; rule.colorHex = $0.hexString }
+                    ), supportsOpacity: false).labelsHidden()
+                    IconThumbnail(host: device.host, iconID: rule.icon)
+                    TextField("Icône", text: $rule.icon).textFieldStyle(.roundedBorder).frame(width: 60)
+                }
+                HStack(spacing: 10) {
+                    TextField("Son (ex. alarm, optionnel)", text: $rule.sound)
+                        .textFieldStyle(.roundedBorder).frame(width: 200)
+                    Picker("LED témoin", selection: $rule.indicator) {
+                        Text("Aucune").tag(0)
+                        ForEach(1..<4) { Text("LED \($0)").tag($0) }
+                    }
+                    .frame(width: 180)
+                    Spacer()
+                }
+                Text("La LED s'allume pendant l'alerte et s'éteint quand la valeur revient à la normale.")
+                    .font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
+            }
+
+            Divider().overlay(Theme.stroke)
+            HStack(spacing: 10) {
+                if alerts.rules.contains(where: { $0.id == rule.id }) {
+                    Button(role: .destructive) { alerts.remove(rule); dismiss() } label: {
+                        Image(systemName: "trash")
+                    }.buttonStyle(.plain).foregroundStyle(.red)
+                }
+                Spacer()
+                Button("Annuler") { dismiss() }.buttonStyle(PillButtonStyle(prominent: false))
+                Button("Enregistrer") { save() }.buttonStyle(PillButtonStyle())
+                    .disabled(rule.metric == .connector && rule.connectorID == nil)
+            }
+        }
+        .padding(22)
+        .frame(width: 520)
+        .background(Theme.background)
+    }
+
+    private func save() {
+        if alerts.rules.contains(where: { $0.id == rule.id }) {
+            alerts.update(rule)
+        } else {
+            alerts.add(rule)
+        }
+        dismiss()
+    }
+
+    private func group<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(String(localized: String.LocalizationValue(title)).uppercased())
+                .font(.caption.weight(.semibold)).tracking(0.8)
+                .foregroundStyle(Theme.textSecondary)
+            content()
+        }
+    }
+}
+
+/// Actions ponctuelles : notification manuelle et LED témoins (ancien contenu de la section).
+private struct ManualActionsView: View {
     let device: Device
     @EnvironmentObject var store: DeviceStore
     var onResult: (String) -> Void = { _ in }
@@ -29,7 +238,6 @@ struct AlertsView: View {
             Divider().overlay(Theme.stroke)
             indicatorsBlock
         }
-        .card()
         .task { effects = (try? await client.fetchEffects()) ?? [] }
     }
 

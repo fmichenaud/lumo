@@ -3,7 +3,7 @@ import Combine
 
 /// Les sous-sections d'un afficheur, affichées sous l'appareil dans la barre latérale.
 enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
-    case compose, scenes, weather, data, integrations, alerts, draw, apps, settings
+    case compose, scenes, weather, integrations, alerts, draw, apps, settings
     var id: String { rawValue }
 
     var title: String {
@@ -11,7 +11,6 @@ enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
         case .compose:      return String(localized: "Composer")
         case .scenes:       return String(localized: "Scènes")
         case .weather:      return String(localized: "Météo")
-        case .data:         return String(localized: "Données")
         case .integrations: return String(localized: "Intégrations")
         case .alerts:       return String(localized: "Alertes")
         case .draw:         return String(localized: "Dessin")
@@ -25,7 +24,6 @@ enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
         case .compose:      return "square.and.pencil"
         case .scenes:       return "bookmark.fill"
         case .weather:      return "cloud.sun.fill"
-        case .data:         return "chart.bar.fill"
         case .integrations: return "antenna.radiowaves.left.and.right"
         case .alerts:       return "bell.badge.fill"
         case .draw:         return "paintbrush.pointed.fill"
@@ -40,12 +38,11 @@ enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
         case .compose:  return String(localized: "Crée un affichage permanent (texte, couleur, icône) ajouté à la rotation de l'écran.")
         case .scenes:   return String(localized: "Sauvegarde tes compositions et renvoie-les en 1 clic. Elles survivent au redémarrage du device.")
         case .weather:  return String(localized: "Affiche la météo de ta ville sur l'écran, avec mise à jour automatique possible.")
-        case .alerts:   return String(localized: "Signaux ponctuels : une notification qui s'affiche puis disparaît, et les 3 LED témoins.")
-        case .data:     return String(localized: "Affiche des graphiques, le cours d'une crypto ou les stats de ton Mac.")
-        case .integrations: return String(localized: "Connecte n'importe quelle API (la tienne ou une externe) et affiche-la en direct.")
+        case .alerts:   return String(localized: "Surveille des seuils (CPU, batterie, connecteurs…) et déclenche notification ou LED automatiquement.")
+        case .integrations: return String(localized: "Branche des sources de données — ton Mac, les cryptos ou n'importe quelle API — et affiche-les en direct.")
         case .draw:     return String(localized: "Dessine pixel par pixel et envoie ton image sur la matrice.")
         case .apps:     return String(localized: "Gère la rotation : affiche ou supprime les apps présentes sur le device.")
-        case .settings: return String(localized: "Écran, luminosité, défilement, apps intégrées et lampe d'ambiance.")
+        case .settings: return String(localized: "Écran, luminosité, défilement, durée par app et lampe d'ambiance.")
         }
     }
 }

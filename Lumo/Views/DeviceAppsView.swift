@@ -13,6 +13,7 @@ struct DeviceAppsView: View {
     @State private var loopApps: [LoopApp] = []
     @State private var current: String?
     @State private var nativeOn: [String: Bool] = [:]
+    @State private var rebootTask: Task<Void, Never>?
 
     private var client: AwtrixClient { store.client(for: device) }
 
@@ -32,22 +33,18 @@ struct DeviceAppsView: View {
         VStack(spacing: 14) {
             header
 
-            groupLabel("Données")
-            toggleRow(icon: "cpu", title: "CPU du Mac", loopName: "cpu", section: .data,
+            groupLabel("Intégrations")
+            toggleRow(icon: "cpu", title: "CPU du Mac", loopName: "cpu", section: .integrations,
                       isOn: live.cpuOn) { live.setCPU($0) }
-            toggleRow(icon: "memorychip", title: "RAM du Mac", loopName: "ram", section: .data,
+            toggleRow(icon: "memorychip", title: "RAM du Mac", loopName: "ram", section: .integrations,
                       isOn: live.ramOn) { live.setRAM($0) }
-            toggleRow(icon: "bitcoinsign", title: "Crypto", loopName: "crypto", section: .data,
+            toggleRow(icon: "bitcoinsign", title: "Crypto", loopName: "crypto", section: .integrations,
                       isOn: live.cryptoOn) { live.setCrypto($0) }
-
-            if !connectors.connectors.isEmpty {
-                groupLabel("Intégrations")
-                ForEach(connectors.connectors) { c in
-                    toggleRow(icon: "antenna.radiowaves.left.and.right",
-                              title: c.name.isEmpty ? "Connecteur" : c.name,
-                              loopName: c.appName, section: .integrations,
-                              isOn: c.enabled) { connectors.setEnabled(c, $0) }
-                }
+            ForEach(connectors.connectors) { c in
+                toggleRow(icon: "antenna.radiowaves.left.and.right",
+                          title: c.name.isEmpty ? "Connecteur" : c.name,
+                          loopName: c.appName, section: .integrations,
+                          isOn: c.enabled) { connectors.setEnabled(c, $0) }
             }
 
             groupLabel("Système")
@@ -169,9 +166,18 @@ struct DeviceAppsView: View {
                     "HUM": s.HUM ?? false, "BAT": s.BAT ?? false]
     }
 
+    /// Applique un toggle natif puis redémarre l'afficheur (avec un délai pour regrouper
+    /// plusieurs toggles) : le firmware ne reconstruit la rotation qu'au démarrage.
     private func setNative(_ key: String, _ on: Bool) {
         nativeOn[key] = on
         Task { try? await client.updateSettings([key: on]) }
+        rebootTask?.cancel()
+        rebootTask = Task {
+            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            guard !Task.isCancelled else { return }
+            onResult("L'afficheur redémarre pour appliquer les changements…")
+            try? await client.reboot()
+        }
     }
 
     private func show(_ app: LoopApp) async {

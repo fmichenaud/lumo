@@ -8,6 +8,7 @@ struct DeviceDetailView: View {
     @State private var stats: AwtrixStats?
     @State private var brightness: Double = 80
     @State private var autoTransition = true
+    @State private var appTime = 5
     @State private var powerOn = true
     @State private var banner: String?
     @State private var moodColor = Theme.accent
@@ -96,7 +97,6 @@ struct DeviceDetailView: View {
             case .scenes:   ScenesView(device: device, onResult: { banner = $0 })
             case .weather:  WeatherView(device: device, onResult: { banner = $0 })
             case .alerts:   AlertsView(device: device, onResult: { banner = $0 })
-            case .data:     DataView(device: device)
             case .integrations: IntegrationsView(device: device)
             case .draw:     DrawView(device: device, onResult: { banner = $0 })
             case .apps:     DeviceAppsView(device: device, onResult: { banner = $0 })
@@ -130,7 +130,24 @@ struct DeviceDetailView: View {
 
             ControlRow(icon: "arrow.left.arrow.right", title: "Défilement auto",
                        subtitle: "Rotation entre les apps") {
-                Toggle("", isOn: $autoTransition).labelsHidden().tint(Theme.accent)
+                Toggle("", isOn: Binding(get: { autoTransition }, set: { value in
+                    autoTransition = value
+                    Task { try? await client.setAutoTransition(value) }
+                })).labelsHidden().tint(Theme.accent)
+            }
+            rowDivider
+
+            ControlRow(icon: "timer", title: "Durée par app",
+                       subtitle: "Temps d'affichage avant de passer à la suivante") {
+                HStack(spacing: 8) {
+                    Text("\(appTime) s")
+                        .font(.callout.weight(.semibold).monospacedDigit())
+                        .foregroundStyle(Theme.accent)
+                    Stepper("", value: Binding(get: { appTime }, set: { value in
+                        appTime = value
+                        Task { try? await client.updateSettings(["ATIME": value]) }
+                    }), in: 1...60).labelsHidden()
+                }
             }
 
             rowDivider
@@ -156,9 +173,6 @@ struct DeviceDetailView: View {
         .card()
         .onChange(of: powerOn) { _, value in
             Task { try? await client.setPower(value); banner = value ? "Écran allumé" : "Écran éteint" }
-        }
-        .onChange(of: autoTransition) { _, value in
-            Task { try? await client.setAutoTransition(value) }
         }
     }
 
@@ -201,6 +215,7 @@ struct DeviceDetailView: View {
         }
         if let settings = try? await client.fetchSettings() {
             if let t = settings.ATRANS { autoTransition = t }
+            if let a = settings.ATIME { appTime = a }
         }
     }
 }
