@@ -36,7 +36,19 @@ struct AuthConfig: Codable, Hashable {
 
 /// Un connecteur vers une API quelconque : récupère une valeur et l'affiche sur l'écran.
 struct Connector: Identifiable, Codable, Hashable {
+    /// Sources spéciales : services qui ne rentrent pas dans le moule URL + chemin JSON
+    /// (agrégation multi-requêtes, token du Trousseau…). Voir SpecialSources.swift.
+    enum SpecialSource: String, Codable {
+        case claudeQuota    // quota Claude Code (session 5 h + semaine)
+        case stripeMRR      // revenu mensuel récurrent Stripe
+        case stripeTotal    // gain total net Stripe (encaissements − remboursements − frais)
+    }
+
+    /// Vrai pour les sources Stripe (partagent la clé API et le lien de création).
+    var isStripe: Bool { special == .stripeMRR || special == .stripeTotal }
+
     var id = UUID()
+    var special: SpecialSource?
     var name: String = ""
     var url: String = ""
     var auth = AuthConfig()
@@ -182,7 +194,24 @@ struct ConnectorTemplate: Identifiable {
             return c
         },
 
-        // Services (OAuth)
+        // Services (sources spéciales / OAuth)
+        .init(title: "Quota Claude Code", subtitle: "Session 5 h + semaine, via le Trousseau — rien à configurer", symbol: "sparkles", category: "Services") {
+            var c = Connector(name: "Claude", template: "CC {value}", colorHex: "#3DD68C", intervalSeconds: 60)
+            c.special = .claudeQuota
+            return c
+        },
+        .init(title: "MRR Stripe", subtitle: "Revenu mensuel récurrent, calculé depuis tes abonnements", symbol: "creditcard.fill", category: "Services") {
+            var c = Connector(name: "MRR", template: "MRR {value}", colorHex: "#8A7DFF", intervalSeconds: 1800)
+            c.special = .stripeMRR
+            c.auth.kind = .bearer
+            return c
+        },
+        .init(title: "Gain total Stripe", subtitle: "Encaissements nets cumulés (remboursements et frais déduits)", symbol: "banknote.fill", category: "Services") {
+            var c = Connector(name: "Total", template: "Total {value}", colorHex: "#8A7DFF", intervalSeconds: 3600)
+            c.special = .stripeTotal
+            c.auth.kind = .bearer
+            return c
+        },
         .init(title: "Spotify – titre en cours", subtitle: "OAuth 2.0 (client requis)", symbol: "music.note", category: "Services") {
             var c = Connector(name: "Spotify",
                               url: "https://api.spotify.com/v1/me/player/currently-playing",

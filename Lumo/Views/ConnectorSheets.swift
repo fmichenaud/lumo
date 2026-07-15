@@ -1,75 +1,8 @@
 import SwiftUI
 import AppKit
 
-/// Section Intégrations : connecte n'importe quelle API et affiche-la en direct.
-struct IntegrationsView: View {
-    let device: Device
-    @EnvironmentObject var connectors: ConnectorsStation
-    @State private var editing: Connector?
-    @State private var showTemplates = false
-
-    var body: some View {
-        VStack(spacing: 14) {
-            if connectors.connectors.isEmpty {
-                empty
-            } else {
-                ForEach(connectors.connectors) { row($0) }
-            }
-            Button { showTemplates = true } label: {
-                Label("Ajouter un connecteur", systemImage: "plus")
-            }
-            .buttonStyle(PillButtonStyle(prominent: false))
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        .card()
-        .sheet(isPresented: $showTemplates) {
-            TemplatePicker { template in
-                showTemplates = false
-                editing = template.build()
-            }
-        }
-        .sheet(item: $editing) { connector in
-            ConnectorEditor(device: device, connector: connector)
-                .environmentObject(connectors)
-        }
-    }
-
-    private var empty: some View {
-        VStack(spacing: 6) {
-            Image(systemName: "antenna.radiowaves.left.and.right").font(.title2)
-            Text("Aucun connecteur").font(.callout)
-            Text("Branche ta propre API ou une API externe (cours, capteurs, compteurs…).")
-                .font(.caption).multilineTextAlignment(.center)
-        }
-        .foregroundStyle(Theme.textSecondary)
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
-    }
-
-    private func row(_ c: Connector) -> some View {
-        HStack(spacing: 12) {
-            IconThumbnail(host: device.host, iconID: c.icon)
-            VStack(alignment: .leading, spacing: 1) {
-                Text(c.name.isEmpty ? "Sans nom" : c.name).foregroundStyle(Theme.textPrimary)
-                if let err = connectors.lastError[c.id] {
-                    Text(err).font(.caption2).foregroundStyle(.red.opacity(0.9))
-                } else if let val = connectors.lastValue[c.id] {
-                    Text(c.renderedText(value: val)).font(.caption).foregroundStyle(Theme.accent)
-                } else {
-                    Text("Toutes les \(c.intervalSeconds) s").font(.caption2).foregroundStyle(Theme.textSecondary)
-                }
-            }
-            Spacer()
-            Button { editing = c } label: { Image(systemName: "pencil") }
-                .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
-            Toggle("", isOn: Binding(get: { c.enabled }, set: { connectors.setEnabled(c, $0) }))
-                .labelsHidden().tint(Theme.accent)
-        }
-    }
-}
-
 /// Galerie de modèles prêts à l'emploi : recherche + sections par catégorie, cartes élégantes.
-private struct TemplatePicker: View {
+struct TemplatePicker: View {
     @Environment(\.dismiss) private var dismiss
     var onPick: (ConnectorTemplate) -> Void
     @State private var query = ""
@@ -162,7 +95,7 @@ private struct TemplatePicker: View {
 }
 
 /// Éditeur d'un connecteur, organisé par sections claires.
-private struct ConnectorEditor: View {
+struct ConnectorEditor: View {
     let device: Device
     @EnvironmentObject var connectors: ConnectorsStation
     @Environment(\.dismiss) private var dismiss
@@ -192,20 +125,48 @@ private struct ConnectorEditor: View {
 
                 group("Source") {
                     field("Nom", "Mon API", text: $connector.name)
-                    field("URL", "https://api.exemple.com/data", text: $connector.url)
+                    switch connector.special {
+                    case .claudeQuota:
+                        caption("Lit le token de Claude Code dans le Trousseau (macOS demandera d'autoriser l'accès une fois — choisis « Toujours autoriser »). Affiche le quota session (5 h) et semaine, avec une couleur selon le niveau.")
+                    case .stripeMRR:
+                        caption("MRR calculé en agrégeant tes abonnements actifs, normalisés au mois.")
+                    case .stripeTotal:
+                        caption("Encaissements nets cumulés (remboursements et frais Stripe déduits), reconstitués depuis l'historique des transactions.")
+                    case nil:
+                        field("URL", "https://api.exemple.com/data", text: $connector.url)
+                    }
                 }
 
-                group("Authentification") {
-                    Picker("Méthode", selection: $connector.auth.kind) {
-                        ForEach(AuthConfig.Kind.allCases) { Text($0.label).tag($0) }
+                if connector.special == nil {
+                    group("Authentification") {
+                        Picker("Méthode", selection: $connector.auth.kind) {
+                            ForEach(AuthConfig.Kind.allCases) { Text($0.label).tag($0) }
+                        }
+                        .pickerStyle(.segmented)
+                        authFields
                     }
-                    .pickerStyle(.segmented)
-                    authFields
+                } else if connector.isStripe {
+                    group("Clé API Stripe") {
+                        SecureField("rk_live_… ou sk_live_…", text: $connector.auth.bearerToken)
+                            .textFieldStyle(.roundedBorder)
+                        HStack(spacing: 6) {
+                            caption("Recommandé : une clé restreinte en lecture seule (« Subscriptions » + « Balance ») — la même clé sert aux deux connecteurs Stripe.")
+                            Spacer()
+                            // Ouvre le Dashboard sur la création d'une clé restreinte pré-remplie.
+                            Link(destination: URL(string: "https://dashboard.stripe.com/apikeys/create?name=Lumo&permissions%5B%5D=rak_subscription_read&permissions%5B%5D=rak_balance_read")!) {
+                                Label("Créer la clé", systemImage: "arrow.up.right.square").font(.caption2)
+                            }
+                            .foregroundStyle(Theme.accent)
+                            .help("Ouvre Stripe avec le formulaire pré-rempli : nom « Lumo », permissions Subscriptions et Balance en lecture")
+                        }
+                    }
                 }
 
                 group("Donnée à afficher") {
-                    field("Chemin JSON", "data.price ou items[0].value", text: $connector.jsonPath)
-                    caption("La « route » vers la valeur dans la réponse JSON. Laisse vide si la réponse est déjà la valeur.")
+                    if connector.special == nil {
+                        field("Chemin JSON", "data.price ou items[0].value", text: $connector.jsonPath)
+                        caption("La « route » vers la valeur dans la réponse JSON. Laisse vide si la réponse est déjà la valeur.")
+                    }
                     field("Format affiché", "{value}€", text: $connector.template)
                     caption("« {value} » est remplacé par la valeur récupérée.")
                 }
@@ -360,7 +321,8 @@ private struct ConnectorEditor: View {
                 }.buttonStyle(.plain).foregroundStyle(.red)
             }
             Button("Annuler") { dismiss() }.buttonStyle(PillButtonStyle(prominent: false))
-            Button("Enregistrer") { save() }.buttonStyle(PillButtonStyle()).disabled(connector.url.isEmpty)
+            Button("Enregistrer") { save() }.buttonStyle(PillButtonStyle())
+                .disabled(connector.special == nil && connector.url.isEmpty)
         }
     }
 

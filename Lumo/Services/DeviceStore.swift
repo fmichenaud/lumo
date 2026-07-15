@@ -3,49 +3,37 @@ import Combine
 
 /// Les sous-sections d'un afficheur, affichées sous l'appareil dans la barre latérale.
 enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
-    case compose, scenes, weather, data, integrations, alerts, draw, apps, settings
+    case apps, compose, alerts, draw, settings
     var id: String { rawValue }
 
     var title: String {
         switch self {
-        case .compose:      return String(localized: "Composer")
-        case .scenes:       return String(localized: "Scènes")
-        case .weather:      return String(localized: "Météo")
-        case .data:         return String(localized: "Données")
-        case .integrations: return String(localized: "Intégrations")
-        case .alerts:       return String(localized: "Alertes")
-        case .draw:         return String(localized: "Dessin")
-        case .apps:         return String(localized: "Apps")
-        case .settings:     return String(localized: "Réglages")
+        case .apps:     return String(localized: "Apps")
+        case .compose:  return String(localized: "Composer")
+        case .alerts:   return String(localized: "Alertes")
+        case .draw:     return String(localized: "Dessin")
+        case .settings: return String(localized: "Réglages")
         }
     }
 
     var icon: String {
         switch self {
-        case .compose:      return "square.and.pencil"
-        case .scenes:       return "bookmark.fill"
-        case .weather:      return "cloud.sun.fill"
-        case .data:         return "chart.bar.fill"
-        case .integrations: return "antenna.radiowaves.left.and.right"
-        case .alerts:       return "bell.badge.fill"
-        case .draw:         return "paintbrush.pointed.fill"
-        case .apps:         return "square.stack.3d.up.fill"
-        case .settings:     return "slider.horizontal.3"
+        case .apps:     return "square.stack.3d.up.fill"
+        case .compose:  return "square.and.pencil"
+        case .alerts:   return "bell.badge.fill"
+        case .draw:     return "paintbrush.pointed.fill"
+        case .settings: return "slider.horizontal.3"
         }
     }
 
     /// Phrase d'explication affichée en tête de chaque section.
     var summary: String {
         switch self {
-        case .compose:  return String(localized: "Crée un affichage permanent (texte, couleur, icône) ajouté à la rotation de l'écran.")
-        case .scenes:   return String(localized: "Sauvegarde tes compositions et renvoie-les en 1 clic. Elles survivent au redémarrage du device.")
-        case .weather:  return String(localized: "Affiche la météo de ta ville sur l'écran, avec mise à jour automatique possible.")
-        case .alerts:   return String(localized: "Signaux ponctuels : une notification qui s'affiche puis disparaît, et les 3 LED témoins.")
-        case .data:     return String(localized: "Affiche des graphiques, le cours d'une crypto ou les stats de ton Mac.")
-        case .integrations: return String(localized: "Connecte n'importe quelle API (la tienne ou une externe) et affiche-la en direct.")
+        case .apps:     return String(localized: "Tout ce qui s'affiche à l'écran : active, configure et organise les apps de la rotation.")
+        case .compose:  return String(localized: "Crée un affichage (texte, couleur, icône) et sauvegarde tes compositions en scènes.")
+        case .alerts:   return String(localized: "Surveille des seuils (CPU, batterie, connecteurs…) et déclenche notification ou LED automatiquement.")
         case .draw:     return String(localized: "Dessine pixel par pixel et envoie ton image sur la matrice.")
-        case .apps:     return String(localized: "Gère la rotation : affiche ou supprime les apps présentes sur le device.")
-        case .settings: return String(localized: "Écran, luminosité, défilement, apps intégrées et lampe d'ambiance.")
+        case .settings: return String(localized: "Écran, luminosité, défilement, durée par app et lampe d'ambiance.")
         }
     }
 }
@@ -55,7 +43,7 @@ enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
 final class DeviceStore: ObservableObject {
     @Published var devices: [Device] = []
     @Published var selectedID: Device.ID?
-    @Published var selectedSection: DeviceSection = .compose
+    @Published var selectedSection: DeviceSection = .apps
 
     private let storageKey = "lumo.devices.v1"
 

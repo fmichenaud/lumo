@@ -63,12 +63,19 @@ final class WeatherStation: ObservableObject {
         if switchTo { try? await client.switchApp(name: "weather") }
     }
 
+    /// Active/désactive l'app météo sur l'afficheur : ON pousse tout de suite puis rafraîchit
+    /// toutes les 15 min ; OFF retire l'app de la rotation.
     func setAuto(_ on: Bool) {
         autoEnabled = on
         defaults.set(on, forKey: "lumo.weather.auto")
         task?.cancel()
         task = nil
-        if on { startAuto() }
+        if on { startAuto() } else { Task { await removeFromDevice() } }
+    }
+
+    private func removeFromDevice() async {
+        guard let device = store?.selectedDevice else { return }
+        try? await AwtrixClient(host: device.host).deleteCustomApp(name: "weather")
     }
 
     private func startAuto() {
