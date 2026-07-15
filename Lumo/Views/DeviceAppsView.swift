@@ -368,9 +368,19 @@ private struct StripeConfigSheet: View {
                 Text("Clé API").font(.caption2).foregroundStyle(Theme.textSecondary)
                 SecureField("rk_live_… ou sk_live_…", text: $key)
                     .textFieldStyle(.roundedBorder)
-                Text("Recommandé : une clé restreinte (Dashboard → Développeurs → Clés API → Clé restreinte) avec la seule permission « Subscriptions : lecture ».")
-                    .font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
-                    .fixedSize(horizontal: false, vertical: true)
+                HStack(spacing: 6) {
+                    Text("Recommandé : une clé restreinte avec la seule permission « Subscriptions : lecture ».")
+                        .font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
+                        .fixedSize(horizontal: false, vertical: true)
+                    Spacer()
+                    // Ouvre le Dashboard sur la création d'une clé restreinte pré-remplie.
+                    Link(destination: URL(string: "https://dashboard.stripe.com/apikeys/create?name=Lumo&permissions%5B%5D=rak_subscription_read")!) {
+                        Label("Créer la clé", systemImage: "arrow.up.right.square")
+                            .font(.caption2)
+                    }
+                    .foregroundStyle(Theme.accent)
+                    .help("Ouvre Stripe avec le formulaire pré-rempli : nom « Lumo », permission Subscriptions en lecture")
+                }
             }
 
             HStack(spacing: 10) {

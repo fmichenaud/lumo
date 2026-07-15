@@ -1097,6 +1097,16 @@
         }
       }
     },
+    "Créer la clé": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create the key"
+          }
+        }
+      }
+    },
     "Custom": {
       "extractionState": "stale",
       "localizations": {
@@ -2045,6 +2055,16 @@
         }
       }
     },
+    "Ouvre Stripe avec le formulaire pré-rempli : nom « Lumo », permission Subscriptions en lecture": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens Stripe with the form pre-filled: name “Lumo”, Subscriptions read permission"
+          }
+        }
+      }
+    },
     "Ouvre l'espace développeur et crée une app (gratuit).": {
       "extractionState": "stale",
       "localizations": {
@@ -2251,11 +2271,22 @@
       }
     },
     "Recommandé : une clé restreinte (Dashboard → Développeurs → Clés API → Clé restreinte) avec la seule permission « Subscriptions : lecture ».": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Recommended: a restricted key (Dashboard → Developers → API keys → Restricted key) with only the “Subscriptions: read” permission."
+          }
+        }
+      }
+    },
+    "Recommandé : une clé restreinte avec la seule permission « Subscriptions : lecture ».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recommended: a restricted key with only the “Subscriptions: read” permission."
           }
         }
       }
