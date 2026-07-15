@@ -106,7 +106,7 @@ struct ConnectorTemplate: Identifiable {
     let build: () -> Connector
 
     /// Ordre d'affichage des catégories.
-    static let categoryOrder = ["Crypto", "Devises", "Développeur", "Espace", "Fun", "Maison", "Services", "Custom"]
+    static let categoryOrder = ["Crypto", "Devises", "Développeur", "Espace", "Fun", "Maison", "Services", "Social", "Custom"]
 
     private static func cg(_ id: String, _ sym: String, _ color: String, _ icon: String = "1013") -> Connector {
         Connector(name: sym,
@@ -158,6 +158,17 @@ struct ConnectorTemplate: Identifiable {
             Connector(name: "npm", url: "https://api.npmjs.org/downloads/point/last-week/react",
                       jsonPath: "downloads", template: "{value} dl", colorHex: "#CB3837", icon: "305", intervalSeconds: 3600)
         },
+        .init(title: "CI GitHub", subtitle: "Verdict du dernier workflow (édite l'URL)", symbol: "checkmark.seal.fill", category: "Développeur") {
+            Connector(name: "GitHub CI", url: "https://api.github.com/repos/Blueforcer/awtrix3/actions/runs?per_page=1",
+                      jsonPath: "workflow_runs.0.conclusion", template: "CI {value}", colorHex: "#FFFFFF", icon: "305", intervalSeconds: 600)
+        },
+        .init(title: "Plausible en direct", subtitle: "Visiteurs actifs sur ton site (token API)", symbol: "chart.bar.fill", category: "Développeur") {
+            var c = Connector(name: "Plausible",
+                              url: "https://plausible.io/api/v1/stats/realtime/visitors?site_id=VOTRE-SITE",
+                              jsonPath: "", template: "{value} visiteurs", colorHex: "#5850EC", intervalSeconds: 60)
+            c.auth.kind = .bearer
+            return c
+        },
 
         // Espace
         .init(title: "Altitude ISS", subtitle: "Station spatiale en direct", symbol: "globe.europe.africa.fill", category: "Espace") {
@@ -193,6 +204,14 @@ struct ConnectorTemplate: Identifiable {
             c.auth.kind = .bearer
             return c
         },
+        .init(title: "Qualité de l'air", subtitle: "Indice européen AQI, sans clé (édite lat/lon)", symbol: "aqi.medium", category: "Maison") {
+            Connector(name: "Air", url: "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=48.85&longitude=2.35&current=european_aqi",
+                      jsonPath: "current.european_aqi", template: "AQI {value}", colorHex: "#3DD68C", intervalSeconds: 1800)
+        },
+        .init(title: "Tempo EDF", subtitle: "Couleur du jour Tempo (France)", symbol: "bolt.fill", category: "Maison") {
+            Connector(name: "Tempo", url: "https://www.api-couleur-tempo.fr/api/jourTempo/today",
+                      jsonPath: "libCouleur", template: "Tempo {value}", colorHex: "#41BDF5", intervalSeconds: 3600)
+        },
 
         // Services (sources spéciales / OAuth)
         .init(title: "Quota Claude Code", subtitle: "Session 5 h + semaine, via le Trousseau — rien à configurer", symbol: "sparkles", category: "Services") {
@@ -225,6 +244,13 @@ struct ConnectorTemplate: Identifiable {
             c.auth.helpURL = "https://developer.spotify.com/dashboard"
             c.auth.clientID = AppInfo.spotifyClientID  // injecté via Config/Secrets.xcconfig (vide → saisie manuelle)
             return c
+        },
+
+        // Social
+        .init(title: "Abonnés YouTube", subtitle: "Compteur d'abonnés d'une chaîne (clé API)", symbol: "play.rectangle.fill", category: "Social") {
+            Connector(name: "YouTube",
+                      url: "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=CHANNEL_ID&key=VOTRE_CLE_API",
+                      jsonPath: "items.0.statistics.subscriberCount", template: "{value} abonnés", colorHex: "#FF0000", intervalSeconds: 3600)
         },
 
         // Custom

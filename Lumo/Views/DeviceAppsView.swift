@@ -9,6 +9,8 @@ struct DeviceAppsView: View {
     @EnvironmentObject var live: LiveAppsStation
     @EnvironmentObject var connectors: ConnectorsStation
     @EnvironmentObject var weatherStation: WeatherStation
+    @EnvironmentObject var calendarStation: CalendarStation
+    @EnvironmentObject var pomodoro: PomodoroStation
     var onResult: (String) -> Void = { _ in }
 
     @State private var loopApps: [LoopApp] = []
@@ -18,6 +20,8 @@ struct DeviceAppsView: View {
     @State private var showTemplates = false
     @State private var showWeatherConfig = false
     @State private var showCryptoConfig = false
+    @State private var showReorder = false
+    @State private var showTimerSheet = false
 
     private var client: AwtrixClient { store.client(for: device) }
 
@@ -31,7 +35,7 @@ struct DeviceAppsView: View {
         ("HUM", "Humidity", "Humidité", "humidity.fill"),
         ("BAT", "Battery", "Batterie", "battery.100")
     ]
-    private let managedNames: Set<String> = ["cpu", "ram", "crypto", "weather", "time", "date", "temperature", "humidity", "battery", "notification"]
+    private let managedNames: Set<String> = ["cpu", "ram", "crypto", "weather", "calendar", "timer", "time", "date", "temperature", "humidity", "battery", "notification"]
 
     var body: some View {
         VStack(spacing: 14) {
@@ -39,6 +43,9 @@ struct DeviceAppsView: View {
 
             groupLabel("Intégrations")
             weatherRow
+            toggleRow(icon: "calendar", title: "Calendrier", loopName: "calendar",
+                      detail: calendarDetail,
+                      isOn: calendarStation.enabled, set: { calendarStation.setEnabled($0) })
             toggleRow(icon: "cpu", title: "CPU du Mac", loopName: "cpu",
                       detail: live.cpuOn ? "\(live.cpuValue)%" : nil,
                       isOn: live.cpuOn, set: { live.setCPU($0) })
@@ -68,6 +75,9 @@ struct DeviceAppsView: View {
                 toggleRow(icon: n.icon, title: n.title, loopName: n.loop, detail: nil,
                           isOn: nativeOn[n.key] ?? false, set: { setNative(n.key, n.loop, $0) })
             }
+
+            groupLabel("Outils")
+            timerRow
 
             if !otherApps.isEmpty {
                 groupLabel("Autres apps")
@@ -100,6 +110,12 @@ struct DeviceAppsView: View {
         .sheet(isPresented: $showCryptoConfig) {
             CryptoConfigSheet().environmentObject(live)
         }
+        .sheet(isPresented: $showReorder) {
+            ReorderSheet(client: client, onResult: onResult)
+        }
+        .sheet(isPresented: $showTimerSheet) {
+            PomodoroSheet().environmentObject(pomodoro)
+        }
     }
 
     private func groupLabel(_ text: String) -> some View {
@@ -116,6 +132,12 @@ struct DeviceAppsView: View {
                 .font(.caption.weight(.semibold)).tracking(0.8)
                 .foregroundStyle(Theme.textSecondary)
             Spacer()
+            Button { showReorder = true } label: {
+                Label("Ordonner", systemImage: "arrow.up.arrow.down")
+                    .font(.caption2)
+            }
+            .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
+            .help("Réordonner la rotation")
             HStack(spacing: 5) {
                 Circle().fill(Theme.online).frame(width: 6, height: 6)
                 Text("en direct").font(.caption2).foregroundStyle(Theme.textSecondary)
@@ -130,6 +152,13 @@ struct DeviceAppsView: View {
         case .stripeTotal: return "banknote"
         case nil:          return "antenna.radiowaves.left.and.right"
         }
+    }
+
+    /// Sous-titre de la ligne Calendrier : erreur d'accès, prochain événement, ou rien à venir.
+    private var calendarDetail: String? {
+        guard calendarStation.enabled else { return nil }
+        if let error = calendarStation.lastError { return error }
+        return calendarStation.nextEventText ?? String(localized: "Aucun événement à venir")
     }
 
     private var cryptoDetail: String? {
@@ -179,6 +208,42 @@ struct DeviceAppsView: View {
                 .labelsHidden().tint(Theme.accent)
                 .disabled(!weatherStation.hasLocation)
         }
+    }
+
+    /// Ligne « Minuteur » : sous-titre = état, contrôles play/pause et stop quand actif,
+    /// clic sur la ligne (ou crayon) → sheet de configuration.
+    private var timerRow: some View {
+        let isCurrent = current?.lowercased() == "timer"
+        return HStack(spacing: 12) {
+            iconBadge("timer", active: isCurrent || pomodoro.isActive)
+            VStack(alignment: .leading, spacing: 1) {
+                HStack(spacing: 6) {
+                    Text("Minuteur").foregroundStyle(Theme.textPrimary)
+                    if isCurrent {
+                        Image(systemName: "dot.radiowaves.left.and.right")
+                            .font(.caption2).foregroundStyle(Theme.accent)
+                    }
+                }
+                Text(pomodoro.statusText)
+                    .font(.caption2.monospacedDigit())
+                    .foregroundStyle(pomodoro.isActive ? Theme.accent : Theme.textSecondary)
+            }
+            Spacer()
+            if pomodoro.isActive {
+                Button {
+                    if pomodoro.isRunning { pomodoro.pause() } else { pomodoro.resume() }
+                } label: {
+                    Image(systemName: pomodoro.isRunning ? "pause.fill" : "play.fill")
+                }
+                .buttonStyle(.plain).foregroundStyle(Theme.accent)
+                Button { pomodoro.stop() } label: { Image(systemName: "stop.fill") }
+                    .buttonStyle(.plain).foregroundStyle(.red.opacity(0.85))
+            }
+            Button { showTimerSheet = true } label: { Image(systemName: "pencil") }
+                .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
+        }
+        .contentShape(Rectangle())
+        .onTapGesture { showTimerSheet = true }
     }
 
     private func toggleRow(icon: String, title: String, loopName: String, detail: String?,
@@ -274,6 +339,187 @@ struct DeviceAppsView: View {
         try? await client.deleteCustomApp(name: app.name)
         onResult("« \(app.name.capitalized) » supprimée")
         await loadLoop()
+    }
+}
+
+/// Sheet de réordonnancement de la rotation : glisser-déposer les apps de la loop,
+/// l'ordre est appliqué à chaud sur l'afficheur à chaque déplacement (POST /api/apps).
+private struct ReorderSheet: View {
+    let client: AwtrixClient
+    var onResult: (String) -> Void = { _ in }
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var names: [String] = []
+    @State private var loaded = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Ordre de la rotation").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
+                    Text("Glisse les apps pour changer leur ordre — appliqué immédiatement.")
+                        .font(.caption).foregroundStyle(Theme.textSecondary)
+                }
+                Spacer()
+                Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title2) }
+                    .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
+            }
+
+            if !loaded {
+                HStack {
+                    Spacer()
+                    ProgressView().controlSize(.small)
+                    Spacer()
+                }
+                .frame(height: 120)
+            } else if names.isEmpty {
+                Text("Aucune app dans la rotation.")
+                    .font(.caption).foregroundStyle(Theme.textSecondary)
+                    .frame(maxWidth: .infinity, minHeight: 120)
+            } else {
+                List {
+                    ForEach(Array(names.enumerated()), id: \.element) { index, name in
+                        HStack(spacing: 10) {
+                            Text("\(index + 1)")
+                                .font(.caption2.monospacedDigit())
+                                .foregroundStyle(Theme.textSecondary)
+                                .frame(width: 18, alignment: .trailing)
+                            Text(name.capitalized).foregroundStyle(Theme.textPrimary)
+                            Spacer()
+                            Image(systemName: "line.3.horizontal")
+                                .font(.caption).foregroundStyle(Theme.textSecondary.opacity(0.6))
+                        }
+                        .padding(.vertical, 2)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparatorTint(Theme.stroke)
+                    }
+                    .onMove(perform: move)
+                }
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .frame(height: min(CGFloat(names.count) * 34 + 16, 320))
+            }
+        }
+        .padding(22)
+        .frame(width: 440)
+        .background(Theme.background)
+        .task {
+            await reload()
+            loaded = true
+        }
+    }
+
+    /// Recharge la loop actuelle et trie par position.
+    private func reload() async {
+        guard let loop = try? await client.fetchLoop() else { return }
+        names = loop.sorted { $0.value < $1.value }.map { $0.key }
+    }
+
+    /// Applique le déplacement localement puis pousse l'ordre complet sur le device.
+    private func move(from source: IndexSet, to destination: Int) {
+        names.move(fromOffsets: source, toOffset: destination)
+        let order = names
+        Task {
+            do {
+                try await client.setLoopOrder(order)
+                onResult("Ordre de la rotation mis à jour")
+            } catch {
+                // En cas d'échec, on resynchronise avec l'état réel du device.
+                await reload()
+                onResult("Impossible d'appliquer l'ordre : \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
+/// Sheet du minuteur : durées rapides ou custom, mode Pomodoro, message de fin,
+/// temps restant en grand et bouton Démarrer/Arrêter.
+private struct PomodoroSheet: View {
+    @EnvironmentObject var pomodoro: PomodoroStation
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Minuteur").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
+                    Text("Compte à rebours affiché sur la matrice, sonnerie à zéro.")
+                        .font(.caption).foregroundStyle(Theme.textSecondary)
+                }
+                Spacer()
+                Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title2) }
+                    .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
+            }
+
+            // Temps restant en grand quand le minuteur est actif.
+            if pomodoro.isActive {
+                VStack(spacing: 4) {
+                    Text(PomodoroStation.timeText(Int(pomodoro.remaining.rounded())))
+                        .font(.system(size: 46, weight: .bold).monospacedDigit())
+                        .foregroundStyle(pomodoro.isRunning ? Theme.textPrimary : Theme.textSecondary)
+                    if pomodoro.pomodoroMode {
+                        Text(pomodoro.onBreak
+                             ? "Pause · cycle \(pomodoro.cycleCount) terminé"
+                             : "Travail · cycle \(pomodoro.cycleCount + 1)")
+                            .font(.caption).foregroundStyle(Theme.textSecondary)
+                    } else if !pomodoro.isRunning {
+                        Text("En pause").font(.caption).foregroundStyle(Theme.textSecondary)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+            }
+
+            // Choix de la durée (désactivé pendant le décompte et en mode Pomodoro).
+            HStack(spacing: 8) {
+                ForEach(PomodoroStation.presets, id: \.self) { m in
+                    Button("\(m) min") { pomodoro.setMinutes(m) }
+                        .buttonStyle(PillButtonStyle(prominent: pomodoro.customMinutes == m))
+                        .controlSize(.small)
+                }
+                Spacer()
+                Stepper(value: Binding(get: { pomodoro.customMinutes },
+                                       set: { pomodoro.setMinutes($0) }), in: 1...180) {
+                    Text("\(pomodoro.customMinutes) min")
+                        .font(.callout.monospacedDigit()).foregroundStyle(Theme.textPrimary)
+                }
+            }
+            .disabled(pomodoro.isActive || pomodoro.pomodoroMode)
+            .opacity(pomodoro.isActive || pomodoro.pomodoroMode ? 0.5 : 1)
+
+            Toggle(isOn: Binding(get: { pomodoro.pomodoroMode },
+                                 set: { pomodoro.setPomodoroMode($0) })) {
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("Mode Pomodoro").foregroundStyle(Theme.textPrimary)
+                    Text("Travail 25 min et pause 5 min, enchaînés.")
+                        .font(.caption2).foregroundStyle(Theme.textSecondary)
+                }
+            }
+            .toggleStyle(.switch).tint(Theme.accent)
+            .disabled(pomodoro.isActive)
+
+            TextField("Message de fin", text: Binding(get: { pomodoro.endMessage },
+                                                      set: { pomodoro.setEndMessage($0) }))
+                .textFieldStyle(.roundedBorder)
+
+            if pomodoro.isActive {
+                Button {
+                    pomodoro.stop()
+                } label: {
+                    Label("Arrêter", systemImage: "stop.fill").frame(maxWidth: .infinity)
+                }
+                .buttonStyle(PillButtonStyle(prominent: true))
+            } else {
+                Button {
+                    pomodoro.start()
+                } label: {
+                    Label("Démarrer", systemImage: "play.fill").frame(maxWidth: .infinity)
+                }
+                .buttonStyle(PillButtonStyle(prominent: true))
+            }
+        }
+        .padding(22)
+        .frame(width: 440)
+        .background(Theme.background)
     }
 }
 

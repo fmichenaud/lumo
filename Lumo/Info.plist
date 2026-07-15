@@ -32,6 +32,8 @@
 	<string>Lumo</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Lumo a besoin du réseau local pour découvrir et piloter vos afficheurs AWTRIX (Ulanzi TC001).</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Lumo lit ton calendrier pour afficher le prochain événement sur l'afficheur.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

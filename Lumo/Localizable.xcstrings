@@ -1,8 +1,65 @@
 {
   "sourceLanguage": "fr",
   "strings": {
-    "APERÇU LIVE": {
+    "": {
+      "shouldTranslate": false
+    },
+    "%@ %@%@": {
+      "shouldTranslate": false
+    },
+    "%@ restantes": {
       "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ left"
+          }
+        }
+      }
+    },
+    "%@ à %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ at %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ à %2$@"
+          }
+        }
+      }
+    },
+    "%lld": {
+      "shouldTranslate": false
+    },
+    "%lld min": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min"
+          }
+        }
+      }
+    },
+    "%lld s": {
+      "shouldTranslate": false
+    },
+    "%lld%%": {
+      "shouldTranslate": false
+    },
+    "192.168.1.41": {
+      "shouldTranslate": false
+    },
+    "8787": {
+      "shouldTranslate": false
+    },
+    "APERÇU LIVE": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -45,8 +102,39 @@
         }
       }
     },
-    "Actions manuelles (notification ponctuelle, LED)": {
+    "Accès refusé — Réglages Système → Confidentialité → Calendriers": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Access denied — System Settings → Privacy → Calendars"
+          }
+        }
+      }
+    },
+    "Actif en ce moment": {
       "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active right now"
+          }
+        }
+      }
+    },
+    "Action": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Action"
+          }
+        }
+      }
+    },
+    "Actions manuelles (notification ponctuelle, LED)": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -67,8 +155,17 @@
         }
       }
     },
+    "Activé : allume l'écran. Désactivé : l'éteint.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On: turns the screen on. Off: turns it off."
+          }
+        }
+      }
+    },
     "Actualiser": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -79,7 +176,6 @@
       }
     },
     "Actuellement : %@%@": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -95,6 +191,16 @@
         }
       }
     },
+    "Affichage": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display"
+          }
+        }
+      }
+    },
     "Affichage normal restauré": {
       "extractionState": "stale",
       "localizations": {
@@ -106,6 +212,16 @@
         }
       }
     },
+    "Affiche brièvement un message sur l'afficheur AWTRIX, comme une notification.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Briefly shows a message on the AWTRIX display, like a notification."
+          }
+        }
+      }
+    },
     "Affiche des graphiques, le cours d'une crypto ou les stats de ton Mac.": {
       "extractionState": "stale",
       "localizations": {
@@ -113,6 +229,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Show charts, a crypto price, or your Mac's stats."
+          }
+        }
+      }
+    },
+    "Affiche immédiatement l'app demandée sur l'afficheur (ex. Time, weather, raccourci).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Immediately shows the requested app on the display (e.g. Time, weather, raccourci)."
           }
         }
       }
@@ -151,7 +277,6 @@
       }
     },
     "Afficher": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -161,8 +286,37 @@
         }
       }
     },
+    "Afficher un texte en continu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show a text continuously"
+          }
+        }
+      }
+    },
+    "Afficheur basculé sur « %@ ».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display switched to “%@”."
+          }
+        }
+      }
+    },
+    "Ajoute le texte comme app permanente dans la rotation de l'afficheur et l'affiche immédiatement.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adds the text as a permanent app in the display's rotation and shows it immediately."
+          }
+        }
+      }
+    },
     "Ajouter par IP": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -173,7 +327,6 @@
       }
     },
     "Ajouter un afficheur": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -184,7 +337,6 @@
       }
     },
     "Ajouter un connecteur": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -195,7 +347,6 @@
       }
     },
     "Ajouter une règle": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -206,7 +357,6 @@
       }
     },
     "Ajouter à l'affichage": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -216,13 +366,33 @@
         }
       }
     },
-    "Alerte en cours": {
+    "Ajuste selon le capteur de lumière ambiante": {
       "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
+            "value": "Adjusts to the ambient light sensor"
+          }
+        }
+      }
+    },
+    "Alerte en cours": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Alert active"
+          }
+        }
+      }
+    },
+    "Alerte planifiée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduled alert"
           }
         }
       }
@@ -239,7 +409,6 @@
       }
     },
     "Alertes": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -260,13 +429,32 @@
         }
       }
     },
+    "Allume ou éteint la matrice LED de l'afficheur.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turns the display's LED matrix on or off."
+          }
+        }
+      }
+    },
     "Allumer": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Turn on"
+          }
+        }
+      }
+    },
+    "Allumer ou éteindre l'écran": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn the screen on or off"
           }
         }
       }
@@ -337,8 +525,18 @@
         }
       }
     },
-    "Annuler": {
+    "Animation entre deux apps": {
       "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animation between two apps"
+          }
+        }
+      }
+    },
+    "Annuler": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -359,6 +557,26 @@
         }
       }
     },
+    "App à afficher (ex. weather, optionnel)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App to show (e.g. weather, optional)"
+          }
+        }
+      }
+    },
+    "Appareil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Device"
+          }
+        }
+      }
+    },
     "Apparence": {
       "extractionState": "stale",
       "localizations": {
@@ -371,7 +589,6 @@
       }
     },
     "Apps": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -403,13 +620,42 @@
         }
       }
     },
+    "Arrêter": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        }
+      }
+    },
     "Aucun": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "None"
+          }
+        }
+      }
+    },
+    "Aucun afficheur n'est configuré dans Lumo. Ouvre l'app et ajoute ton appareil d'abord.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No display is configured in Lumo. Open the app and add your device first."
+          }
+        }
+      }
+    },
+    "Aucun afficheur nommé « %@ » n'est configuré dans Lumo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No display named “%@” is configured in Lumo."
           }
         }
       }
@@ -436,8 +682,17 @@
         }
       }
     },
+    "Aucun jour coché = tous les jours.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No day checked = every day."
+          }
+        }
+      }
+    },
     "Aucun modèle pour « %@ »": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -447,8 +702,17 @@
         }
       }
     },
+    "Aucun événement à venir": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No upcoming events"
+          }
+        }
+      }
+    },
     "Aucune": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -458,8 +722,17 @@
         }
       }
     },
+    "Aucune app dans la rotation.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No apps in the rotation."
+          }
+        }
+      }
+    },
     "Aucune icône trouvée": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -470,7 +743,6 @@
       }
     },
     "Aucune règle": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -524,6 +796,16 @@
         }
       }
     },
+    "Basculer sur une app": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch to an app"
+          }
+        }
+      }
+    },
     "Batterie": {
       "extractionState": "stale",
       "localizations": {
@@ -536,7 +818,6 @@
       }
     },
     "Batterie de l'afficheur": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -547,7 +828,6 @@
       }
     },
     "Bienvenue dans Lumo": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -591,7 +871,6 @@
       }
     },
     "Branche ton afficheur AWTRIX sur le même réseau,\nLumo le trouve automatiquement.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -602,7 +881,6 @@
       }
     },
     "CE QUI TOURNE À L'ÉCRAN": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -624,7 +902,6 @@
       }
     },
     "CPU du Mac": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -634,8 +911,29 @@
         }
       }
     },
-    "Cet afficheur doit être sous AWTRIX — voir comment l'installer": {
+    "Calendrier": {
       "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendar"
+          }
+        }
+      }
+    },
+    "Ce qui se passe pendant la nuit": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What happens during the night"
+          }
+        }
+      }
+    },
+    "Cet afficheur doit être sous AWTRIX — voir comment l'installer": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -679,7 +977,6 @@
       }
     },
     "Cherche, clique : l'icône part directement sur l'afficheur.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -690,7 +987,6 @@
       }
     },
     "Chercher": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -701,7 +997,6 @@
       }
     },
     "Choisir une icône": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -712,7 +1007,6 @@
       }
     },
     "Choisir…": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -723,7 +1017,6 @@
       }
     },
     "Choisis ta ville — l'afficheur se met à jour toutes les 15 min quand l'app est activée.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -734,7 +1027,6 @@
       }
     },
     "Choisis un modèle — tout reste ajustable ensuite.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -745,7 +1037,6 @@
       }
     },
     "Choisis une ville pour commencer": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -756,7 +1047,6 @@
       }
     },
     "Client ID": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -811,7 +1101,6 @@
       }
     },
     "Clé API invalide": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -822,7 +1111,6 @@
       }
     },
     "Clé API manquante": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -833,12 +1121,21 @@
       }
     },
     "Clé sans accès aux abonnements — crée une clé restreinte avec « Subscriptions : lecture »": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Key has no access to subscriptions — create a restricted key with “Subscriptions: read”"
+          }
+        }
+      }
+    },
+    "Code hexadécimal du texte, ex. #FF5555": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hex code for the text, e.g. #FF5555"
           }
         }
       }
@@ -855,7 +1152,6 @@
       }
     },
     "Composer": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -866,12 +1162,21 @@
       }
     },
     "Composer un affichage": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Compose a display"
+          }
+        }
+      }
+    },
+    "Compte à rebours affiché sur la matrice, sonnerie à zéro.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Countdown shown on the matrix, chime at zero."
           }
         }
       }
@@ -899,7 +1204,6 @@
       }
     },
     "Connecte ton compte %@ en un clic.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -921,7 +1225,6 @@
       }
     },
     "Connecter": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -932,7 +1235,6 @@
       }
     },
     "Connecteur": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -954,7 +1256,6 @@
       }
     },
     "Connecté": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -965,7 +1266,6 @@
       }
     },
     "Connexion à %@": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1009,12 +1309,31 @@
       }
     },
     "Couleur": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Color"
+          }
+        }
+      }
+    },
+    "Couleur (hex)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color (hex)"
+          }
+        }
+      }
+    },
+    "Couleur invalide : « %@ ». Utilise un code hexadécimal comme #FF5555.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invalid color: “%@”. Use a hex code like #FF5555."
           }
         }
       }
@@ -1097,7 +1416,6 @@
       }
     },
     "Cours mis à jour toutes les 60 s (CoinGecko).": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1108,7 +1426,6 @@
       }
     },
     "Crypto": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1119,7 +1436,6 @@
       }
     },
     "Crée un affichage (texte, couleur, icône) et sauvegarde tes compositions en scènes.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1141,7 +1457,6 @@
       }
     },
     "Créer la clé": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1184,8 +1499,17 @@
         }
       }
     },
+    "De 1 à 100.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From 1 to 100."
+          }
+        }
+      }
+    },
     "Dessin": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1196,7 +1520,6 @@
       }
     },
     "Dessine pixel par pixel et envoie ton image sur la matrice.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1207,7 +1530,6 @@
       }
     },
     "Devise": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1294,6 +1616,36 @@
         }
       }
     },
+    "Démarrer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
+          }
+        }
+      }
+    },
+    "Démarrer %lld min": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start %lld min"
+          }
+        }
+      }
+    },
+    "Désactivée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disabled"
+          }
+        }
+      }
+    },
     "Développeur": {
       "extractionState": "stale",
       "localizations": {
@@ -1305,6 +1657,9 @@
         }
       }
     },
+    "EUR": {
+      "shouldTranslate": false
+    },
     "Effet de fond": {
       "extractionState": "stale",
       "localizations": {
@@ -1312,6 +1667,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "Background effect"
+          }
+        }
+      }
+    },
+    "Effet de transition": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transition effect"
           }
         }
       }
@@ -1327,7 +1693,28 @@
         }
       }
     },
+    "En pause": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paused"
+          }
+        }
+      }
+    },
+    "En écoute sur le port %lld · %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listening on port %lld · %@"
+          }
+        }
+      }
+    },
     "Encaissements nets cumulés (remboursements et frais Stripe déduits), reconstitués depuis l'historique des transactions.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1338,7 +1725,6 @@
       }
     },
     "Enregistrer": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1349,7 +1735,6 @@
       }
     },
     "Enregistrer comme scène": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1382,7 +1767,6 @@
       }
     },
     "Envoyer": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1393,7 +1777,6 @@
       }
     },
     "Envoyer la météo": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1404,7 +1787,6 @@
       }
     },
     "Envoyer la notification": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1415,7 +1797,6 @@
       }
     },
     "Envoyer le dessin": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1426,12 +1807,31 @@
       }
     },
     "Envoyer sur l'afficheur": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Send to display"
+          }
+        }
+      }
+    },
+    "Envoyer une notification": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send a notification"
+          }
+        }
+      }
+    },
+    "Erreur : %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error: %@"
           }
         }
       }
@@ -1448,12 +1848,21 @@
       }
     },
     "Exemple : « si le CPU du Mac dépasse 90 %, affiche une alerte rouge ».": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Example: “if the Mac's CPU goes above 90%, show a red alert”."
+          }
+        }
+      }
+    },
+    "Exemples d'utilisation": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usage examples"
           }
         }
       }
@@ -1470,7 +1879,6 @@
       }
     },
     "Fermer": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1481,7 +1889,6 @@
       }
     },
     "Fichier…": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1535,7 +1942,6 @@
       }
     },
     "Galerie d'icônes": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1546,7 +1952,6 @@
       }
     },
     "Garde cette composition sous la main pour la renvoyer en 1 clic": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1557,7 +1962,6 @@
       }
     },
     "Garder affichée": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1568,7 +1972,6 @@
       }
     },
     "Garder après reboot": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1578,8 +1981,17 @@
         }
       }
     },
+    "Glisse les apps pour changer leur ordre — appliqué immédiatement.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag apps to change their order — applied immediately."
+          }
+        }
+      }
+    },
     "Gomme": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1601,7 +2013,6 @@
       }
     },
     "HORS LIGNE": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1623,7 +2034,6 @@
       }
     },
     "Hors ligne": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1645,7 +2055,6 @@
       }
     },
     "Humidité (capteur)": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1655,8 +2064,10 @@
         }
       }
     },
+    "ID": {
+      "shouldTranslate": false
+    },
     "Icône": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1677,6 +2088,26 @@
         }
       }
     },
+    "Identifiant d'icône LaMetric, ex. 1234": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LaMetric icon ID, e.g. 1234"
+          }
+        }
+      }
+    },
+    "Inactif": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idle"
+          }
+        }
+      }
+    },
     "Inactive": {
       "extractionState": "stale",
       "localizations": {
@@ -1689,7 +2120,6 @@
       }
     },
     "Indicateur %lld": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1744,7 +2174,6 @@
       }
     },
     "LED %lld": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1755,7 +2184,6 @@
       }
     },
     "LED témoin": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1766,12 +2194,21 @@
       }
     },
     "La LED s'allume pendant l'alerte et s'éteint quand la valeur revient à la normale.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "The LED lights up while the alert is active and turns off when the value returns to normal."
+          }
+        }
+      }
+    },
+    "La notification reste à l'écran jusqu'à confirmation.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The notification stays on screen until confirmed."
           }
         }
       }
@@ -1788,7 +2225,6 @@
       }
     },
     "Lampe d'ambiance": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1831,6 +2267,61 @@
         }
       }
     },
+    "Luminosité (%)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brightness (%)"
+          }
+        }
+      }
+    },
+    "Luminosité automatique": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic brightness"
+          }
+        }
+      }
+    },
+    "Luminosité nocturne": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Night brightness"
+          }
+        }
+      }
+    },
+    "Luminosité réduite": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dimmed brightness"
+          }
+        }
+      }
+    },
+    "Luminosité réglée à %lld %%.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brightness set to %lld%%."
+          }
+        }
+      }
+    },
+    "Lumo": {
+      "shouldTranslate": false
+    },
     "Lumo lit le token de Claude Code dans le Trousseau (macOS te demandera d'autoriser l'accès une fois — choisis « Toujours autoriser »). Aucune clé à saisir.": {
       "extractionState": "stale",
       "localizations": {
@@ -1843,7 +2334,6 @@
       }
     },
     "MES AFFICHEURS": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1865,7 +2355,6 @@
       }
     },
     "MRR Stripe": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1898,7 +2387,6 @@
       }
     },
     "Mes scènes": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1908,8 +2396,27 @@
         }
       }
     },
+    "Message": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message"
+          }
+        }
+      }
+    },
+    "Message (vide = automatique)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message (empty = automatic)"
+          }
+        }
+      }
+    },
     "Message ({value} = valeur mesurée, vide = automatique)": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1919,8 +2426,17 @@
         }
       }
     },
+    "Message de fin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "End message"
+          }
+        }
+      }
+    },
     "Message à afficher": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1941,13 +2457,53 @@
         }
       }
     },
+    "Minuteur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timer"
+          }
+        }
+      }
+    },
+    "Minuteur · pause": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timer · break"
+          }
+        }
+      }
+    },
     "Mise à jour auto (15 min)": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Auto update (15 min)"
+          }
+        }
+      }
+    },
+    "Mode Pomodoro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pomodoro mode"
+          }
+        }
+      }
+    },
+    "Mode nuit programmé": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduled night mode"
           }
         }
       }
@@ -1997,7 +2553,6 @@
       }
     },
     "Méthode": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2008,7 +2563,6 @@
       }
     },
     "Météo": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2019,7 +2573,6 @@
       }
     },
     "Météo non configurée": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2062,6 +2615,16 @@
         }
       }
     },
+    "Nom d'app": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App name"
+          }
+        }
+      }
+    },
     "Nom d'une mélodie présente sur l'appareil": {
       "extractionState": "stale",
       "localizations": {
@@ -2073,13 +2636,32 @@
         }
       }
     },
+    "Nom de l'afficheur dans Lumo. Par défaut : le premier appareil.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display name in Lumo. Default: the first device."
+          }
+        }
+      }
+    },
     "Nom de l'app": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "App name"
+          }
+        }
+      }
+    },
+    "Nom de l'app custom dans la rotation.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name of the custom app in the rotation."
           }
         }
       }
@@ -2091,6 +2673,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Header name"
+          }
+        }
+      }
+    },
+    "Nom exact de l'app, ex. Time, weather.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exact app name, e.g. Time, weather."
           }
         }
       }
@@ -2117,6 +2709,16 @@
         }
       }
     },
+    "Notification envoyée sur l'afficheur.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notification sent to the display."
+          }
+        }
+      }
+    },
     "Nouveau connecteur": {
       "extractionState": "stale",
       "localizations": {
@@ -2124,6 +2726,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "New connector"
+          }
+        }
+      }
+    },
+    "Nuit": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Night"
           }
         }
       }
@@ -2151,7 +2764,6 @@
       }
     },
     "Options avancées": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2161,13 +2773,43 @@
         }
       }
     },
+    "Ordonner": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reorder"
+          }
+        }
+      }
+    },
+    "Ordre de la rotation": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rotation order"
+          }
+        }
+      }
+    },
     "Oublier ce device": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Forget this device"
+          }
+        }
+      }
+    },
+    "Outils": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tools"
           }
         }
       }
@@ -2205,7 +2847,6 @@
       }
     },
     "Ouvrir": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2216,7 +2857,6 @@
       }
     },
     "Ouvrir Lumo": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2227,7 +2867,6 @@
       }
     },
     "Parcourir la galerie / importer une icône": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2248,6 +2887,57 @@
         }
       }
     },
+    "Passerelle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gateway"
+          }
+        }
+      }
+    },
+    "Passerelle de notifications": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notification gateway"
+          }
+        }
+      }
+    },
+    "Pause": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pause"
+          }
+        }
+      }
+    },
+    "Pause · %@ restantes": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Break · %@ left"
+          }
+        }
+      }
+    },
+    "Pause · cycle %lld terminé": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Break · cycle %lld done"
+          }
+        }
+      }
+    },
     "Permission manquante sur la clé — utilise le lien « Créer la clé » de l'éditeur": {
       "localizations": {
         "en": {
@@ -2258,13 +2948,66 @@
         }
       }
     },
-    "Pinceau": {
+    "Peut traverser minuit": {
       "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
+            "value": "Can span past midnight"
+          }
+        }
+      }
+    },
+    "Pinceau": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Brush"
+          }
+        }
+      }
+    },
+    "Plage horaire": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time window"
+          }
+        }
+      }
+    },
+    "Planifiée": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduled"
+          }
+        }
+      }
+    },
+    "Port": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Port"
+          }
+        }
+      }
+    },
+    "Quand": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When"
           }
         }
       }
@@ -2281,7 +3024,6 @@
       }
     },
     "Quitter": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2303,7 +3045,6 @@
       }
     },
     "Quota Claude — semaine": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2314,7 +3055,6 @@
       }
     },
     "Quota Claude — session": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2324,8 +3064,17 @@
         }
       }
     },
+    "Quotas & business": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quotas & business"
+          }
+        }
+      }
+    },
     "RAM du Mac": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2347,7 +3096,6 @@
       }
     },
     "Rafraîchir toutes les %lld s": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2358,7 +3106,6 @@
       }
     },
     "Recherche de ton afficheur…": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2380,7 +3127,6 @@
       }
     },
     "Rechercher": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2391,7 +3137,6 @@
       }
     },
     "Rechercher (trophy, clock, heart, fire…)": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2402,7 +3147,6 @@
       }
     },
     "Rechercher un modèle…": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2413,7 +3157,6 @@
       }
     },
     "Recherche…": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2446,6 +3189,7 @@
       }
     },
     "Recommandé : une clé restreinte en lecture seule (« Subscriptions » + « Balance ») — la même clé sert aux deux connecteurs Stripe.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2456,7 +3200,6 @@
       }
     },
     "Reconnecter": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2473,6 +3216,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Redirect URI to allow on the service side: lumo://oauth"
+          }
+        }
+      }
+    },
+    "Reprendre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resume"
           }
         }
       }
@@ -2499,6 +3252,16 @@
         }
       }
     },
+    "Reçois des messages d'autres apps (Raccourcis, scripts, curl…) et affiche-les sur la matrice. La passerelle n'écoute que sur cet ordinateur (127.0.0.1).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Receive messages from other apps (Shortcuts, scripts, curl…) and show them on the matrix. The gateway only listens on this computer (127.0.0.1)."
+          }
+        }
+      }
+    },
     "Rotation entre les apps": {
       "extractionState": "stale",
       "localizations": {
@@ -2511,7 +3274,6 @@
       }
     },
     "Règle d'alerte": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2521,8 +3283,17 @@
         }
       }
     },
+    "Règle la luminosité de l'afficheur, de 1 à 100 %. Désactive la luminosité automatique.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sets the display brightness, from 1 to 100%. Disables automatic brightness."
+          }
+        }
+      }
+    },
     "Règles d'alerte": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2533,7 +3304,6 @@
       }
     },
     "Réglages": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2544,12 +3314,31 @@
       }
     },
     "Réglages avancés": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Advanced settings"
+          }
+        }
+      }
+    },
+    "Régler la luminosité": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set the brightness"
+          }
+        }
+      }
+    },
+    "Réordonner la rotation": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reorder the rotation"
           }
         }
       }
@@ -2565,8 +3354,18 @@
         }
       }
     },
-    "Saisis l'adresse IP de ton AWTRIX (visible dans l'app Ulanzi ou ta box).": {
+    "S'applique automatiquement à l'heure choisie": {
       "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Applies automatically at the chosen time"
+          }
+        }
+      }
+    },
+    "Saisis l'adresse IP de ton AWTRIX (visible dans l'app Ulanzi ou ta box).": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2588,7 +3387,6 @@
       }
     },
     "Sauvegarde l'app dans la mémoire du device pour qu'elle survive au redémarrage": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2665,7 +3463,6 @@
       }
     },
     "Se connecter": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2737,7 +3534,6 @@
       }
     },
     "Seuil": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2747,13 +3543,32 @@
         }
       }
     },
+    "Seuil franchi": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Threshold crossed"
+          }
+        }
+      }
+    },
     "Si macOS demande l'accès au réseau local, autorise-le :\nla recherche reprend toute seule.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "If macOS asks for local network access, allow it:\nthe search resumes on its own."
+          }
+        }
+      }
+    },
+    "Si une app est renseignée, l'écran bascule dessus au lieu d'afficher la notification.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If an app is set, the screen switches to it instead of showing the notification."
           }
         }
       }
@@ -2781,7 +3596,6 @@
       }
     },
     "Son (ex. alarm, optionnel)": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2835,8 +3649,17 @@
         }
       }
     },
+    "Stop": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        }
+      }
+    },
     "Surveille des seuils (CPU, batterie, connecteurs…) et déclenche notification ou LED automatiquement.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2847,7 +3670,6 @@
       }
     },
     "Surveiller": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2924,7 +3746,6 @@
       }
     },
     "Température (capteur)": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2935,7 +3756,6 @@
       }
     },
     "Tester": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2946,12 +3766,21 @@
       }
     },
     "Texte": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Text"
+          }
+        }
+      }
+    },
+    "Texte affiché en continu dans l'app « %@ ».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text shown continuously in the app “%@”."
           }
         }
       }
@@ -2979,7 +3808,6 @@
       }
     },
     "Token expiré — relance Claude Code pour le rafraîchir.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2990,7 +3818,6 @@
       }
     },
     "Token introuvable — ouvre Claude Code une fois, puis autorise Lumo dans le Trousseau.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3001,7 +3828,6 @@
       }
     },
     "Ton afficheur n'apparaît pas ? Il doit être sous AWTRIX — guide d'installation": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3012,7 +3838,6 @@
       }
     },
     "Ton message": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3022,8 +3847,17 @@
         }
       }
     },
+    "Tous les jours à %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every day at %@"
+          }
+        }
+      }
+    },
     "Tout ce qui s'affiche à l'écran : active, configure et organise les apps de la rotation.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3034,7 +3868,6 @@
       }
     },
     "Tout effacer": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3056,12 +3889,31 @@
       }
     },
     "Transforme tout l'écran en couleur unie. Masque l'affichage normal tant que c'est allumé.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Turns the whole screen a solid color. Hides the normal display while it's on."
+          }
+        }
+      }
+    },
+    "Travail 25 min et pause 5 min, enchaînés.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "25 min work and 5 min break, chained."
+          }
+        }
+      }
+    },
+    "Travail · cycle %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Work · cycle %lld"
           }
         }
       }
@@ -3099,6 +3951,9 @@
         }
       }
     },
+    "USD": {
+      "shouldTranslate": false
+    },
     "Une phrase de sagesse": {
       "extractionState": "stale",
       "localizations": {
@@ -3111,7 +3966,6 @@
       }
     },
     "Une seule fois, en 3 étapes :": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3122,7 +3976,6 @@
       }
     },
     "Valeur d'un connecteur": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3144,7 +3997,6 @@
       }
     },
     "Ville (Paris, Lyon, Bordeaux…)": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3161,6 +4013,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "ISS speed"
+          }
+        }
+      }
+    },
+    "Vitesse de transition": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transition speed"
           }
         }
       }
@@ -3188,7 +4051,6 @@
       }
     },
     "descend sous": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3199,7 +4061,6 @@
       }
     },
     "dépasse": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3210,7 +4071,6 @@
       }
     },
     "en direct": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3232,7 +4092,6 @@
       }
     },
     "ex. alarm": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3253,6 +4112,9 @@
         }
       }
     },
+    "lumo://oauth": {
+      "shouldTranslate": false
+    },
     "rarement nécessaire": {
       "extractionState": "stale",
       "localizations": {
@@ -3265,7 +4127,6 @@
       }
     },
     "rk_live_… ou sk_live_…": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3308,8 +4169,20 @@
         }
       }
     },
+    "· AWTRIX %@": {
+      "shouldTranslate": false
+    },
+    "À heure fixe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At a set time"
+          }
+        }
+      }
+    },
     "À l'écran maintenant": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3320,7 +4193,6 @@
       }
     },
     "ÉDITEUR PIXEL ART": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3386,7 +4258,6 @@
       }
     },
     "Échec réseau": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3397,7 +4268,6 @@
       }
     },
     "Écran": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3408,12 +4278,21 @@
       }
     },
     "Écran allumé": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Screen on"
+          }
+        }
+      }
+    },
+    "Écran allumé.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screen turned on."
           }
         }
       }
@@ -3425,6 +4304,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Screen off"
+          }
+        }
+      }
+    },
+    "Écran éteint.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screen turned off."
           }
         }
       }
@@ -3441,7 +4330,6 @@
       }
     },
     "Écran, luminosité, défilement, durée par app et lampe d'ambiance.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3463,12 +4351,21 @@
       }
     },
     "Éteindre": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Turn off"
+          }
+        }
+      }
+    },
+    "Éteindre l'écran": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn the screen off"
           }
         }
       }
@@ -3507,7 +4404,6 @@
       }
     },
     "↑ colle d'abord ton Client ID": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3517,8 +4413,10 @@
         }
       }
     },
+    "→": {
+      "shouldTranslate": false
+    },
     "→ « %@ »": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
