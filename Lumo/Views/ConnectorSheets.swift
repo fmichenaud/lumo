@@ -125,20 +125,46 @@ struct ConnectorEditor: View {
 
                 group("Source") {
                     field("Nom", "Mon API", text: $connector.name)
-                    field("URL", "https://api.exemple.com/data", text: $connector.url)
+                    switch connector.special {
+                    case .claudeQuota:
+                        caption("Lit le token de Claude Code dans le Trousseau (macOS demandera d'autoriser l'accès une fois — choisis « Toujours autoriser »). Affiche le quota session (5 h) et semaine, avec une couleur selon le niveau.")
+                    case .stripeMRR:
+                        caption("MRR calculé en agrégeant tes abonnements actifs, normalisés au mois.")
+                    case nil:
+                        field("URL", "https://api.exemple.com/data", text: $connector.url)
+                    }
                 }
 
-                group("Authentification") {
-                    Picker("Méthode", selection: $connector.auth.kind) {
-                        ForEach(AuthConfig.Kind.allCases) { Text($0.label).tag($0) }
+                if connector.special == nil {
+                    group("Authentification") {
+                        Picker("Méthode", selection: $connector.auth.kind) {
+                            ForEach(AuthConfig.Kind.allCases) { Text($0.label).tag($0) }
+                        }
+                        .pickerStyle(.segmented)
+                        authFields
                     }
-                    .pickerStyle(.segmented)
-                    authFields
+                } else if connector.special == .stripeMRR {
+                    group("Clé API Stripe") {
+                        SecureField("rk_live_… ou sk_live_…", text: $connector.auth.bearerToken)
+                            .textFieldStyle(.roundedBorder)
+                        HStack(spacing: 6) {
+                            caption("Recommandé : une clé restreinte avec la seule permission « Subscriptions : lecture ».")
+                            Spacer()
+                            // Ouvre le Dashboard sur la création d'une clé restreinte pré-remplie.
+                            Link(destination: URL(string: "https://dashboard.stripe.com/apikeys/create?name=Lumo&permissions%5B%5D=rak_subscription_read")!) {
+                                Label("Créer la clé", systemImage: "arrow.up.right.square").font(.caption2)
+                            }
+                            .foregroundStyle(Theme.accent)
+                            .help("Ouvre Stripe avec le formulaire pré-rempli : nom « Lumo », permission Subscriptions en lecture")
+                        }
+                    }
                 }
 
                 group("Donnée à afficher") {
-                    field("Chemin JSON", "data.price ou items[0].value", text: $connector.jsonPath)
-                    caption("La « route » vers la valeur dans la réponse JSON. Laisse vide si la réponse est déjà la valeur.")
+                    if connector.special == nil {
+                        field("Chemin JSON", "data.price ou items[0].value", text: $connector.jsonPath)
+                        caption("La « route » vers la valeur dans la réponse JSON. Laisse vide si la réponse est déjà la valeur.")
+                    }
                     field("Format affiché", "{value}€", text: $connector.template)
                     caption("« {value} » est remplacé par la valeur récupérée.")
                 }
@@ -293,7 +319,8 @@ struct ConnectorEditor: View {
                 }.buttonStyle(.plain).foregroundStyle(.red)
             }
             Button("Annuler") { dismiss() }.buttonStyle(PillButtonStyle(prominent: false))
-            Button("Enregistrer") { save() }.buttonStyle(PillButtonStyle()).disabled(connector.url.isEmpty)
+            Button("Enregistrer") { save() }.buttonStyle(PillButtonStyle())
+                .disabled(connector.special == nil && connector.url.isEmpty)
         }
     }
 

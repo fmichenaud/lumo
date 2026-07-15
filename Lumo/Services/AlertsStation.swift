@@ -12,20 +12,15 @@ final class AlertsStation: ObservableObject {
 
     private weak var store: DeviceStore?
     private weak var connectorsStation: ConnectorsStation?
-    private weak var claudeStation: ClaudeUsageStation?
-    private weak var stripeStation: StripeStation?
     private var ticker: Task<Void, Never>?
     private let storageKey = "lumo.alertrules.v1"
     private let tick: UInt64 = 10_000_000_000   // 10 s
 
     init() { load() }
 
-    func attach(_ store: DeviceStore, connectors: ConnectorsStation,
-                claude: ClaudeUsageStation, stripe: StripeStation) {
+    func attach(_ store: DeviceStore, connectors: ConnectorsStation) {
         self.store = store
         self.connectorsStation = connectors
-        self.claudeStation = claude
-        self.stripeStation = stripe
         ensureTicker()
     }
 
@@ -107,9 +102,9 @@ final class AlertsStation: ObservableObject {
         case .deviceBattery:  return stats?.bat.map(Double.init)
         case .deviceTemp:     return stats?.temp
         case .deviceHumidity: return stats?.hum
-        case .claudeSession:  return claudeStation?.sessionPercent
-        case .claudeWeekly:   return claudeStation?.weeklyPercent
-        case .stripeMRR:      return stripeStation?.mrr
+        case .claudeSession:  return connectorsStation?.specialMetrics["claude.session"]
+        case .claudeWeekly:   return connectorsStation?.specialMetrics["claude.weekly"]
+        case .stripeMRR:      return connectorsStation?.specialMetrics["stripe.mrr"]
         case .connector:
             guard let id = rule.connectorID,
                   let text = connectorsStation?.lastValue[id] else { return nil }

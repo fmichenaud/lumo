@@ -8,6 +8,9 @@ final class ConnectorsStation: ObservableObject {
     @Published var connectors: [Connector] = []
     @Published var lastValue: [UUID: String] = [:]
     @Published var lastError: [UUID: String] = [:]
+    /// Métriques numériques des sources spéciales, pour les règles d'alerte
+    /// (clés : "claude.session", "claude.weekly", "stripe.mrr").
+    @Published var specialMetrics: [String: Double] = [:]
 
     private weak var store: DeviceStore?
     private var ticker: Task<Void, Never>?
@@ -75,6 +78,32 @@ final class ConnectorsStation: ObservableObject {
     /// Récupère la valeur d'un connecteur (sans pousser) — utilisé par le bouton Tester.
     /// Renvoie (valeur, erreur) : l'un des deux est nil.
     func fetchValue(_ c: Connector) async -> (value: String?, error: String?) {
+        // Sources spéciales : services hors du moule URL + chemin JSON.
+        switch c.special {
+        case .claudeQuota:
+            do {
+                let usage = try await ClaudeQuotaSource.fetch()
+                if let s = usage.session { specialMetrics["claude.session"] = s }
+                if let w = usage.weekly { specialMetrics["claude.weekly"] = w }
+                return (usage.value, nil)
+            } catch let error as ClaudeQuotaSource.SourceError {
+                return (nil, error.message)
+            } catch {
+                return (nil, String(localized: "Échec réseau"))
+            }
+        case .stripeMRR:
+            do {
+                let result = try await StripeMRRSource.fetch(apiKey: c.auth.bearerToken)
+                specialMetrics["stripe.mrr"] = result.mrr
+                return (result.value, nil)
+            } catch let error as StripeMRRSource.SourceError {
+                return (nil, error.message)
+            } catch {
+                return (nil, String(localized: "Échec réseau"))
+            }
+        case nil:
+            break
+        }
         guard let url = URL(string: c.url) else { return (nil, "URL invalide") }
         var req = URLRequest(url: url)
         req.timeoutInterval = 8
@@ -133,8 +162,14 @@ final class ConnectorsStation: ObservableObject {
     private func push(_ c: Connector, text: String) async {
         guard let device = store?.selectedDevice else { return }
         await ensureIcon(c, host: device.host)
+        // Quota Claude : la couleur suit le niveau (vert → orange → rouge) au lieu d'être fixe.
+        var color = c.colorHex
+        if c.special == .claudeQuota {
+            let worst = max(specialMetrics["claude.session"] ?? 0, specialMetrics["claude.weekly"] ?? 0)
+            color = ClaudeQuotaSource.color(forPercent: worst)
+        }
         // repeat: 1 → l'app reste affichée jusqu'à ce que le texte ait défilé une fois en entier.
-        var json: [String: Any] = ["text": text, "color": c.colorHex, "repeat": 1]
+        var json: [String: Any] = ["text": text, "color": color, "repeat": 1]
         let icon = c.icon.trimmingCharacters(in: .whitespaces)
         if !icon.isEmpty { json["icon"] = icon }
         try? await AwtrixClient(host: device.host).upsertCustomAppRaw(name: c.appName, json: json)
