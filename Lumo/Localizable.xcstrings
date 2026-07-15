@@ -8,6 +8,7 @@
       "shouldTranslate": false
     },
     "%@ restantes": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -53,6 +54,9 @@
       "shouldTranslate": false
     },
     "192.168.1.41": {
+      "shouldTranslate": false
+    },
+    "8787": {
       "shouldTranslate": false
     },
     "APERÇU LIVE": {
@@ -151,6 +155,16 @@
         }
       }
     },
+    "Activé : allume l'écran. Désactivé : l'éteint.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On: turns the screen on. Off: turns it off."
+          }
+        }
+      }
+    },
     "Actualiser": {
       "localizations": {
         "en": {
@@ -177,6 +191,16 @@
         }
       }
     },
+    "Affichage": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display"
+          }
+        }
+      }
+    },
     "Affichage normal restauré": {
       "extractionState": "stale",
       "localizations": {
@@ -188,6 +212,16 @@
         }
       }
     },
+    "Affiche brièvement un message sur l'afficheur AWTRIX, comme une notification.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Briefly shows a message on the AWTRIX display, like a notification."
+          }
+        }
+      }
+    },
     "Affiche des graphiques, le cours d'une crypto ou les stats de ton Mac.": {
       "extractionState": "stale",
       "localizations": {
@@ -195,6 +229,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Show charts, a crypto price, or your Mac's stats."
+          }
+        }
+      }
+    },
+    "Affiche immédiatement l'app demandée sur l'afficheur (ex. Time, weather, raccourci).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Immediately shows the requested app on the display (e.g. Time, weather, raccourci)."
           }
         }
       }
@@ -238,6 +282,36 @@
           "stringUnit": {
             "state": "translated",
             "value": "Show"
+          }
+        }
+      }
+    },
+    "Afficher un texte en continu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show a text continuously"
+          }
+        }
+      }
+    },
+    "Afficheur basculé sur « %@ ».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display switched to “%@”."
+          }
+        }
+      }
+    },
+    "Ajoute le texte comme app permanente dans la rotation de l'afficheur et l'affiche immédiatement.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adds the text as a permanent app in the display's rotation and shows it immediately."
           }
         }
       }
@@ -355,12 +429,32 @@
         }
       }
     },
+    "Allume ou éteint la matrice LED de l'afficheur.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turns the display's LED matrix on or off."
+          }
+        }
+      }
+    },
     "Allumer": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Turn on"
+          }
+        }
+      }
+    },
+    "Allumer ou éteindre l'écran": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn the screen on or off"
           }
         }
       }
@@ -473,6 +567,16 @@
         }
       }
     },
+    "Appareil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Device"
+          }
+        }
+      }
+    },
     "Apparence": {
       "extractionState": "stale",
       "localizations": {
@@ -532,6 +636,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "None"
+          }
+        }
+      }
+    },
+    "Aucun afficheur n'est configuré dans Lumo. Ouvre l'app et ajoute ton appareil d'abord.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No display is configured in Lumo. Open the app and add your device first."
+          }
+        }
+      }
+    },
+    "Aucun afficheur nommé « %@ » n'est configuré dans Lumo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No display named “%@” is configured in Lumo."
           }
         }
       }
@@ -672,6 +796,16 @@
         }
       }
     },
+    "Basculer sur une app": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch to an app"
+          }
+        }
+      }
+    },
     "Batterie": {
       "extractionState": "stale",
       "localizations": {
@@ -778,6 +912,7 @@
       }
     },
     "Calendrier": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -995,6 +1130,16 @@
         }
       }
     },
+    "Code hexadécimal du texte, ex. #FF5555": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hex code for the text, e.g. #FF5555"
+          }
+        }
+      }
+    },
     "Colle cette URL de redirection dans l'app créée :": {
       "extractionState": "stale",
       "localizations": {
@@ -1173,6 +1318,26 @@
         }
       }
     },
+    "Couleur (hex)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color (hex)"
+          }
+        }
+      }
+    },
+    "Couleur invalide : « %@ ». Utilise un code hexadécimal comme #FF5555.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invalid color: “%@”. Use a hex code like #FF5555."
+          }
+        }
+      }
+    },
     "Cours ADA en euros": {
       "extractionState": "stale",
       "localizations": {
@@ -1334,6 +1499,16 @@
         }
       }
     },
+    "De 1 à 100.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From 1 to 100."
+          }
+        }
+      }
+    },
     "Dessin": {
       "localizations": {
         "en": {
@@ -1451,6 +1626,26 @@
         }
       }
     },
+    "Démarrer %lld min": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start %lld min"
+          }
+        }
+      }
+    },
+    "Désactivée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disabled"
+          }
+        }
+      }
+    },
     "Développeur": {
       "extractionState": "stale",
       "localizations": {
@@ -1504,6 +1699,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Paused"
+          }
+        }
+      }
+    },
+    "En écoute sur le port %lld · %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listening on port %lld · %@"
           }
         }
       }
@@ -1611,6 +1816,26 @@
         }
       }
     },
+    "Envoyer une notification": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send a notification"
+          }
+        }
+      }
+    },
+    "Erreur : %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error: %@"
+          }
+        }
+      }
+    },
     "Espace": {
       "extractionState": "stale",
       "localizations": {
@@ -1628,6 +1853,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Example: “if the Mac's CPU goes above 90%, show a red alert”."
+          }
+        }
+      }
+    },
+    "Exemples d'utilisation": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usage examples"
           }
         }
       }
@@ -1727,7 +1962,6 @@
       }
     },
     "Garder affichée": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1854,6 +2088,16 @@
         }
       }
     },
+    "Identifiant d'icône LaMetric, ex. 1234": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LaMetric icon ID, e.g. 1234"
+          }
+        }
+      }
+    },
     "Inactif": {
       "localizations": {
         "en": {
@@ -1959,6 +2203,16 @@
         }
       }
     },
+    "La notification reste à l'écran jusqu'à confirmation.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The notification stays on screen until confirmed."
+          }
+        }
+      }
+    },
     "La « route » vers la valeur dans la réponse JSON. Laisse vide si la réponse est déjà la valeur.": {
       "extractionState": "stale",
       "localizations": {
@@ -2013,6 +2267,16 @@
         }
       }
     },
+    "Luminosité (%)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brightness (%)"
+          }
+        }
+      }
+    },
     "Luminosité automatique": {
       "extractionState": "stale",
       "localizations": {
@@ -2041,6 +2305,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dimmed brightness"
+          }
+        }
+      }
+    },
+    "Luminosité réglée à %lld %%.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brightness set to %lld%%."
           }
         }
       }
@@ -2122,6 +2396,16 @@
         }
       }
     },
+    "Message": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message"
+          }
+        }
+      }
+    },
     "Message (vide = automatique)": {
       "localizations": {
         "en": {
@@ -2179,6 +2463,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Timer"
+          }
+        }
+      }
+    },
+    "Minuteur · pause": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timer · break"
           }
         }
       }
@@ -2321,6 +2615,16 @@
         }
       }
     },
+    "Nom d'app": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App name"
+          }
+        }
+      }
+    },
     "Nom d'une mélodie présente sur l'appareil": {
       "extractionState": "stale",
       "localizations": {
@@ -2328,6 +2632,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Name of a melody on the device"
+          }
+        }
+      }
+    },
+    "Nom de l'afficheur dans Lumo. Par défaut : le premier appareil.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display name in Lumo. Default: the first device."
           }
         }
       }
@@ -2342,6 +2656,16 @@
         }
       }
     },
+    "Nom de l'app custom dans la rotation.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name of the custom app in the rotation."
+          }
+        }
+      }
+    },
     "Nom de l'en-tête": {
       "extractionState": "stale",
       "localizations": {
@@ -2349,6 +2673,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Header name"
+          }
+        }
+      }
+    },
+    "Nom exact de l'app, ex. Time, weather.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exact app name, e.g. Time, weather."
           }
         }
       }
@@ -2371,6 +2705,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Notification sent"
+          }
+        }
+      }
+    },
+    "Notification envoyée sur l'afficheur.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notification sent to the display."
           }
         }
       }
@@ -2460,6 +2804,7 @@
       }
     },
     "Outils": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2542,7 +2887,38 @@
         }
       }
     },
+    "Passerelle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gateway"
+          }
+        }
+      }
+    },
+    "Passerelle de notifications": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notification gateway"
+          }
+        }
+      }
+    },
+    "Pause": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pause"
+          }
+        }
+      }
+    },
     "Pause · %@ restantes": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2605,6 +2981,7 @@
       }
     },
     "Planifiée": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2614,7 +2991,18 @@
         }
       }
     },
+    "Port": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Port"
+          }
+        }
+      }
+    },
     "Quand": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2672,6 +3060,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Claude quota — session"
+          }
+        }
+      }
+    },
+    "Quotas & business": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quotas & business"
           }
         }
       }
@@ -2822,6 +3220,16 @@
         }
       }
     },
+    "Reprendre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resume"
+          }
+        }
+      }
+    },
     "Reste jusqu'à appui sur le bouton central": {
       "extractionState": "stale",
       "localizations": {
@@ -2844,6 +3252,16 @@
         }
       }
     },
+    "Reçois des messages d'autres apps (Raccourcis, scripts, curl…) et affiche-les sur la matrice. La passerelle n'écoute que sur cet ordinateur (127.0.0.1).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Receive messages from other apps (Shortcuts, scripts, curl…) and show them on the matrix. The gateway only listens on this computer (127.0.0.1)."
+          }
+        }
+      }
+    },
     "Rotation entre les apps": {
       "extractionState": "stale",
       "localizations": {
@@ -2861,6 +3279,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alert rule"
+          }
+        }
+      }
+    },
+    "Règle la luminosité de l'afficheur, de 1 à 100 %. Désactive la luminosité automatique.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sets the display brightness, from 1 to 100%. Disables automatic brightness."
           }
         }
       }
@@ -2891,6 +3319,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Advanced settings"
+          }
+        }
+      }
+    },
+    "Régler la luminosité": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set the brightness"
           }
         }
       }
@@ -3211,6 +3649,16 @@
         }
       }
     },
+    "Stop": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        }
+      }
+    },
     "Surveille des seuils (CPU, batterie, connecteurs…) et déclenche notification ou LED automatiquement.": {
       "localizations": {
         "en": {
@@ -3323,6 +3771,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Text"
+          }
+        }
+      }
+    },
+    "Texte affiché en continu dans l'app « %@ ».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text shown continuously in the app “%@”."
           }
         }
       }
@@ -3810,7 +4268,6 @@
       }
     },
     "Écran": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3821,12 +4278,21 @@
       }
     },
     "Écran allumé": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Screen on"
+          }
+        }
+      }
+    },
+    "Écran allumé.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screen turned on."
           }
         }
       }
@@ -3838,6 +4304,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Screen off"
+          }
+        }
+      }
+    },
+    "Écran éteint.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screen turned off."
           }
         }
       }
