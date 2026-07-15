@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject var store: DeviceStore
+    @EnvironmentObject var gateway: NotificationGateway
     @StateObject private var discovery = DeviceDiscovery()
 
     var body: some View {
@@ -18,6 +19,9 @@ struct RootView: View {
         }
         .background(Theme.backgroundGradient)
         .toggleStyle(ModernToggleStyle())
+        // lumo://notify?text=… → passerelle de notifications.
+        // Les autres hosts (ex. OAuth) sont ignorés par handle(url:).
+        .onOpenURL { url in gateway.handle(url: url) }
         .task {
             // Découverte automatique au lancement si aucun device connu :
             // le prompt macOS « réseau local » arrive dans un contexte naturel.
