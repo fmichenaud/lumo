@@ -130,6 +130,16 @@ struct AwtrixClient: Sendable {
         try await post("/api/apps", json: [["name": name, "show": show]])
     }
 
+    /// Réordonne la rotation à chaud : envoie en un seul POST /api/apps la position de chaque app,
+    /// dans l'ordre du tableau. ⚠️ "show": true est obligatoire — absent, le firmware le lit comme
+    /// false et retire l'app de la loop. Noms sensibles à la casse (tels que rendus par /api/loop).
+    func setLoopOrder(_ names: [String]) async throws {
+        let payload = names.enumerated().map { index, name in
+            ["name": name, "show": true, "pos": index] as [String: Any]
+        }
+        try await post("/api/apps", json: payload)
+    }
+
     // MARK: - Affichage
 
     func notify(_ payload: PushPayload) async throws {

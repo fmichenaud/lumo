@@ -18,6 +18,7 @@ struct DeviceAppsView: View {
     @State private var showTemplates = false
     @State private var showWeatherConfig = false
     @State private var showCryptoConfig = false
+    @State private var showReorder = false
 
     private var client: AwtrixClient { store.client(for: device) }
 
@@ -100,6 +101,9 @@ struct DeviceAppsView: View {
         .sheet(isPresented: $showCryptoConfig) {
             CryptoConfigSheet().environmentObject(live)
         }
+        .sheet(isPresented: $showReorder) {
+            ReorderSheet(client: client, onResult: onResult)
+        }
     }
 
     private func groupLabel(_ text: String) -> some View {
@@ -116,6 +120,12 @@ struct DeviceAppsView: View {
                 .font(.caption.weight(.semibold)).tracking(0.8)
                 .foregroundStyle(Theme.textSecondary)
             Spacer()
+            Button { showReorder = true } label: {
+                Label("Ordonner", systemImage: "arrow.up.arrow.down")
+                    .font(.caption2)
+            }
+            .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
+            .help("Réordonner la rotation")
             HStack(spacing: 5) {
                 Circle().fill(Theme.online).frame(width: 6, height: 6)
                 Text("en direct").font(.caption2).foregroundStyle(Theme.textSecondary)
@@ -274,6 +284,96 @@ struct DeviceAppsView: View {
         try? await client.deleteCustomApp(name: app.name)
         onResult("« \(app.name.capitalized) » supprimée")
         await loadLoop()
+    }
+}
+
+/// Sheet de réordonnancement de la rotation : glisser-déposer les apps de la loop,
+/// l'ordre est appliqué à chaud sur l'afficheur à chaque déplacement (POST /api/apps).
+private struct ReorderSheet: View {
+    let client: AwtrixClient
+    var onResult: (String) -> Void = { _ in }
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var names: [String] = []
+    @State private var loaded = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Ordre de la rotation").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
+                    Text("Glisse les apps pour changer leur ordre — appliqué immédiatement.")
+                        .font(.caption).foregroundStyle(Theme.textSecondary)
+                }
+                Spacer()
+                Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title2) }
+                    .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
+            }
+
+            if !loaded {
+                HStack {
+                    Spacer()
+                    ProgressView().controlSize(.small)
+                    Spacer()
+                }
+                .frame(height: 120)
+            } else if names.isEmpty {
+                Text("Aucune app dans la rotation.")
+                    .font(.caption).foregroundStyle(Theme.textSecondary)
+                    .frame(maxWidth: .infinity, minHeight: 120)
+            } else {
+                List {
+                    ForEach(Array(names.enumerated()), id: \.element) { index, name in
+                        HStack(spacing: 10) {
+                            Text("\(index + 1)")
+                                .font(.caption2.monospacedDigit())
+                                .foregroundStyle(Theme.textSecondary)
+                                .frame(width: 18, alignment: .trailing)
+                            Text(name.capitalized).foregroundStyle(Theme.textPrimary)
+                            Spacer()
+                            Image(systemName: "line.3.horizontal")
+                                .font(.caption).foregroundStyle(Theme.textSecondary.opacity(0.6))
+                        }
+                        .padding(.vertical, 2)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparatorTint(Theme.stroke)
+                    }
+                    .onMove(perform: move)
+                }
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .frame(height: min(CGFloat(names.count) * 34 + 16, 320))
+            }
+        }
+        .padding(22)
+        .frame(width: 440)
+        .background(Theme.background)
+        .task {
+            await reload()
+            loaded = true
+        }
+    }
+
+    /// Recharge la loop actuelle et trie par position.
+    private func reload() async {
+        guard let loop = try? await client.fetchLoop() else { return }
+        names = loop.sorted { $0.value < $1.value }.map { $0.key }
+    }
+
+    /// Applique le déplacement localement puis pousse l'ordre complet sur le device.
+    private func move(from source: IndexSet, to destination: Int) {
+        names.move(fromOffsets: source, toOffset: destination)
+        let order = names
+        Task {
+            do {
+                try await client.setLoopOrder(order)
+                onResult("Ordre de la rotation mis à jour")
+            } catch {
+                // En cas d'échec, on resynchronise avec l'état réel du device.
+                await reload()
+                onResult("Impossible d'appliquer l'ordre : \(error.localizedDescription)")
+            }
+        }
     }
 }
 
