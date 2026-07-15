@@ -127,11 +127,10 @@ private struct RuleEditor: View {
             Text("Règle d'alerte").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
 
             group("Quand") {
-                Picker("", selection: $rule.trigger) {
-                    Text("Seuil franchi").tag(AlertRule.Trigger.threshold)
-                    Text("À heure fixe").tag(AlertRule.Trigger.schedule)
-                }
-                .pickerStyle(.segmented).labelsHidden()
+                PillPicker(selection: $rule.trigger, options: [
+                    (AlertRule.Trigger.threshold, "Seuil franchi"),
+                    (AlertRule.Trigger.schedule, "À heure fixe")
+                ])
             }
 
             if rule.trigger == .threshold {
@@ -150,10 +149,8 @@ private struct RuleEditor: View {
                         }
                     }
                     HStack(spacing: 10) {
-                        Picker("", selection: $rule.comparison) {
-                            ForEach(AlertRule.Comparison.allCases) { Text($0.label).tag($0) }
-                        }
-                        .pickerStyle(.segmented).frame(width: 220)
+                        PillPicker(selection: $rule.comparison,
+                                   options: AlertRule.Comparison.allCases.map { ($0, $0.label) })
                         TextField("Seuil", value: $rule.threshold, format: .number)
                             .textFieldStyle(.roundedBorder).frame(width: 80)
                         Text(rule.metric.unit).foregroundStyle(Theme.textSecondary)

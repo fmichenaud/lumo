@@ -139,10 +139,8 @@ struct ConnectorEditor: View {
 
                 if connector.special == nil {
                     group("Authentification") {
-                        Picker("Méthode", selection: $connector.auth.kind) {
-                            ForEach(AuthConfig.Kind.allCases) { Text($0.label).tag($0) }
-                        }
-                        .pickerStyle(.segmented)
+                        PillPicker(selection: $connector.auth.kind,
+                                   options: AuthConfig.Kind.allCases.map { ($0, $0.label) })
                         authFields
                     }
                 } else if connector.isStripe {

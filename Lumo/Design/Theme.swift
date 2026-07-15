@@ -70,27 +70,70 @@ extension Color {
 }
 
 /// Switch moderne (piste arrondie, bouton coulissant, ressort), doré quand actif.
+/// Le libellé du Toggle est rendu à gauche de la piste (masquable via .labelsHidden()).
 struct ModernToggleStyle: ToggleStyle {
+    @Environment(\.labelsVisibility) private var labelsVisibility
+
     func makeBody(configuration: Configuration) -> some View {
-        Button {
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                configuration.isOn.toggle()
+        HStack(spacing: 10) {
+            if labelsVisibility != .hidden {
+                configuration.label
+                    .foregroundStyle(Theme.textPrimary)
             }
-        } label: {
-            ZStack {
-                Capsule()
-                    .fill(configuration.isOn ? Theme.accent : Color.white.opacity(0.12))
-                    .overlay(Capsule().strokeBorder(Color.white.opacity(0.06)))
-                Circle()
-                    .fill(.white)
-                    .padding(3)
-                    .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
-                    .offset(x: configuration.isOn ? 9 : -9)
+            Button {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                    configuration.isOn.toggle()
+                }
+            } label: {
+                ZStack {
+                    Capsule()
+                        .fill(configuration.isOn ? Theme.accent : Color.white.opacity(0.12))
+                        .overlay(Capsule().strokeBorder(Color.white.opacity(0.06)))
+                    Circle()
+                        .fill(.white)
+                        .padding(3)
+                        .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
+                        .offset(x: configuration.isOn ? 9 : -9)
+                }
+                .frame(width: 46, height: 28)
             }
-            .frame(width: 46, height: 28)
+            .buttonStyle(.plain)
+            .contentShape(Capsule())
         }
-        .buttonStyle(.plain)
-        .contentShape(Capsule())
+    }
+}
+
+/// Sélecteur segmenté maison, aux couleurs de Lumo (remplace les segmented pickers
+/// bleu système dans les sheets) : une pilule par option, la sélection est dorée.
+struct PillPicker<Value: Hashable>: View {
+    @Binding var selection: Value
+    let options: [(value: Value, label: String)]
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(options, id: \.value) { option in
+                Button {
+                    withAnimation(.spring(response: 0.25, dampingFraction: 0.8)) {
+                        selection = option.value
+                    }
+                } label: {
+                    Text(LocalizedStringKey(option.label))
+                        .font(.callout.weight(.medium))
+                        .padding(.horizontal, 12).padding(.vertical, 6)
+                        .background(
+                            Capsule().fill(selection == option.value
+                                           ? AnyShapeStyle(Theme.accent)
+                                           : AnyShapeStyle(Color.clear))
+                        )
+                        .foregroundStyle(selection == option.value
+                                         ? Color.black.opacity(0.85) : Theme.textSecondary)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(3)
+        .background(Color.white.opacity(0.06), in: Capsule())
+        .overlay(Capsule().strokeBorder(Theme.stroke))
     }
 }
 
