@@ -353,18 +353,9 @@ private struct ReorderSheet: View {
     @State private var loaded = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Ordre de la rotation").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
-                    Text("Glisse les apps pour changer leur ordre — appliqué immédiatement.")
-                        .font(.caption).foregroundStyle(Theme.textSecondary)
-                }
-                Spacer()
-                Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title2) }
-                    .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
-            }
-
+        SheetScaffold("Ordre de la rotation",
+                      subtitle: "Glisse les apps pour changer leur ordre.",
+                      live: true) {
             if !loaded {
                 HStack {
                     Spacer()
@@ -400,9 +391,6 @@ private struct ReorderSheet: View {
                 .frame(height: min(CGFloat(names.count) * 34 + 16, 320))
             }
         }
-        .padding(22)
-        .frame(width: 440)
-        .background(Theme.background)
         .task {
             await reload()
             loaded = true
@@ -439,18 +427,9 @@ private struct PomodoroSheet: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Minuteur").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
-                    Text("Compte à rebours affiché sur la matrice, sonnerie à zéro.")
-                        .font(.caption).foregroundStyle(Theme.textSecondary)
-                }
-                Spacer()
-                Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title2) }
-                    .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
-            }
-
+        SheetScaffold("Minuteur",
+                      subtitle: "Compte à rebours affiché sur la matrice, sonnerie à zéro.",
+                      live: true) {
             // Temps restant en grand quand le minuteur est actif.
             if pomodoro.isActive {
                 VStack(spacing: 4) {
@@ -517,9 +496,6 @@ private struct PomodoroSheet: View {
                 .buttonStyle(PillButtonStyle(prominent: true))
             }
         }
-        .padding(22)
-        .frame(width: 440)
-        .background(Theme.background)
     }
 }
 
@@ -529,17 +505,9 @@ private struct CryptoConfigSheet: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Crypto").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
-                    Text("Cours mis à jour toutes les 60 s (CoinGecko).")
-                        .font(.caption).foregroundStyle(Theme.textSecondary)
-                }
-                Spacer()
-                Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title2) }
-                    .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
-            }
+        SheetScaffold("Crypto",
+                      subtitle: "Cours mis à jour toutes les 60 s (CoinGecko).",
+                      live: true) {
             HStack(spacing: 12) {
                 Picker("Crypto", selection: Binding(get: { live.coinID }, set: { live.setCoin($0) })) {
                     ForEach(DataService.coins) { Text($0.symbol).tag($0.id) }
@@ -556,8 +524,5 @@ private struct CryptoConfigSheet: View {
                 }
             }
         }
-        .padding(22)
-        .frame(width: 440)
-        .background(Theme.background)
     }
 }

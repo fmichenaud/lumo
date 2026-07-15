@@ -20,34 +20,20 @@ struct IconImportSheet: View {
     private let columns = [GridItem(.adaptive(minimum: 84, maximum: 110), spacing: 12)]
 
     var body: some View {
-        VStack(spacing: 14) {
-            header
+        SheetScaffold("Galerie d'icônes",
+                      subtitle: "Cherche, clique : l'icône part directement sur l'afficheur.",
+                      width: 600, height: 560,
+                      content: {
             searchBar
             content
             if let status {
                 Text(status).font(.caption).foregroundStyle(Theme.textSecondary)
             }
-        }
-        .padding(20)
-        .frame(width: 580, height: 560)
-        .background(Theme.background)
-        .task { await runSearch() }
-    }
-
-    private var header: some View {
-        HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Galerie d'icônes")
-                    .font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
-                Text("Cherche, clique : l'icône part directement sur l'afficheur.")
-                    .font(.caption).foregroundStyle(Theme.textSecondary)
-            }
-            Spacer()
+        }, accessory: {
             Button { chooseFile() } label: { Label("Fichier…", systemImage: "folder") }
                 .buttonStyle(PillButtonStyle(prominent: false))
-            Button("Fermer") { dismiss() }
-                .buttonStyle(PillButtonStyle(prominent: false))
-        }
+        })
+        .task { await runSearch() }
     }
 
     private var searchBar: some View {

@@ -123,9 +123,7 @@ private struct RuleEditor: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 18) {
-            Text("Règle d'alerte").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
-
+        SheetScaffold("Règle d'alerte") {
             group("Quand") {
                 PillPicker(selection: $rule.trigger, options: [
                     (AlertRule.Trigger.threshold, "Seuil franchi"),
@@ -204,21 +202,13 @@ private struct RuleEditor: View {
             }
 
             Divider().overlay(Theme.stroke)
-            HStack(spacing: 10) {
-                if alerts.rules.contains(where: { $0.id == rule.id }) {
-                    Button(role: .destructive) { alerts.remove(rule); dismiss() } label: {
-                        Image(systemName: "trash")
-                    }.buttonStyle(.plain).foregroundStyle(.red)
-                }
-                Spacer()
-                Button("Annuler") { dismiss() }.buttonStyle(PillButtonStyle(prominent: false))
-                Button("Enregistrer") { save() }.buttonStyle(PillButtonStyle())
-                    .disabled(rule.trigger == .threshold && rule.metric == .connector && rule.connectorID == nil)
-            }
+            EditorButtons(
+                onDelete: alerts.rules.contains(where: { $0.id == rule.id })
+                    ? { alerts.remove(rule); dismiss() } : nil,
+                saveDisabled: rule.trigger == .threshold && rule.metric == .connector && rule.connectorID == nil,
+                onSave: { save() }
+            )
         }
-        .padding(22)
-        .frame(width: 520)
-        .background(Theme.background)
     }
 
     private func save() {
