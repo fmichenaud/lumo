@@ -4,6 +4,7 @@ import SwiftUI
 struct LumoApp: App {
     @StateObject private var store = DeviceStore()
     @StateObject private var weatherStation = WeatherStation()
+    @StateObject private var calendarStation = CalendarStation()
     @StateObject private var sceneStore = SceneStore()
     @StateObject private var liveApps = LiveAppsStation()
     @StateObject private var connectors = ConnectorsStation()
@@ -15,6 +16,7 @@ struct LumoApp: App {
             RootView()
                 .environmentObject(store)
                 .environmentObject(weatherStation)
+                .environmentObject(calendarStation)
                 .environmentObject(sceneStore)
                 .environmentObject(liveApps)
                 .environmentObject(connectors)
@@ -23,7 +25,7 @@ struct LumoApp: App {
                 .frame(minWidth: 940, minHeight: 620)
                 .preferredColorScheme(.dark)
                 .task {
-                    weatherStation.attach(store); liveApps.attach(store)
+                    weatherStation.attach(store); liveApps.attach(store); calendarStation.attach(store)
                     connectors.attach(store); alerts.attach(store, connectors: connectors)
                     nightMode.attach(store)
                 }

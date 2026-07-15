@@ -9,6 +9,7 @@ struct DeviceAppsView: View {
     @EnvironmentObject var live: LiveAppsStation
     @EnvironmentObject var connectors: ConnectorsStation
     @EnvironmentObject var weatherStation: WeatherStation
+    @EnvironmentObject var calendarStation: CalendarStation
     var onResult: (String) -> Void = { _ in }
 
     @State private var loopApps: [LoopApp] = []
@@ -32,7 +33,7 @@ struct DeviceAppsView: View {
         ("HUM", "Humidity", "Humidité", "humidity.fill"),
         ("BAT", "Battery", "Batterie", "battery.100")
     ]
-    private let managedNames: Set<String> = ["cpu", "ram", "crypto", "weather", "time", "date", "temperature", "humidity", "battery", "notification"]
+    private let managedNames: Set<String> = ["cpu", "ram", "crypto", "weather", "calendar", "time", "date", "temperature", "humidity", "battery", "notification"]
 
     var body: some View {
         VStack(spacing: 14) {
@@ -40,6 +41,9 @@ struct DeviceAppsView: View {
 
             groupLabel("Intégrations")
             weatherRow
+            toggleRow(icon: "calendar", title: "Calendrier", loopName: "calendar",
+                      detail: calendarDetail,
+                      isOn: calendarStation.enabled, set: { calendarStation.setEnabled($0) })
             toggleRow(icon: "cpu", title: "CPU du Mac", loopName: "cpu",
                       detail: live.cpuOn ? "\(live.cpuValue)%" : nil,
                       isOn: live.cpuOn, set: { live.setCPU($0) })
@@ -140,6 +144,13 @@ struct DeviceAppsView: View {
         case .stripeTotal: return "banknote"
         case nil:          return "antenna.radiowaves.left.and.right"
         }
+    }
+
+    /// Sous-titre de la ligne Calendrier : erreur d'accès, prochain événement, ou rien à venir.
+    private var calendarDetail: String? {
+        guard calendarStation.enabled else { return nil }
+        if let error = calendarStation.lastError { return error }
+        return calendarStation.nextEventText ?? String(localized: "Aucun événement à venir")
     }
 
     private var cryptoDetail: String? {
