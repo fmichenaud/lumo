@@ -6,7 +6,8 @@ struct AlertRule: Identifiable, Codable, Hashable {
 
     /// Ce qu'on surveille.
     enum Metric: String, Codable, CaseIterable, Identifiable {
-        case macCPU, macRAM, deviceBattery, deviceTemp, deviceHumidity, connector
+        case macCPU, macRAM, deviceBattery, deviceTemp, deviceHumidity
+        case claudeSession, claudeWeekly, stripeMRR, connector
         var id: String { rawValue }
 
         var label: String {
@@ -16,15 +17,19 @@ struct AlertRule: Identifiable, Codable, Hashable {
             case .deviceBattery:  return String(localized: "Batterie de l'afficheur")
             case .deviceTemp:     return String(localized: "Température (capteur)")
             case .deviceHumidity: return String(localized: "Humidité (capteur)")
+            case .claudeSession:  return String(localized: "Quota Claude — session")
+            case .claudeWeekly:   return String(localized: "Quota Claude — semaine")
+            case .stripeMRR:      return String(localized: "MRR Stripe")
             case .connector:      return String(localized: "Valeur d'un connecteur")
             }
         }
 
         var unit: String {
             switch self {
-            case .macCPU, .macRAM, .deviceBattery, .deviceHumidity: return "%"
+            case .macCPU, .macRAM, .deviceBattery, .deviceHumidity,
+                 .claudeSession, .claudeWeekly: return "%"
             case .deviceTemp: return "°"
-            case .connector:  return ""
+            case .stripeMRR, .connector: return ""
             }
         }
 
@@ -35,6 +40,8 @@ struct AlertRule: Identifiable, Codable, Hashable {
             case .deviceBattery:  return "battery.25"
             case .deviceTemp:     return "thermometer.medium"
             case .deviceHumidity: return "humidity.fill"
+            case .claudeSession, .claudeWeekly: return "sparkles"
+            case .stripeMRR:      return "creditcard"
             case .connector:      return "antenna.radiowaves.left.and.right"
             }
         }

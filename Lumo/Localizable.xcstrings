@@ -131,6 +131,16 @@
         }
       }
     },
+    "Affiche l'utilisation de tes limites — session (5 h) et semaine — mise à jour toutes les 60 s.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shows how much of your limits you've used — session (5 h) and week — refreshed every 60 s."
+          }
+        }
+      }
+    },
     "Affiche la météo de ta ville sur l'écran, avec mise à jour automatique possible.": {
       "extractionState": "stale",
       "localizations": {
@@ -374,6 +384,7 @@
       }
     },
     "Apps de l'afficheur": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -749,6 +760,16 @@
         }
       }
     },
+    "Clé API": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API key"
+          }
+        }
+      }
+    },
     "Clé API (en-tête)": {
       "extractionState": "stale",
       "localizations": {
@@ -756,6 +777,36 @@
           "stringUnit": {
             "state": "translated",
             "value": "API key (header)"
+          }
+        }
+      }
+    },
+    "Clé API invalide": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invalid API key"
+          }
+        }
+      }
+    },
+    "Clé API manquante": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Missing API key"
+          }
+        }
+      }
+    },
+    "Clé sans accès aux abonnements — crée une clé restreinte avec « Subscriptions : lecture »": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Key has no access to subscriptions — create a restricted key with “Subscriptions: read”"
           }
         }
       }
@@ -1242,6 +1293,16 @@
         }
       }
     },
+    "Enregistrer et tester": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save and test"
+          }
+        }
+      }
+    },
     "Enregistrer la scène": {
       "extractionState": "stale",
       "localizations": {
@@ -1667,6 +1728,16 @@
     "Lumo": {
       "shouldTranslate": false
     },
+    "Lumo lit le token de Claude Code dans le Trousseau (macOS te demandera d'autoriser l'accès une fois — choisis « Toujours autoriser »). Aucune clé à saisir.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lumo reads the Claude Code token from the Keychain (macOS will ask you to allow access once — pick “Always Allow”). No key to paste."
+          }
+        }
+      }
+    },
     "MES AFFICHEURS": {
       "localizations": {
         "en": {
@@ -1684,6 +1755,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "MY SCENES"
+          }
+        }
+      }
+    },
+    "MRR Stripe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stripe MRR"
           }
         }
       }
@@ -2047,6 +2128,36 @@
         }
       }
     },
+    "Quota Claude Code": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code quota"
+          }
+        }
+      }
+    },
+    "Quota Claude — semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude quota — week"
+          }
+        }
+      }
+    },
+    "Quota Claude — session": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude quota — session"
+          }
+        }
+      }
+    },
     "RAM du Mac": {
       "localizations": {
         "en": {
@@ -2139,6 +2250,16 @@
         }
       }
     },
+    "Recommandé : une clé restreinte (Dashboard → Développeurs → Clés API → Clé restreinte) avec la seule permission « Subscriptions : lecture ».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recommended: a restricted key (Dashboard → Developers → API keys → Restricted key) with only the “Subscriptions: read” permission."
+          }
+        }
+      }
+    },
     "Reconnecter": {
       "localizations": {
         "en": {
@@ -2167,6 +2288,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Stays until you press the middle button"
+          }
+        }
+      }
+    },
+    "Revenu mensuel récurrent, calculé depuis tes abonnements actifs · mise à jour toutes les 30 min.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monthly recurring revenue, computed from your active subscriptions · refreshed every 30 min."
           }
         }
       }
@@ -2309,6 +2440,7 @@
       }
     },
     "Scène « %@ » enregistrée": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2339,6 +2471,16 @@
         }
       }
     },
+    "Semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week"
+          }
+        }
+      }
+    },
     "Services": {
       "extractionState": "stale",
       "localizations": {
@@ -2346,6 +2488,42 @@
           "stringUnit": {
             "state": "translated",
             "value": "Services"
+          }
+        }
+      }
+    },
+    "Session %@ · Semaine %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session %@ · Week %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Session %1$@ · Semaine %2$@"
+          }
+        }
+      }
+    },
+    "Session (5 h)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session (5 h)"
+          }
+        }
+      }
+    },
+    "Session + semaine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session + week"
           }
         }
       }
@@ -2580,6 +2758,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bearer token"
+          }
+        }
+      }
+    },
+    "Token expiré — relance Claude Code pour le rafraîchir.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token expired — launch Claude Code to refresh it."
+          }
+        }
+      }
+    },
+    "Token introuvable — ouvre Claude Code une fois, puis autorise Lumo dans le Trousseau.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token not found — open Claude Code once, then allow Lumo in the Keychain."
           }
         }
       }
@@ -2842,6 +3040,16 @@
         }
       }
     },
+    "rk_live_… ou sk_live_…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "rk_live_… or sk_live_…"
+          }
+        }
+      }
+    },
     "votre clé": {
       "extractionState": "stale",
       "localizations": {
@@ -2949,6 +3157,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Notification failed"
+          }
+        }
+      }
+    },
+    "Échec réseau": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Network failure"
           }
         }
       }

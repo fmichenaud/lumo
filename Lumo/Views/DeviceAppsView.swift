@@ -9,6 +9,8 @@ struct DeviceAppsView: View {
     @EnvironmentObject var live: LiveAppsStation
     @EnvironmentObject var connectors: ConnectorsStation
     @EnvironmentObject var weatherStation: WeatherStation
+    @EnvironmentObject var claude: ClaudeUsageStation
+    @EnvironmentObject var stripe: StripeStation
     var onResult: (String) -> Void = { _ in }
 
     @State private var loopApps: [LoopApp] = []
@@ -18,6 +20,8 @@ struct DeviceAppsView: View {
     @State private var showTemplates = false
     @State private var showWeatherConfig = false
     @State private var showCryptoConfig = false
+    @State private var showClaudeConfig = false
+    @State private var showStripeConfig = false
 
     private var client: AwtrixClient { store.client(for: device) }
 
@@ -31,7 +35,7 @@ struct DeviceAppsView: View {
         ("HUM", "Humidity", "Humidité", "humidity.fill"),
         ("BAT", "Battery", "Batterie", "battery.100")
     ]
-    private let managedNames: Set<String> = ["cpu", "ram", "crypto", "weather", "time", "date", "temperature", "humidity", "battery", "notification"]
+    private let managedNames: Set<String> = ["cpu", "ram", "crypto", "weather", "claude", "mrr", "time", "date", "temperature", "humidity", "battery", "notification"]
 
     var body: some View {
         VStack(spacing: 14) {
@@ -49,6 +53,19 @@ struct DeviceAppsView: View {
                       detail: cryptoDetail,
                       isOn: live.cryptoOn, set: { live.setCrypto($0) },
                       onEdit: { showCryptoConfig = true })
+            toggleRow(icon: "sparkles", title: "Quota Claude Code", loopName: "claude",
+                      detail: claude.enabled ? (claude.lastError ?? claude.summaryText) : nil,
+                      isOn: claude.enabled, set: { claude.setEnabled($0) },
+                      onEdit: { showClaudeConfig = true })
+            toggleRow(icon: "creditcard", title: "MRR Stripe", loopName: "mrr",
+                      detail: stripe.enabled ? (stripe.lastError ?? stripe.summaryText) : nil,
+                      isOn: stripe.enabled,
+                      set: { on in
+                          // Pas de clé → on ouvre la config au lieu d'activer dans le vide.
+                          if on && stripe.apiKey.isEmpty { showStripeConfig = true }
+                          else { stripe.setEnabled(on) }
+                      },
+                      onEdit: { showStripeConfig = true })
             ForEach(connectors.connectors) { c in
                 toggleRow(icon: "antenna.radiowaves.left.and.right",
                           title: c.name.isEmpty ? "Connecteur" : c.name,
@@ -99,6 +116,12 @@ struct DeviceAppsView: View {
         }
         .sheet(isPresented: $showCryptoConfig) {
             CryptoConfigSheet().environmentObject(live)
+        }
+        .sheet(isPresented: $showClaudeConfig) {
+            ClaudeConfigSheet().environmentObject(claude)
+        }
+        .sheet(isPresented: $showStripeConfig) {
+            StripeConfigSheet().environmentObject(stripe)
         }
     }
 
@@ -265,6 +288,116 @@ struct DeviceAppsView: View {
         try? await client.deleteCustomApp(name: app.name)
         onResult("« \(app.name.capitalized) » supprimée")
         await loadLoop()
+    }
+}
+
+/// Sheet de l'intégration Claude Code : choix de l'affichage + explication de l'accès Trousseau.
+private struct ClaudeConfigSheet: View {
+    @EnvironmentObject var claude: ClaudeUsageStation
+    @Environment(\.dismiss) private var dismiss
+    @State private var refreshing = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Quota Claude Code").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
+                    Text("Affiche l'utilisation de tes limites — session (5 h) et semaine — mise à jour toutes les 60 s.")
+                        .font(.caption).foregroundStyle(Theme.textSecondary)
+                }
+                Spacer()
+                Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title2) }
+                    .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
+            }
+
+            HStack(spacing: 12) {
+                Picker("Afficher", selection: Binding(get: { claude.display }, set: { claude.setDisplay($0) })) {
+                    ForEach(ClaudeUsageStation.Display.allCases) { Text($0.label).tag($0) }
+                }
+                .frame(width: 260)
+                Spacer()
+                Button {
+                    refreshing = true
+                    Task { await claude.refresh(); refreshing = false }
+                } label: {
+                    if refreshing { ProgressView().controlSize(.small) }
+                    else { Label("Actualiser", systemImage: "arrow.clockwise") }
+                }
+                .buttonStyle(PillButtonStyle(prominent: false)).controlSize(.small)
+            }
+
+            if let err = claude.lastError {
+                Label(err, systemImage: "exclamationmark.triangle.fill")
+                    .font(.caption).foregroundStyle(.orange)
+            } else if let text = claude.summaryText {
+                Label(text, systemImage: "checkmark.circle.fill")
+                    .font(.caption).foregroundStyle(Theme.online)
+            }
+
+            Text("Lumo lit le token de Claude Code dans le Trousseau (macOS te demandera d'autoriser l'accès une fois — choisis « Toujours autoriser »). Aucune clé à saisir.")
+                .font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(22)
+        .frame(width: 470)
+        .background(Theme.background)
+    }
+}
+
+/// Sheet de l'intégration Stripe : clé API restreinte + test.
+private struct StripeConfigSheet: View {
+    @EnvironmentObject var stripe: StripeStation
+    @Environment(\.dismiss) private var dismiss
+    @State private var key = ""
+    @State private var testing = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("MRR Stripe").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
+                    Text("Revenu mensuel récurrent, calculé depuis tes abonnements actifs · mise à jour toutes les 30 min.")
+                        .font(.caption).foregroundStyle(Theme.textSecondary)
+                }
+                Spacer()
+                Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title2) }
+                    .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
+            }
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Clé API").font(.caption2).foregroundStyle(Theme.textSecondary)
+                SecureField("rk_live_… ou sk_live_…", text: $key)
+                    .textFieldStyle(.roundedBorder)
+                Text("Recommandé : une clé restreinte (Dashboard → Développeurs → Clés API → Clé restreinte) avec la seule permission « Subscriptions : lecture ».")
+                    .font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            HStack(spacing: 10) {
+                Button {
+                    stripe.setAPIKey(key)
+                    testing = true
+                    Task { await stripe.refresh(); testing = false }
+                } label: {
+                    if testing { ProgressView().controlSize(.small) }
+                    else { Label("Enregistrer et tester", systemImage: "checkmark.circle") }
+                }
+                .buttonStyle(PillButtonStyle())
+                .disabled(key.trimmingCharacters(in: .whitespaces).isEmpty)
+
+                if let err = stripe.lastError {
+                    Text(err).font(.caption).foregroundStyle(.red)
+                } else if let text = stripe.summaryText {
+                    Label(text, systemImage: "checkmark.circle.fill")
+                        .font(.caption).foregroundStyle(Theme.online)
+                }
+                Spacer()
+            }
+        }
+        .padding(22)
+        .frame(width: 500)
+        .background(Theme.background)
+        .onAppear { key = stripe.apiKey }
     }
 }
 
