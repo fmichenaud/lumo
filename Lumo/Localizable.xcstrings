@@ -7,8 +7,44 @@
     "%@ %@%@": {
       "shouldTranslate": false
     },
+    "%@ restantes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ left"
+          }
+        }
+      }
+    },
+    "%@ à %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ at %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ à %2$@"
+          }
+        }
+      }
+    },
     "%lld": {
       "shouldTranslate": false
+    },
+    "%lld min": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min"
+          }
+        }
+      }
     },
     "%lld s": {
       "shouldTranslate": false
@@ -62,7 +98,18 @@
         }
       }
     },
+    "Accès refusé — Réglages Système → Confidentialité → Calendriers": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Access denied — System Settings → Privacy → Calendars"
+          }
+        }
+      }
+    },
     "Actif en ce moment": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -73,6 +120,7 @@
       }
     },
     "Action": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -245,6 +293,7 @@
       }
     },
     "Ajuste selon le capteur de lumière ambiante": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -260,6 +309,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alert active"
+          }
+        }
+      }
+    },
+    "Alerte planifiée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduled alert"
           }
         }
       }
@@ -373,6 +432,7 @@
       }
     },
     "Animation entre deux apps": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -399,6 +459,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Custom app"
+          }
+        }
+      }
+    },
+    "App à afficher (ex. weather, optionnel)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App to show (e.g. weather, optional)"
           }
         }
       }
@@ -446,6 +516,16 @@
         }
       }
     },
+    "Arrêter": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        }
+      }
+    },
     "Aucun": {
       "localizations": {
         "en": {
@@ -478,12 +558,32 @@
         }
       }
     },
+    "Aucun jour coché = tous les jours.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No day checked = every day."
+          }
+        }
+      }
+    },
     "Aucun modèle pour « %@ »": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "No template for « %@ »"
+          }
+        }
+      }
+    },
+    "Aucun événement à venir": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No upcoming events"
           }
         }
       }
@@ -677,7 +777,18 @@
         }
       }
     },
+    "Calendrier": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendar"
+          }
+        }
+      }
+    },
     "Ce qui se passe pendant la nuit": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -911,6 +1022,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Compose a display"
+          }
+        }
+      }
+    },
+    "Compte à rebours affiché sur la matrice, sonnerie à zéro.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Countdown shown on the matrix, chime at zero."
           }
         }
       }
@@ -1320,6 +1441,16 @@
         }
       }
     },
+    "Démarrer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
+          }
+        }
+      }
+    },
     "Développeur": {
       "extractionState": "stale",
       "localizations": {
@@ -1346,6 +1477,7 @@
       }
     },
     "Effet de transition": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1362,6 +1494,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Waiting for data…"
+          }
+        }
+      }
+    },
+    "En pause": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paused"
           }
         }
       }
@@ -1712,6 +1854,16 @@
         }
       }
     },
+    "Inactif": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idle"
+          }
+        }
+      }
+    },
     "Inactive": {
       "extractionState": "stale",
       "localizations": {
@@ -1862,6 +2014,7 @@
       }
     },
     "Luminosité automatique": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1872,6 +2025,7 @@
       }
     },
     "Luminosité nocturne": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1968,12 +2122,32 @@
         }
       }
     },
+    "Message (vide = automatique)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message (empty = automatic)"
+          }
+        }
+      }
+    },
     "Message ({value} = valeur mesurée, vide = automatique)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Message ({value} = measured value, empty = automatic)"
+          }
+        }
+      }
+    },
+    "Message de fin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "End message"
           }
         }
       }
@@ -1999,6 +2173,16 @@
         }
       }
     },
+    "Minuteur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timer"
+          }
+        }
+      }
+    },
     "Mise à jour auto (15 min)": {
       "localizations": {
         "en": {
@@ -2009,7 +2193,18 @@
         }
       }
     },
+    "Mode Pomodoro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pomodoro mode"
+          }
+        }
+      }
+    },
     "Mode nuit programmé": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2192,6 +2387,7 @@
       }
     },
     "Nuit": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2259,6 +2455,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Forget this device"
+          }
+        }
+      }
+    },
+    "Outils": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tools"
           }
         }
       }
@@ -2336,6 +2542,26 @@
         }
       }
     },
+    "Pause · %@ restantes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Break · %@ left"
+          }
+        }
+      }
+    },
+    "Pause · cycle %lld terminé": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Break · cycle %lld done"
+          }
+        }
+      }
+    },
     "Permission manquante sur la clé — utilise le lien « Créer la clé » de l'éditeur": {
       "localizations": {
         "en": {
@@ -2347,6 +2573,7 @@
       }
     },
     "Peut traverser minuit": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2367,11 +2594,32 @@
       }
     },
     "Plage horaire": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Time window"
+          }
+        }
+      }
+    },
+    "Planifiée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduled"
+          }
+        }
+      }
+    },
+    "Quand": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When"
           }
         }
       }
@@ -2669,6 +2917,7 @@
       }
     },
     "S'applique automatiquement à l'heure choisie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2856,12 +3105,32 @@
         }
       }
     },
+    "Seuil franchi": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Threshold crossed"
+          }
+        }
+      }
+    },
     "Si macOS demande l'accès au réseau local, autorise-le :\nla recherche reprend toute seule.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "If macOS asks for local network access, allow it:\nthe search resumes on its own."
+          }
+        }
+      }
+    },
+    "Si une app est renseignée, l'écran bascule dessus au lieu d'afficher la notification.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If an app is set, the screen switches to it instead of showing the notification."
           }
         }
       }
@@ -3120,6 +3389,16 @@
         }
       }
     },
+    "Tous les jours à %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every day at %@"
+          }
+        }
+      }
+    },
     "Tout ce qui s'affiche à l'écran : active, configure et organise les apps de la rotation.": {
       "localizations": {
         "en": {
@@ -3157,6 +3436,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Turns the whole screen a solid color. Hides the normal display while it's on."
+          }
+        }
+      }
+    },
+    "Travail 25 min et pause 5 min, enchaînés.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "25 min work and 5 min break, chained."
+          }
+        }
+      }
+    },
+    "Travail · cycle %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Work · cycle %lld"
           }
         }
       }
@@ -3261,6 +3560,7 @@
       }
     },
     "Vitesse de transition": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3413,6 +3713,16 @@
     },
     "· AWTRIX %@": {
       "shouldTranslate": false
+    },
+    "À heure fixe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At a set time"
+          }
+        }
+      }
     },
     "À l'écran maintenant": {
       "localizations": {
