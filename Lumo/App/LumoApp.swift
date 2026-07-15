@@ -10,6 +10,7 @@ struct LumoApp: App {
     @StateObject private var connectors = ConnectorsStation()
     @StateObject private var alerts = AlertsStation()
     @StateObject private var nightMode = NightModeStation()
+    @StateObject private var pomodoro = PomodoroStation()
 
     var body: some Scene {
         WindowGroup("Lumo", id: "main") {
@@ -22,12 +23,13 @@ struct LumoApp: App {
                 .environmentObject(connectors)
                 .environmentObject(alerts)
                 .environmentObject(nightMode)
+                .environmentObject(pomodoro)
                 .frame(minWidth: 940, minHeight: 620)
                 .preferredColorScheme(.dark)
                 .task {
                     weatherStation.attach(store); liveApps.attach(store); calendarStation.attach(store)
                     connectors.attach(store); alerts.attach(store, connectors: connectors)
-                    nightMode.attach(store)
+                    nightMode.attach(store); pomodoro.attach(store)
                 }
         }
         .windowStyle(.hiddenTitleBar)
