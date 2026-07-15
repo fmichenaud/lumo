@@ -3,37 +3,24 @@ import Combine
 
 /// Les sous-sections d'un afficheur, affichées sous l'appareil dans la barre latérale.
 enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
-    case apps, compose, alerts, draw, settings
+    case screen, studio, moments, device
     var id: String { rawValue }
 
     var title: String {
         switch self {
-        case .apps:     return String(localized: "Apps")
-        case .compose:  return String(localized: "Composer")
-        case .alerts:   return String(localized: "Alertes")
-        case .draw:     return String(localized: "Dessin")
-        case .settings: return String(localized: "Réglages")
+        case .screen:  return String(localized: "Écran")
+        case .studio:  return String(localized: "Studio")
+        case .moments: return String(localized: "Moments")
+        case .device:  return String(localized: "Appareil")
         }
     }
 
     var icon: String {
         switch self {
-        case .apps:     return "square.stack.3d.up.fill"
-        case .compose:  return "square.and.pencil"
-        case .alerts:   return "bell.badge.fill"
-        case .draw:     return "paintbrush.pointed.fill"
-        case .settings: return "slider.horizontal.3"
-        }
-    }
-
-    /// Phrase d'explication affichée en tête de chaque section.
-    var summary: String {
-        switch self {
-        case .apps:     return String(localized: "Tout ce qui s'affiche à l'écran : active, configure et organise les apps de la rotation.")
-        case .compose:  return String(localized: "Crée un affichage (texte, couleur, icône) et sauvegarde tes compositions en scènes.")
-        case .alerts:   return String(localized: "Surveille des seuils (CPU, batterie, connecteurs…) et déclenche notification ou LED automatiquement.")
-        case .draw:     return String(localized: "Dessine pixel par pixel et envoie ton image sur la matrice.")
-        case .settings: return String(localized: "Écran, luminosité, défilement, durée par app et lampe d'ambiance.")
+        case .screen:  return "rectangle.stack.fill"
+        case .studio:  return "paintpalette.fill"
+        case .moments: return "bell.badge.fill"
+        case .device:  return "slider.horizontal.3"
         }
     }
 }
@@ -43,7 +30,7 @@ enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
 final class DeviceStore: ObservableObject {
     @Published var devices: [Device] = []
     @Published var selectedID: Device.ID?
-    @Published var selectedSection: DeviceSection = .apps
+    @Published var selectedSection: DeviceSection = .screen
 
     private let storageKey = "lumo.devices.v1"
 

@@ -10,11 +10,6 @@ struct DeviceDetailView: View {
     @State private var stats: AwtrixStats?
     @State private var brightness: Double = 80
     @State private var autoBrightness = false
-    @State private var autoTransition = true
-    @State private var appTime = 5
-    @State private var transitions: [String] = []
-    @State private var transitionEffect = 0
-    @State private var transitionSpeed: Double = 200
     @State private var powerOn = true
     @State private var banner: String?
     @State private var moodColor = Theme.accent
@@ -35,10 +30,10 @@ struct DeviceDetailView: View {
             // Contenu de la section, défilant sous l'aperçu.
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    sectionIntro
                     sectionContent
                 }
                 .padding(.horizontal, 24)
+                .padding(.top, 4)
                 .padding(.bottom, 24)
             }
         }
@@ -48,26 +43,23 @@ struct DeviceDetailView: View {
         .task(id: device.id) { await refreshState() }
     }
 
-    private var sectionIntro: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text(store.selectedSection.title)
-                .font(.title3.weight(.semibold)).foregroundStyle(Theme.textPrimary)
-            Text(store.selectedSection.summary)
-                .font(.callout).foregroundStyle(Theme.textSecondary)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
     // MARK: - Cartes
 
     @ViewBuilder private var sectionContent: some View {
         Group {
             switch store.selectedSection {
-            case .apps:     DeviceAppsView(device: device, onResult: { banner = $0 })
-            case .compose:  ComposeView(device: device, onResult: { banner = $0 })
-            case .alerts:   AlertsView(device: device, onResult: { banner = $0 })
-            case .draw:     DrawView(device: device, onResult: { banner = $0 })
-            case .settings: controlsCard
+            case .screen:
+                DeviceScreenView(device: device, onResult: { banner = $0 })
+            case .studio:
+                // Fusion réelle en onglets à l'étape « Studio » de la refonte.
+                VStack(alignment: .leading, spacing: 14) {
+                    ComposeView(device: device, onResult: { banner = $0 })
+                    DrawView(device: device, onResult: { banner = $0 })
+                }
+            case .moments:
+                AlertsView(device: device, onResult: { banner = $0 })
+            case .device:
+                controlsCard
             }
         }
         .transition(.opacity)
@@ -104,54 +96,6 @@ struct DeviceDetailView: View {
                 })).labelsHidden().tint(Theme.accent)
             }
             rowDivider
-
-            ControlRow(icon: "arrow.left.arrow.right", title: "Défilement auto",
-                       subtitle: "Rotation entre les apps") {
-                Toggle("", isOn: Binding(get: { autoTransition }, set: { value in
-                    autoTransition = value
-                    Task { try? await client.setAutoTransition(value) }
-                })).labelsHidden().tint(Theme.accent)
-            }
-            rowDivider
-
-            ControlRow(icon: "timer", title: "Durée par app",
-                       subtitle: "Temps d'affichage avant de passer à la suivante") {
-                HStack(spacing: 8) {
-                    Text("\(appTime) s")
-                        .font(.callout.weight(.semibold).monospacedDigit())
-                        .foregroundStyle(Theme.accent)
-                    Stepper("", value: Binding(get: { appTime }, set: { value in
-                        appTime = value
-                        Task { try? await client.updateSettings(["ATIME": value]) }
-                    }), in: 1...60).labelsHidden()
-                }
-            }
-            rowDivider
-
-            ControlRow(icon: "wand.and.stars", title: "Effet de transition",
-                       subtitle: "Animation entre deux apps") {
-                Picker("", selection: Binding(get: { transitionEffect }, set: { value in
-                    transitionEffect = value
-                    Task { try? await client.updateSettings(["TEFF": value]) }
-                })) {
-                    ForEach(Array(transitions.enumerated()), id: \.offset) { index, name in
-                        Text(name).tag(index)
-                    }
-                }
-                .labelsHidden()
-                .frame(width: 150)
-                .disabled(transitions.isEmpty)
-            }
-            rowDivider
-
-            ControlRow(icon: "gauge.with.needle", title: "Vitesse de transition",
-                       subtitle: "\(Int(transitionSpeed)) ms") {
-                Slider(value: $transitionSpeed, in: 100...2000, step: 50) { editing in
-                    if !editing { Task { try? await client.updateSettings(["TSPEED": Int(transitionSpeed)]) } }
-                }
-                .tint(Theme.accent)
-                .frame(width: 170)
-            }
 
             rowDivider
             nightModeBlock
@@ -369,14 +313,7 @@ struct DeviceDetailView: View {
             if let b = s.bri { brightness = Double(b) }
         }
         if let settings = try? await client.fetchSettings() {
-            if let t = settings.ATRANS { autoTransition = t }
-            if let a = settings.ATIME { appTime = a }
             if let ab = settings.ABRI { autoBrightness = ab }
-            if let te = settings.TEFF { transitionEffect = te }
-            if let ts = settings.TSPEED { transitionSpeed = Double(min(2000, max(100, ts))) }
-        }
-        if let list = try? await client.fetchTransitions() {
-            transitions = list
         }
     }
 }
