@@ -26,14 +26,11 @@ struct DeviceDetailView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Zone épinglée (toujours visible) : en-tête + aperçu live.
-            VStack(alignment: .leading, spacing: 16) {
-                headerCard
-                LivePreviewView(host: device.host)
-            }
-            .padding(.horizontal, 24)
-            .padding(.top, 24)
-            .padding(.bottom, 14)
+            // Zone épinglée (toujours visible) : barre « à l'écran » compacte.
+            NowPlayingBar(device: device)
+                .padding(.horizontal, 24)
+                .padding(.top, 20)
+                .padding(.bottom, 14)
 
             // Contenu de la section, défilant sous l'aperçu.
             ScrollView {
@@ -62,42 +59,6 @@ struct DeviceDetailView: View {
     }
 
     // MARK: - Cartes
-
-    private var headerCard: some View {
-        HStack(spacing: 16) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(device.name)
-                    .font(.system(size: 27, weight: .bold, design: .rounded))
-                    .foregroundStyle(Theme.textPrimary)
-                HStack(spacing: 8) {
-                    HStack(spacing: 6) {
-                        Circle().fill(stats != nil ? Theme.online : Theme.textSecondary)
-                            .frame(width: 7, height: 7)
-                        Text(stats != nil ? "Connecté" : "Hors ligne")
-                            .font(.caption.weight(.medium))
-                    }
-                    .padding(.horizontal, 9).padding(.vertical, 4)
-                    .background(Color.white.opacity(0.06), in: Capsule())
-                    .foregroundStyle(Theme.textPrimary)
-
-                    Text(device.host).font(.callout).foregroundStyle(Theme.textSecondary)
-                    if let v = stats?.version {
-                        Text("· AWTRIX \(v)").font(.callout).foregroundStyle(Theme.textSecondary)
-                    }
-                }
-            }
-            Spacer()
-            statChips
-        }
-    }
-
-    private var statChips: some View {
-        HStack(spacing: 10) {
-            if let bat = stats?.bat { Chip(icon: "battery.100", text: "\(bat)%") }
-            if let t = stats?.temp { Chip(icon: "thermometer.medium", text: "\(Int(t))°") }
-            if let h = stats?.hum { Chip(icon: "humidity", text: "\(Int(h))%") }
-        }
-    }
 
     @ViewBuilder private var sectionContent: some View {
         Group {
@@ -417,18 +378,6 @@ struct DeviceDetailView: View {
         if let list = try? await client.fetchTransitions() {
             transitions = list
         }
-    }
-}
-
-private struct Chip: View {
-    let icon: String
-    let text: String
-    var body: some View {
-        Label(text, systemImage: icon)
-            .font(.caption.weight(.medium))
-            .padding(.horizontal, 10).padding(.vertical, 6)
-            .background(Theme.surfaceHover, in: Capsule())
-            .foregroundStyle(Theme.textPrimary)
     }
 }
 
