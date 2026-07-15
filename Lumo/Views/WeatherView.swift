@@ -1,11 +1,12 @@
 import SwiftUI
 
-/// Carte météo : choix d'une ville, aperçu, envoi sur l'afficheur et mise à jour automatique.
+/// Sheet de configuration de l'intégration Météo : choix de la ville, aperçu, envoi manuel.
 /// L'état (ville, météo, auto) est porté par WeatherStation, partagé avec la menu-bar.
-struct WeatherView: View {
+struct WeatherConfigSheet: View {
     let device: Device
     @EnvironmentObject var store: DeviceStore
     @EnvironmentObject var weatherStation: WeatherStation
+    @Environment(\.dismiss) private var dismiss
     var onResult: (String) -> Void = { _ in }
 
     @State private var query = ""
@@ -14,25 +15,32 @@ struct WeatherView: View {
     @State private var sending = false
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             header
             searchBar
             if !results.isEmpty { resultsList }
             if weatherStation.hasLocation { currentBlock }
+            Spacer(minLength: 0)
         }
-        .card()
+        .padding(22)
+        .frame(width: 480, height: 360)
+        .background(Theme.background)
         .task { if weatherStation.hasLocation && weatherStation.weather == nil { await weatherStation.refresh() } }
     }
 
     private var header: some View {
         HStack {
-            Text("MÉTÉO")
-                .font(.caption.weight(.semibold)).tracking(0.8)
-                .foregroundStyle(Theme.textSecondary)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Météo").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
+                Text("Choisis ta ville — l'afficheur se met à jour toutes les 15 min quand l'app est activée.")
+                    .font(.caption).foregroundStyle(Theme.textSecondary)
+            }
             Spacer()
             if busy { ProgressView().controlSize(.small) }
+            Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title2) }
+                .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
         }
-        .padding(.bottom, 12)
+        .padding(.bottom, 14)
     }
 
     private var searchBar: some View {
@@ -101,12 +109,6 @@ struct WeatherView: View {
                 .disabled(weatherStation.weather == nil || sending)
 
                 Spacer()
-
-                Toggle(isOn: Binding(
-                    get: { weatherStation.autoEnabled },
-                    set: { weatherStation.setAuto($0) }
-                )) { Text("Auto").font(.caption) }
-                .help("Met à jour la météo sur l'afficheur toutes les 15 min (même fenêtre fermée, via la menu-bar)")
             }
         }
         .padding(.top, 16)

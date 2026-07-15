@@ -4,7 +4,7 @@
     "": {
       "shouldTranslate": false
     },
-    "%@%@": {
+    "%@ %@%@": {
       "shouldTranslate": false
     },
     "%lld": {
@@ -132,6 +132,7 @@
       }
     },
     "Affiche la météo de ta ville sur l'écran, avec mise à jour automatique possible.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -223,6 +224,7 @@
       }
     },
     "Alerte testée": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -371,6 +373,16 @@
         }
       }
     },
+    "Apps de l'afficheur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Built-in apps"
+          }
+        }
+      }
+    },
     "Apps intégrées": {
       "extractionState": "stale",
       "localizations": {
@@ -404,6 +416,7 @@
       }
     },
     "Aucun connecteur": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -476,6 +489,7 @@
       }
     },
     "Auto": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -539,6 +553,7 @@
       }
     },
     "Branche des sources de données — ton Mac, les cryptos ou n'importe quelle API — et affiche-les en direct.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -549,6 +564,7 @@
       }
     },
     "Branche ta propre API ou une API externe (cours, capteurs, compteurs…).": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -568,7 +584,18 @@
         }
       }
     },
+    "CE QUI TOURNE À L'ÉCRAN": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WHAT'S ON SCREEN"
+          }
+        }
+      }
+    },
     "CENTRE DE CONTRÔLE": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -671,12 +698,32 @@
         }
       }
     },
+    "Choisis ta ville — l'afficheur se met à jour toutes les 15 min quand l'app est activée.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick your city — the display refreshes every 15 min while the app is on."
+          }
+        }
+      }
+    },
     "Choisis un modèle — tout reste ajustable ensuite.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Pick a template — everything stays adjustable afterwards."
+          }
+        }
+      }
+    },
+    "Choisis une ville pour commencer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick a city to get started"
           }
         }
       }
@@ -745,6 +792,7 @@
       }
     },
     "Condition": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -807,6 +855,7 @@
       }
     },
     "Connecteurs API": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -946,11 +995,22 @@
       }
     },
     "Cours en direct · mise à jour toutes les 60 s": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Live price · updated every 60 s"
+          }
+        }
+      }
+    },
+    "Cours mis à jour toutes les 60 s (CoinGecko).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Price refreshed every 60 s (CoinGecko)."
           }
         }
       }
@@ -965,7 +1025,18 @@
         }
       }
     },
+    "Crée un affichage (texte, couleur, icône) et sauvegarde tes compositions en scènes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a display (text, color, icon) and save your compositions as scenes."
+          }
+        }
+      }
+    },
     "Crée un affichage permanent (texte, couleur, icône) ajouté à la rotation de l'écran.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1028,6 +1099,16 @@
         }
       }
     },
+    "Devise": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Currency"
+          }
+        }
+      }
+    },
     "Devises": {
       "extractionState": "stale",
       "localizations": {
@@ -1084,6 +1165,7 @@
       }
     },
     "Durée par app": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1150,7 +1232,18 @@
         }
       }
     },
+    "Enregistrer comme scène": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save as scene"
+          }
+        }
+      }
+    },
     "Enregistrer la scène": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1305,6 +1398,16 @@
         }
       }
     },
+    "Garde cette composition sous la main pour la renvoyer en 1 clic": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep this composition at hand to resend it in one click"
+          }
+        }
+      }
+    },
     "Garder affichée": {
       "extractionState": "stale",
       "localizations": {
@@ -1337,6 +1440,7 @@
       }
     },
     "Gère la rotation : affiche ou supprime les apps présentes sur le device.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1466,6 +1570,7 @@
       }
     },
     "Intégrations": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1476,6 +1581,7 @@
       }
     },
     "L'afficheur redémarre pour appliquer les changements…": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1572,6 +1678,7 @@
       }
     },
     "MES SCÈNES": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1588,6 +1695,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Home"
+          }
+        }
+      }
+    },
+    "Mes scènes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My scenes"
           }
         }
       }
@@ -1613,6 +1730,7 @@
       }
     },
     "Met à jour la météo sur l'afficheur toutes les 15 min (même fenêtre fermée, via la menu-bar)": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1644,6 +1762,7 @@
       }
     },
     "Mon Mac & marchés": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1654,6 +1773,7 @@
       }
     },
     "MÉTÉO": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1705,6 +1825,7 @@
       }
     },
     "NOUVELLE SCÈNE": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1726,6 +1847,7 @@
       }
     },
     "Nom (ex. Compteurs)": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1905,6 +2027,7 @@
       }
     },
     "Quand ça se déclenche": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2142,6 +2265,7 @@
       }
     },
     "Sauvegarde tes compositions et renvoie-les en 1 clic. Elles survivent au redémarrage du device.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2184,7 +2308,18 @@
         }
       }
     },
+    "Scène « %@ » enregistrée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scene “%@” saved"
+          }
+        }
+      }
+    },
     "Scènes": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2376,6 +2511,7 @@
       }
     },
     "Temps d'affichage avant de passer à la suivante": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2468,6 +2604,16 @@
         }
       }
     },
+    "Tout ce qui s'affiche à l'écran : active, configure et organise les apps de la rotation.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything shown on screen: enable, configure and organize the rotation's apps."
+          }
+        }
+      }
+    },
     "Tout effacer": {
       "localizations": {
         "en": {
@@ -2479,6 +2625,7 @@
       }
     },
     "Toutes les %lld s": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2732,7 +2879,6 @@
       "shouldTranslate": false
     },
     "À l'écran maintenant": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {

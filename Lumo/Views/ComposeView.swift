@@ -1,12 +1,13 @@
 import SwiftUI
 
-/// Compose un message et l'envoie au device : soit en notification éphémère,
-/// soit épinglé comme app permanente dans la rotation.
+/// Compose un affichage (texte, couleur, icône), l'envoie dans la rotation,
+/// et permet de le sauvegarder en scène réutilisable en 1 clic.
 struct ComposeView: View {
     let device: Device
     var onResult: (String) -> Void = { _ in }
 
     @EnvironmentObject var store: DeviceStore
+    @EnvironmentObject var sceneStore: SceneStore
 
     @State private var text = "1012"
     @State private var color = Theme.accent
@@ -15,6 +16,7 @@ struct ComposeView: View {
     @State private var sending = false
     @State private var showIconImport = false
     @State private var saveApp = true
+    @State private var sendingSceneID: UUID?
 
     private var client: AwtrixClient { store.client(for: device) }
 
@@ -69,6 +71,13 @@ struct ComposeView: View {
 
                 Spacer()
 
+                Button { saveScene() } label: {
+                    Label("Enregistrer comme scène", systemImage: "bookmark")
+                }
+                .buttonStyle(PillButtonStyle(prominent: false))
+                .disabled(text.isEmpty && iconID.isEmpty)
+                .help("Garde cette composition sous la main pour la renvoyer en 1 clic")
+
                 Button {
                     Task { await addApp() }
                 } label: {
@@ -78,6 +87,11 @@ struct ComposeView: View {
                 .buttonStyle(PillButtonStyle())
                 .disabled(text.isEmpty && iconID.isEmpty)
             }
+
+            if !sceneStore.scenes.isEmpty {
+                Divider().overlay(Theme.stroke)
+                scenesBlock
+            }
         }
         .card()
         .sheet(isPresented: $showIconImport) {
@@ -85,6 +99,68 @@ struct ComposeView: View {
                 iconID = importedName
             }
             .environmentObject(store)
+        }
+    }
+
+    // MARK: - Scènes
+
+    private var scenesBlock: some View {
+        VStack(spacing: 0) {
+            Text(String(localized: "Mes scènes").uppercased())
+                .font(.caption.weight(.semibold)).tracking(0.8)
+                .foregroundStyle(Theme.textSecondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 10)
+
+            ForEach(Array(sceneStore.scenes.enumerated()), id: \.element.id) { index, scene in
+                sceneRow(scene)
+                if index < sceneStore.scenes.count - 1 {
+                    Divider().overlay(Theme.stroke).padding(.vertical, 9)
+                }
+            }
+        }
+    }
+
+    private func sceneRow(_ scene: DisplayScene) -> some View {
+        HStack(spacing: 12) {
+            IconThumbnail(host: device.host, iconID: scene.icon)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(scene.name).foregroundStyle(Theme.textPrimary)
+                Text(scene.text.isEmpty ? "—" : scene.text)
+                    .font(.caption).foregroundStyle(Theme.textSecondary)
+            }
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Color(hex: scene.colorHex)).frame(width: 14, height: 14)
+            Spacer()
+
+            Button { Task { await send(scene) } } label: {
+                if sendingSceneID == scene.id { ProgressView().controlSize(.small) }
+                else { Label("Envoyer", systemImage: "paperplane.fill") }
+            }
+            .buttonStyle(PillButtonStyle(prominent: false))
+            .controlSize(.small)
+
+            Button { sceneStore.remove(scene) } label: { Image(systemName: "trash") }
+                .buttonStyle(.plain)
+                .foregroundStyle(.red.opacity(0.85))
+        }
+    }
+
+    private func saveScene() {
+        let scene = DisplayScene(name: appName.isEmpty ? "Scène" : appName,
+                                 text: text, colorHex: color.hexString, icon: iconID)
+        sceneStore.add(scene)
+        onResult("Scène « \(scene.name) » enregistrée")
+    }
+
+    private func send(_ scene: DisplayScene) async {
+        sendingSceneID = scene.id; defer { sendingSceneID = nil }
+        do {
+            try await client.upsertCustomApp(name: scene.appName, payload: scene.payload())
+            try await client.switchApp(name: scene.appName)
+            onResult("Scène « \(scene.name) » envoyée\(scene.persist ? " (persistante)" : "")")
+        } catch {
+            onResult("Échec de l'envoi")
         }
     }
 

@@ -118,10 +118,16 @@ struct AwtrixClient: Sendable {
         try await post("/api/power", json: ["power": on])
     }
 
-    /// Redémarre l'afficheur. Nécessaire pour appliquer les toggles d'apps natives (TIM, DAT, TEMP…) :
-    /// AWTRIX 0.94 ne reconstruit la rotation qu'au boot (vérifié sur device).
+    /// Redémarre l'afficheur.
     func reboot() async throws {
         try await postEmpty("/api/reboot")
+    }
+
+    /// Montre/cache une app native dans la rotation, à chaud (sans reboot).
+    /// Endpoint non documenté mais présent depuis 0.94 (updateAppVector) — vérifié sur device.
+    /// Les noms sont sensibles à la casse : "Time", "Date", "Temperature", "Humidity", "Battery".
+    func setNativeAppVisible(_ name: String, show: Bool) async throws {
+        try await post("/api/apps", json: [["name": name, "show": show]])
     }
 
     // MARK: - Affichage

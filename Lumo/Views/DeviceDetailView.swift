@@ -93,13 +93,10 @@ struct DeviceDetailView: View {
     @ViewBuilder private var sectionContent: some View {
         Group {
             switch store.selectedSection {
-            case .compose:  ComposeView(device: device, onResult: { banner = $0 })
-            case .scenes:   ScenesView(device: device, onResult: { banner = $0 })
-            case .weather:  WeatherView(device: device, onResult: { banner = $0 })
-            case .alerts:   AlertsView(device: device, onResult: { banner = $0 })
-            case .integrations: IntegrationsView(device: device)
-            case .draw:     DrawView(device: device, onResult: { banner = $0 })
             case .apps:     DeviceAppsView(device: device, onResult: { banner = $0 })
+            case .compose:  ComposeView(device: device, onResult: { banner = $0 })
+            case .alerts:   AlertsView(device: device, onResult: { banner = $0 })
+            case .draw:     DrawView(device: device, onResult: { banner = $0 })
             case .settings: controlsCard
             }
         }
