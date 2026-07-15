@@ -4,11 +4,16 @@ import SwiftUI
 struct DeviceDetailView: View {
     let device: Device
     @EnvironmentObject var store: DeviceStore
+    @EnvironmentObject var nightMode: NightModeStation
 
     @State private var stats: AwtrixStats?
     @State private var brightness: Double = 80
+    @State private var autoBrightness = false
     @State private var autoTransition = true
     @State private var appTime = 5
+    @State private var transitions: [String] = []
+    @State private var transitionEffect = 0
+    @State private var transitionSpeed: Double = 200
     @State private var powerOn = true
     @State private var banner: String?
     @State private var moodColor = Theme.accent
@@ -122,6 +127,16 @@ struct DeviceDetailView: View {
                 }
                 .tint(Theme.accent)
                 .frame(width: 170)
+                .disabled(autoBrightness)
+            }
+            rowDivider
+
+            ControlRow(icon: "circle.lefthalf.filled", title: "Luminosité automatique",
+                       subtitle: "Ajuste selon le capteur de lumière ambiante") {
+                Toggle("", isOn: Binding(get: { autoBrightness }, set: { value in
+                    autoBrightness = value
+                    Task { try? await client.updateSettings(["ABRI": value]) }
+                })).labelsHidden().tint(Theme.accent)
             }
             rowDivider
 
@@ -146,6 +161,35 @@ struct DeviceDetailView: View {
                     }), in: 1...60).labelsHidden()
                 }
             }
+            rowDivider
+
+            ControlRow(icon: "wand.and.stars", title: "Effet de transition",
+                       subtitle: "Animation entre deux apps") {
+                Picker("", selection: Binding(get: { transitionEffect }, set: { value in
+                    transitionEffect = value
+                    Task { try? await client.updateSettings(["TEFF": value]) }
+                })) {
+                    ForEach(Array(transitions.enumerated()), id: \.offset) { index, name in
+                        Text(name).tag(index)
+                    }
+                }
+                .labelsHidden()
+                .frame(width: 150)
+                .disabled(transitions.isEmpty)
+            }
+            rowDivider
+
+            ControlRow(icon: "gauge.with.needle", title: "Vitesse de transition",
+                       subtitle: "\(Int(transitionSpeed)) ms") {
+                Slider(value: $transitionSpeed, in: 100...2000, step: 50) { editing in
+                    if !editing { Task { try? await client.updateSettings(["TSPEED": Int(transitionSpeed)]) } }
+                }
+                .tint(Theme.accent)
+                .frame(width: 170)
+            }
+
+            rowDivider
+            nightModeBlock
 
             rowDivider
             sectionTitle("Ambiance")
@@ -171,6 +215,76 @@ struct DeviceDetailView: View {
         .onChange(of: powerOn) { _, value in
             Task { try? await client.setPower(value); banner = value ? "Écran allumé" : "Écran éteint" }
         }
+    }
+
+    // MARK: - Mode nuit
+
+    /// Bloc de réglage du mode nuit programmé (branché sur NightModeStation).
+    @ViewBuilder private var nightModeBlock: some View {
+        sectionTitle("Mode nuit")
+
+        ControlRow(icon: "moon.fill", title: "Mode nuit programmé",
+                   subtitle: nightMode.applied ? "Actif en ce moment" : "S'applique automatiquement à l'heure choisie") {
+            Toggle("", isOn: Binding(get: { nightMode.enabled }, set: { value in
+                nightMode.setEnabled(value)
+            })).labelsHidden().tint(Theme.accent)
+        }
+
+        if nightMode.enabled {
+            rowDivider
+
+            ControlRow(icon: "clock.fill", title: "Plage horaire",
+                       subtitle: "Peut traverser minuit") {
+                HStack(spacing: 8) {
+                    DatePicker("", selection: timeBinding(minutes: { nightMode.startMinutes },
+                                                          set: { nightMode.setStart(minutes: $0) }),
+                               displayedComponents: .hourAndMinute)
+                        .labelsHidden()
+                    Text("→").foregroundStyle(Theme.textSecondary)
+                    DatePicker("", selection: timeBinding(minutes: { nightMode.endMinutes },
+                                                          set: { nightMode.setEnd(minutes: $0) }),
+                               displayedComponents: .hourAndMinute)
+                        .labelsHidden()
+                }
+            }
+            rowDivider
+
+            ControlRow(icon: "moon.zzz.fill", title: "Action",
+                       subtitle: "Ce qui se passe pendant la nuit") {
+                Picker("", selection: Binding(get: { nightMode.action }, set: { value in
+                    nightMode.setAction(value)
+                })) {
+                    Text("Éteindre l'écran").tag(NightAction.powerOff)
+                    Text("Luminosité réduite").tag(NightAction.dim)
+                }
+                .labelsHidden()
+                .frame(width: 170)
+            }
+
+            if nightMode.action == .dim {
+                rowDivider
+                ControlRow(icon: "sun.min.fill", title: "Luminosité nocturne",
+                           subtitle: "\(nightMode.dimPercent) %") {
+                    Stepper("", value: Binding(get: { nightMode.dimPercent }, set: { value in
+                        nightMode.setDimPercent(value)
+                    }), in: 1...100, step: 5).labelsHidden()
+                }
+            }
+        }
+    }
+
+    /// Binding Date ↔︎ minutes depuis minuit pour les DatePicker heure/minute.
+    private func timeBinding(minutes: @escaping () -> Int, set: @escaping (Int) -> Void) -> Binding<Date> {
+        Binding<Date>(
+            get: {
+                let m = minutes()
+                return Calendar.current.date(bySettingHour: m / 60, minute: m % 60, second: 0, of: Date()) ?? Date()
+            },
+            set: { date in
+                let comps = Calendar.current.dateComponents([.hour, .minute], from: date)
+                set((comps.hour ?? 0) * 60 + (comps.minute ?? 0))
+            }
+        )
     }
 
     private func sectionTitle(_ text: String) -> some View {
@@ -213,6 +327,12 @@ struct DeviceDetailView: View {
         if let settings = try? await client.fetchSettings() {
             if let t = settings.ATRANS { autoTransition = t }
             if let a = settings.ATIME { appTime = a }
+            if let ab = settings.ABRI { autoBrightness = ab }
+            if let te = settings.TEFF { transitionEffect = te }
+            if let ts = settings.TSPEED { transitionSpeed = Double(min(2000, max(100, ts))) }
+        }
+        if let list = try? await client.fetchTransitions() {
+            transitions = list
         }
     }
 }

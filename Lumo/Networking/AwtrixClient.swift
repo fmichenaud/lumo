@@ -186,6 +186,12 @@ struct AwtrixClient: Sendable {
         return (try? JSONDecoder().decode([String].self, from: data)) ?? []
     }
 
+    /// Liste des effets de transition entre apps ; la valeur TEFF est l'index dans cette liste.
+    func fetchTransitions() async throws -> [String] {
+        let data = try await getData("/api/transitions")
+        return (try? JSONDecoder().decode([String].self, from: data)) ?? []
+    }
+
     // MARK: - Icônes (upload vers /edit en multipart)
 
     func uploadIcon(id: String, data: Data, ext: String) async throws {
