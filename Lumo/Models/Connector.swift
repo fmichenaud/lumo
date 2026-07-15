@@ -41,7 +41,11 @@ struct Connector: Identifiable, Codable, Hashable {
     enum SpecialSource: String, Codable {
         case claudeQuota    // quota Claude Code (session 5 h + semaine)
         case stripeMRR      // revenu mensuel récurrent Stripe
+        case stripeTotal    // gain total net Stripe (encaissements − remboursements − frais)
     }
+
+    /// Vrai pour les sources Stripe (partagent la clé API et le lien de création).
+    var isStripe: Bool { special == .stripeMRR || special == .stripeTotal }
 
     var id = UUID()
     var special: SpecialSource?
@@ -199,6 +203,12 @@ struct ConnectorTemplate: Identifiable {
         .init(title: "MRR Stripe", subtitle: "Revenu mensuel récurrent, calculé depuis tes abonnements", symbol: "creditcard.fill", category: "Services") {
             var c = Connector(name: "MRR", template: "MRR {value}", colorHex: "#8A7DFF", intervalSeconds: 1800)
             c.special = .stripeMRR
+            c.auth.kind = .bearer
+            return c
+        },
+        .init(title: "Gain total Stripe", subtitle: "Encaissements nets cumulés (remboursements et frais déduits)", symbol: "banknote.fill", category: "Services") {
+            var c = Connector(name: "Total", template: "Total {value}", colorHex: "#8A7DFF", intervalSeconds: 3600)
+            c.special = .stripeTotal
             c.auth.kind = .bearer
             return c
         },

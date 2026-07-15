@@ -101,6 +101,16 @@ final class ConnectorsStation: ObservableObject {
             } catch {
                 return (nil, String(localized: "Échec réseau"))
             }
+        case .stripeTotal:
+            do {
+                let result = try await StripeTotalSource.fetch(apiKey: c.auth.bearerToken)
+                specialMetrics["stripe.total"] = result.total
+                return (result.value, nil)
+            } catch let error as StripeMRRSource.SourceError {
+                return (nil, error.message)
+            } catch {
+                return (nil, String(localized: "Échec réseau"))
+            }
         case nil:
             break
         }

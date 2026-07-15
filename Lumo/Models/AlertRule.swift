@@ -7,7 +7,7 @@ struct AlertRule: Identifiable, Codable, Hashable {
     /// Ce qu'on surveille.
     enum Metric: String, Codable, CaseIterable, Identifiable {
         case macCPU, macRAM, deviceBattery, deviceTemp, deviceHumidity
-        case claudeSession, claudeWeekly, stripeMRR, connector
+        case claudeSession, claudeWeekly, stripeMRR, stripeTotal, connector
         var id: String { rawValue }
 
         var label: String {
@@ -20,6 +20,7 @@ struct AlertRule: Identifiable, Codable, Hashable {
             case .claudeSession:  return String(localized: "Quota Claude — session")
             case .claudeWeekly:   return String(localized: "Quota Claude — semaine")
             case .stripeMRR:      return String(localized: "MRR Stripe")
+            case .stripeTotal:    return String(localized: "Gain total Stripe")
             case .connector:      return String(localized: "Valeur d'un connecteur")
             }
         }
@@ -29,7 +30,7 @@ struct AlertRule: Identifiable, Codable, Hashable {
             case .macCPU, .macRAM, .deviceBattery, .deviceHumidity,
                  .claudeSession, .claudeWeekly: return "%"
             case .deviceTemp: return "°"
-            case .stripeMRR, .connector: return ""
+            case .stripeMRR, .stripeTotal, .connector: return ""
             }
         }
 
@@ -42,6 +43,7 @@ struct AlertRule: Identifiable, Codable, Hashable {
             case .deviceHumidity: return "humidity.fill"
             case .claudeSession, .claudeWeekly: return "sparkles"
             case .stripeMRR:      return "creditcard"
+            case .stripeTotal:    return "banknote"
             case .connector:      return "antenna.radiowaves.left.and.right"
             }
         }

@@ -50,6 +50,22 @@ struct StripeMRRSourceTests {
     }
 }
 
+struct StripeTotalSourceTests {
+    @Test func salesAndRefundsCount() {
+        #expect(StripeTotalSource.countsTowardTotal(type: "charge"))
+        #expect(StripeTotalSource.countsTowardTotal(type: "payment"))
+        #expect(StripeTotalSource.countsTowardTotal(type: "refund"))
+        #expect(StripeTotalSource.countsTowardTotal(type: "payment_refund"))
+    }
+
+    @Test func payoutsAndFeesExcluded() {
+        #expect(!StripeTotalSource.countsTowardTotal(type: "payout"))
+        #expect(!StripeTotalSource.countsTowardTotal(type: "stripe_fee"))
+        #expect(!StripeTotalSource.countsTowardTotal(type: "adjustment"))
+        #expect(!StripeTotalSource.countsTowardTotal(type: "transfer"))
+    }
+}
+
 struct SpecialConnectorTests {
     @Test func oldConnectorsDecodeWithoutSpecial() throws {
         // Un connecteur sauvegardé avant l'ajout du champ `special` doit se décoder (nil).
@@ -68,5 +84,8 @@ struct SpecialConnectorTests {
         let stripe = ConnectorTemplate.all.first { $0.title == "MRR Stripe" }!.build()
         #expect(stripe.special == .stripeMRR)
         #expect(stripe.auth.kind == .bearer)
+        let total = ConnectorTemplate.all.first { $0.title == "Gain total Stripe" }!.build()
+        #expect(total.special == .stripeTotal)
+        #expect(total.isStripe)
     }
 }

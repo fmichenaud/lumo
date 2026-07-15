@@ -130,6 +130,8 @@ struct ConnectorEditor: View {
                         caption("Lit le token de Claude Code dans le Trousseau (macOS demandera d'autoriser l'accès une fois — choisis « Toujours autoriser »). Affiche le quota session (5 h) et semaine, avec une couleur selon le niveau.")
                     case .stripeMRR:
                         caption("MRR calculé en agrégeant tes abonnements actifs, normalisés au mois.")
+                    case .stripeTotal:
+                        caption("Encaissements nets cumulés (remboursements et frais Stripe déduits), reconstitués depuis l'historique des transactions.")
                     case nil:
                         field("URL", "https://api.exemple.com/data", text: $connector.url)
                     }
@@ -143,19 +145,19 @@ struct ConnectorEditor: View {
                         .pickerStyle(.segmented)
                         authFields
                     }
-                } else if connector.special == .stripeMRR {
+                } else if connector.isStripe {
                     group("Clé API Stripe") {
                         SecureField("rk_live_… ou sk_live_…", text: $connector.auth.bearerToken)
                             .textFieldStyle(.roundedBorder)
                         HStack(spacing: 6) {
-                            caption("Recommandé : une clé restreinte avec la seule permission « Subscriptions : lecture ».")
+                            caption("Recommandé : une clé restreinte en lecture seule (« Subscriptions » + « Balance ») — la même clé sert aux deux connecteurs Stripe.")
                             Spacer()
                             // Ouvre le Dashboard sur la création d'une clé restreinte pré-remplie.
-                            Link(destination: URL(string: "https://dashboard.stripe.com/apikeys/create?name=Lumo&permissions%5B%5D=rak_subscription_read")!) {
+                            Link(destination: URL(string: "https://dashboard.stripe.com/apikeys/create?name=Lumo&permissions%5B%5D=rak_subscription_read&permissions%5B%5D=rak_balance_read")!) {
                                 Label("Créer la clé", systemImage: "arrow.up.right.square").font(.caption2)
                             }
                             .foregroundStyle(Theme.accent)
-                            .help("Ouvre Stripe avec le formulaire pré-rempli : nom « Lumo », permission Subscriptions en lecture")
+                            .help("Ouvre Stripe avec le formulaire pré-rempli : nom « Lumo », permissions Subscriptions et Balance en lecture")
                         }
                     }
                 }

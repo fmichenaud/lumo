@@ -127,6 +127,7 @@ struct DeviceAppsView: View {
         switch c.special {
         case .claudeQuota: return "sparkles"
         case .stripeMRR:   return "creditcard"
+        case .stripeTotal: return "banknote"
         case nil:          return "antenna.radiowaves.left.and.right"
         }
     }

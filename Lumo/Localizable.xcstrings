@@ -800,6 +800,7 @@
       }
     },
     "Clé API Stripe": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1326,6 +1327,16 @@
         }
       }
     },
+    "Encaissements nets cumulés (remboursements et frais Stripe déduits), reconstitués depuis l'historique des transactions.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumulative net revenue (refunds and Stripe fees deducted), rebuilt from the transaction history."
+          }
+        }
+      }
+    },
     "Enregistrer": {
       "extractionState": "stale",
       "localizations": {
@@ -1509,6 +1520,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fun"
+          }
+        }
+      }
+    },
+    "Gain total Stripe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stripe total revenue"
           }
         }
       }
@@ -1789,6 +1810,7 @@
       }
     },
     "Lit le token de Claude Code dans le Trousseau (macOS demandera d'autoriser l'accès une fois — choisis « Toujours autoriser »). Affiche le quota session (5 h) et semaine, avec une couleur selon le niveau.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1854,6 +1876,7 @@
       }
     },
     "MRR calculé en agrégeant tes abonnements actifs, normalisés au mois.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2160,6 +2183,16 @@
         }
       }
     },
+    "Ouvre Stripe avec le formulaire pré-rempli : nom « Lumo », permissions Subscriptions et Balance en lecture": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens Stripe with the form pre-filled: name “Lumo”, Subscriptions and Balance read permissions"
+          }
+        }
+      }
+    },
     "Ouvre l'espace développeur et crée une app (gratuit).": {
       "extractionState": "stale",
       "localizations": {
@@ -2211,6 +2244,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Start from a blank page"
+          }
+        }
+      }
+    },
+    "Permission manquante sur la clé — utilise le lien « Créer la clé » de l'éditeur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Missing permission on the key — use the editor's “Create the key” link"
           }
         }
       }
@@ -2398,6 +2441,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recommended: a restricted key with only the “Subscriptions: read” permission."
+          }
+        }
+      }
+    },
+    "Recommandé : une clé restreinte en lecture seule (« Subscriptions » + « Balance ») — la même clé sert aux deux connecteurs Stripe.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recommended: a read-only restricted key (“Subscriptions” + “Balance”) — the same key works for both Stripe connectors."
           }
         }
       }

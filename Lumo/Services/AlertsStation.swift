@@ -105,6 +105,7 @@ final class AlertsStation: ObservableObject {
         case .claudeSession:  return connectorsStation?.specialMetrics["claude.session"]
         case .claudeWeekly:   return connectorsStation?.specialMetrics["claude.weekly"]
         case .stripeMRR:      return connectorsStation?.specialMetrics["stripe.mrr"]
+        case .stripeTotal:    return connectorsStation?.specialMetrics["stripe.total"]
         case .connector:
             guard let id = rule.connectorID,
                   let text = connectorsStation?.lastValue[id] else { return nil }

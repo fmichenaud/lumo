@@ -149,6 +149,16 @@ enum StripeMRRSource {
         return try JSONDecoder().decode(SubscriptionsPage.self, from: data)
     }
 
+    /// En-têtes / erreurs HTTP communs aux appels Stripe.
+    static func check(_ resp: URLResponse) throws {
+        guard let http = resp as? HTTPURLResponse, !(200..<300).contains(http.statusCode) else { return }
+        switch http.statusCode {
+        case 401: throw SourceError(message: String(localized: "Clé API invalide"))
+        case 403: throw SourceError(message: String(localized: "Permission manquante sur la clé — utilise le lien « Créer la clé » de l'éditeur"))
+        default:  throw SourceError(message: "HTTP \(http.statusCode)")
+        }
+    }
+
     /// Montant mensuel en cents d'une ligne d'abonnement.
     static func monthlyCents(unitAmount: Int, quantity: Int, interval: String, intervalCount: Int) -> Double {
         let total = Double(unitAmount) * Double(max(1, quantity))
@@ -174,5 +184,62 @@ enum StripeMRRSource {
         case "":    return ""
         default:    return " " + currency.uppercased()
         }
+    }
+}
+
+/// Gain total Stripe — encaissements nets cumulés, reconstitués depuis /v1/balance_transactions
+/// (montants `net` : remboursements négatifs inclus, frais Stripe déduits).
+enum StripeTotalSource {
+    private struct TransactionsPage: Decodable {
+        struct Transaction: Decodable {
+            let id: String
+            let net: Int
+            let currency: String
+            let type: String
+        }
+        let data: [Transaction]
+        let has_more: Bool
+    }
+
+    /// Types comptés dans le gain (ventes et leurs remboursements) — les virements (payout),
+    /// frais divers et ajustements n'en font pas partie.
+    static func countsTowardTotal(type: String) -> Bool {
+        ["charge", "payment", "refund", "payment_refund", "payment_failure_refund"].contains(type)
+    }
+
+    /// (texte affichable, total en unités de devise). Parcourt jusqu'à 50 pages de 100
+    /// transactions ; au-delà le total est partiel et affiché préfixé "≥".
+    static func fetch(apiKey: String) async throws -> (value: String, total: Double) {
+        let key = apiKey.trimmingCharacters(in: .whitespaces)
+        guard !key.isEmpty else {
+            throw StripeMRRSource.SourceError(message: String(localized: "Clé API manquante"))
+        }
+        var totalCents = 0.0
+        var currency: String?
+        var startingAfter: String?
+        var truncated = false
+        for page in 0..<50 {
+            var components = URLComponents(string: "https://api.stripe.com/v1/balance_transactions")!
+            components.queryItems = [URLQueryItem(name: "limit", value: "100")]
+            if let startingAfter {
+                components.queryItems?.append(URLQueryItem(name: "starting_after", value: startingAfter))
+            }
+            var req = URLRequest(url: components.url!)
+            req.timeoutInterval = 15
+            req.setValue("Bearer \(key)", forHTTPHeaderField: "Authorization")
+            let (data, resp) = try await URLSession.shared.data(for: req)
+            try StripeMRRSource.check(resp)
+            let decoded = try JSONDecoder().decode(TransactionsPage.self, from: data)
+            for tx in decoded.data where countsTowardTotal(type: tx.type) {
+                currency = currency ?? tx.currency
+                totalCents += Double(tx.net)
+            }
+            guard decoded.has_more, let last = decoded.data.last else { break }
+            startingAfter = last.id
+            truncated = page == 49
+        }
+        let total = totalCents / 100
+        let text = (truncated ? "≥ " : "") + StripeMRRSource.format(total) + StripeMRRSource.symbol(for: currency ?? "")
+        return (text, total)
     }
 }
