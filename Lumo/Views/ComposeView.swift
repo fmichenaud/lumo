@@ -16,7 +16,6 @@ struct ComposeView: View {
     @State private var sending = false
     @State private var showIconImport = false
     @State private var saveApp = true
-    @State private var sendingSceneID: UUID?
 
     private var client: AwtrixClient { store.client(for: device) }
 
@@ -39,15 +38,17 @@ struct ComposeView: View {
                 }
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Icône").font(.caption).foregroundStyle(Theme.textSecondary)
-                    HStack(spacing: 6) {
+                    HStack(spacing: 8) {
                         IconThumbnail(host: device.host, iconID: iconID)
                         TextField("ID", text: $iconID)
                             .textFieldStyle(.roundedBorder)
                             .frame(width: 72)
                         Button { showIconImport = true } label: {
-                            Image(systemName: "square.and.arrow.down")
+                            Label("Galerie", systemImage: "photo.on.rectangle.angled")
                         }
-                        .help("Parcourir la galerie / importer une icône")
+                        .buttonStyle(PillButtonStyle(prominent: false))
+                        .controlSize(.small)
+                        .help("Parcourir la galerie LaMetric ou importer un fichier")
                     }
                 }
             }
@@ -61,13 +62,18 @@ struct ComposeView: View {
 
             Divider().overlay(Theme.stroke)
 
-            HStack(spacing: 12) {
-                TextField("Nom de l'app", text: $appName)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(width: 150)
+            HStack(alignment: .bottom, spacing: 12) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Nom de l'app").font(.caption).foregroundStyle(Theme.textSecondary)
+                    TextField("lumo", text: $appName)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 150)
+                }
+                .help("Nom de l'app dans la rotation — sert aussi de nom de scène")
 
                 Toggle(isOn: $saveApp) { Text("Garder après reboot").font(.caption) }
                     .help("Sauvegarde l'app dans la mémoire du device pour qu'elle survive au redémarrage")
+                    .padding(.bottom, 4)
 
                 Spacer()
 
@@ -88,10 +94,6 @@ struct ComposeView: View {
                 .disabled(text.isEmpty && iconID.isEmpty)
             }
 
-            if !sceneStore.scenes.isEmpty {
-                Divider().overlay(Theme.stroke)
-                scenesBlock
-            }
         }
         .card()
         .sheet(isPresented: $showIconImport) {
@@ -104,64 +106,11 @@ struct ComposeView: View {
 
     // MARK: - Scènes
 
-    private var scenesBlock: some View {
-        VStack(spacing: 0) {
-            Text(String(localized: "Mes scènes").uppercased())
-                .font(.caption.weight(.semibold)).tracking(0.8)
-                .foregroundStyle(Theme.textSecondary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 10)
-
-            ForEach(Array(sceneStore.scenes.enumerated()), id: \.element.id) { index, scene in
-                sceneRow(scene)
-                if index < sceneStore.scenes.count - 1 {
-                    Divider().overlay(Theme.stroke).padding(.vertical, 9)
-                }
-            }
-        }
-    }
-
-    private func sceneRow(_ scene: DisplayScene) -> some View {
-        HStack(spacing: 12) {
-            IconThumbnail(host: device.host, iconID: scene.icon)
-            VStack(alignment: .leading, spacing: 1) {
-                Text(scene.name).foregroundStyle(Theme.textPrimary)
-                Text(scene.text.isEmpty ? "—" : scene.text)
-                    .font(.caption).foregroundStyle(Theme.textSecondary)
-            }
-            RoundedRectangle(cornerRadius: 4)
-                .fill(Color(hex: scene.colorHex)).frame(width: 14, height: 14)
-            Spacer()
-
-            Button { Task { await send(scene) } } label: {
-                if sendingSceneID == scene.id { ProgressView().controlSize(.small) }
-                else { Label("Envoyer", systemImage: "paperplane.fill") }
-            }
-            .buttonStyle(PillButtonStyle(prominent: false))
-            .controlSize(.small)
-
-            Button { sceneStore.remove(scene) } label: { Image(systemName: "trash") }
-                .buttonStyle(.plain)
-                .foregroundStyle(.red.opacity(0.85))
-        }
-    }
-
     private func saveScene() {
         let scene = DisplayScene(name: appName.isEmpty ? "Scène" : appName,
                                  text: text, colorHex: color.hexString, icon: iconID)
         sceneStore.add(scene)
         onResult("Scène « \(scene.name) » enregistrée")
-    }
-
-    private func send(_ scene: DisplayScene) async {
-        sendingSceneID = scene.id; defer { sendingSceneID = nil }
-        do {
-            try await client.upsertCustomApp(name: scene.appName, payload: scene.payload())
-            try await client.switchApp(name: scene.appName)
-            onResult("Scène « \(scene.name) » envoyée\(scene.persist ? " (persistante)" : "")")
-        } catch {
-            onResult("Échec de l'envoi")
-        }
     }
 
     private func payload() -> PushPayload {

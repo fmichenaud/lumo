@@ -51,11 +51,7 @@ struct DeviceDetailView: View {
             case .screen:
                 DeviceScreenView(device: device, onResult: { banner = $0 })
             case .studio:
-                // Fusion réelle en onglets à l'étape « Studio » de la refonte.
-                VStack(alignment: .leading, spacing: 14) {
-                    ComposeView(device: device, onResult: { banner = $0 })
-                    DrawView(device: device, onResult: { banner = $0 })
-                }
+                StudioView(device: device, onResult: { banner = $0 })
             case .moments:
                 AlertsView(device: device, onResult: { banner = $0 })
             case .device:
