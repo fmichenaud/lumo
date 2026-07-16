@@ -5,7 +5,6 @@ struct DeviceDetailView: View {
     let device: Device
     @EnvironmentObject var store: DeviceStore
     @EnvironmentObject var nightMode: NightModeStation
-    @EnvironmentObject var gateway: NotificationGateway
 
     @State private var stats: AwtrixStats?
     @State private var brightness: Double = 80
@@ -13,9 +12,6 @@ struct DeviceDetailView: View {
     @State private var powerOn = true
     @State private var banner: String?
     @State private var moodColor = Theme.accent
-    @State private var gatewayPortText = ""
-    @State private var gatewayHelpExpanded = false
-    @FocusState private var gatewayPortFocused: Bool
 
     private var client: AwtrixClient { store.client(for: device) }
 
@@ -53,7 +49,7 @@ struct DeviceDetailView: View {
             case .studio:
                 StudioView(device: device, onResult: { banner = $0 })
             case .moments:
-                AlertsView(device: device, onResult: { banner = $0 })
+                MomentsView(device: device, onResult: { banner = $0 })
             case .device:
                 controlsCard
             }
@@ -116,51 +112,8 @@ struct DeviceDetailView: View {
                 .buttonStyle(PillButtonStyle(prominent: false))
             }
 
-            rowDivider
-            sectionTitle("Passerelle")
-            Text("Reçois des messages d'autres apps (Raccourcis, scripts, curl…) et affiche-les sur la matrice. La passerelle n'écoute que sur cet ordinateur (127.0.0.1).")
-                .font(.caption).foregroundStyle(Theme.textSecondary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 10)
-
-            ControlRow(icon: "tray.and.arrow.down.fill", title: "Passerelle de notifications",
-                       subtitle: gatewaySubtitle) {
-                Toggle("", isOn: Binding(get: { gateway.enabled }, set: { gateway.setEnabled($0) }))
-                    .labelsHidden().tint(Theme.accent)
-            }
-            rowDivider
-
-            ControlRow(icon: "number.circle.fill", title: "Port d'écoute",
-                       subtitle: "Appliqué à la validation (Entrée) ou en quittant le champ") {
-                TextField("8787", text: $gatewayPortText)
-                    .textFieldStyle(.roundedBorder)
-                    .multilineTextAlignment(.trailing)
-                    .frame(width: 76)
-                    .focused($gatewayPortFocused)
-                    .onSubmit { applyGatewayPort() }
-                    .onChange(of: gatewayPortFocused) { _, focused in
-                        if !focused { applyGatewayPort() }
-                    }
-            }
-
-            DisclosureGroup(isExpanded: $gatewayHelpExpanded) {
-                VStack(alignment: .leading, spacing: 10) {
-                    gatewayExample("Depuis un terminal ou un script :",
-                                   "curl -X POST http://127.0.0.1:\(gateway.port)/notify -d '{\"text\":\"Coucou\"}'")
-                    gatewayExample("Via le schéma d'URL, depuis n'importe où dans macOS :",
-                                   "open \"lumo://notify?text=Coucou&color=%23FF5555\"")
-                    gatewayExample("Dans Raccourcis : action « Obtenir le contenu de l'URL » (méthode POST, corps JSON) vers",
-                                   "http://127.0.0.1:\(gateway.port)/notify")
-                }
-                .padding(.top, 8)
-            } label: {
-                Label("Exemples d'utilisation", systemImage: "questionmark.circle")
-                    .font(.callout).foregroundStyle(Theme.textSecondary)
-            }
-            .padding(.top, 12)
         }
         .card()
-        .onAppear { gatewayPortText = String(gateway.port) }
         .onChange(of: powerOn) { _, value in
             Task { try? await client.setPower(value); banner = value ? "Écran allumé" : "Écran éteint" }
         }
@@ -234,41 +187,6 @@ struct DeviceDetailView: View {
                 set((comps.hour ?? 0) * 60 + (comps.minute ?? 0))
             }
         )
-    }
-
-    // MARK: - Passerelle
-
-    private var gatewaySubtitle: String {
-        if !gateway.enabled { return "Désactivée" }
-        if let error = gateway.lastError { return "Erreur : \(error)" }
-        let count: String
-        switch gateway.receivedCount {
-        case 0: count = "aucun message reçu"
-        case 1: count = "1 message reçu"
-        default: count = "\(gateway.receivedCount) messages reçus"
-        }
-        return "En écoute sur le port \(gateway.port) · \(count)"
-    }
-
-    private func applyGatewayPort() {
-        if let value = Int(gatewayPortText.trimmingCharacters(in: .whitespaces)) {
-            gateway.setPort(value)
-        }
-        gatewayPortText = String(gateway.port)
-    }
-
-    private func gatewayExample(_ caption: String, _ code: String) -> some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text(LocalizedStringKey(caption))
-                .font(.caption).foregroundStyle(Theme.textSecondary)
-            Text(code)
-                .font(.system(.caption, design: .monospaced))
-                .textSelection(.enabled)
-                .padding(.horizontal, 8).padding(.vertical, 5)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.black.opacity(0.25), in: RoundedRectangle(cornerRadius: 6))
-                .foregroundStyle(Theme.textPrimary)
-        }
     }
 
     private func sectionTitle(_ text: String) -> some View {

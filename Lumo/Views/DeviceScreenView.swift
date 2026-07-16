@@ -12,7 +12,6 @@ struct DeviceScreenView: View {
     @EnvironmentObject var connectors: ConnectorsStation
     @EnvironmentObject var weatherStation: WeatherStation
     @EnvironmentObject var calendarStation: CalendarStation
-    @EnvironmentObject var pomodoro: PomodoroStation
     var onResult: (String) -> Void = { _ in }
 
     // Rotation (loop du device), rafraîchie en continu.
@@ -35,7 +34,6 @@ struct DeviceScreenView: View {
     @State private var showWeatherConfig = false
     @State private var showCryptoConfig = false
     @State private var showCalendarConfig = false
-    @State private var showTimerSheet = false
     @State private var editingCustom: CustomAppSelection?
 
     private struct CustomAppSelection: Identifiable {
@@ -90,9 +88,6 @@ struct DeviceScreenView: View {
         }
         .sheet(isPresented: $showCalendarConfig) {
             CalendarConfigSheet().environmentObject(calendarStation)
-        }
-        .sheet(isPresented: $showTimerSheet) {
-            PomodoroSheet().environmentObject(pomodoro)
         }
         .sheet(item: $editingCustom) { selection in
             CustomAppSheet(name: selection.name,
@@ -322,37 +317,8 @@ struct DeviceScreenView: View {
                 .opacity(0.8)
             }
 
-            Divider().overlay(Theme.stroke).padding(.vertical, 4)
-            timerRow
         }
         .card()
-    }
-
-    /// Minuteur : outil ponctuel, hébergé ici en attendant la section « Moments ».
-    private var timerRow: some View {
-        HStack(spacing: 12) {
-            iconBadge("timer", active: pomodoro.isActive)
-            VStack(alignment: .leading, spacing: 1) {
-                Text("Minuteur").foregroundStyle(Theme.textPrimary)
-                Text(pomodoro.statusText)
-                    .font(.caption2.monospacedDigit())
-                    .foregroundStyle(pomodoro.isActive ? Theme.accent : Theme.textSecondary)
-            }
-            Spacer()
-            if pomodoro.isActive {
-                Button {
-                    if pomodoro.isRunning { pomodoro.pause() } else { pomodoro.resume() }
-                } label: {
-                    Image(systemName: pomodoro.isRunning ? "pause.fill" : "play.fill")
-                }
-                .buttonStyle(.plain).foregroundStyle(Theme.accent)
-                Button { pomodoro.stop() } label: { Image(systemName: "stop.fill") }
-                    .buttonStyle(.plain).foregroundStyle(.red.opacity(0.85))
-            }
-            editButton { showTimerSheet = true }
-        }
-        .contentShape(Rectangle())
-        .onTapGesture { showTimerSheet = true }
     }
 
     private var addRow: some View {
