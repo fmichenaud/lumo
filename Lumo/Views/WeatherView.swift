@@ -15,32 +15,21 @@ struct WeatherConfigSheet: View {
     @State private var sending = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            header
-            searchBar
-            if !results.isEmpty { resultsList }
-            if weatherStation.hasLocation { currentBlock }
-            Spacer(minLength: 0)
-        }
-        .padding(22)
-        .frame(width: 480, height: 360)
-        .background(Theme.background)
-        .task { if weatherStation.hasLocation && weatherStation.weather == nil { await weatherStation.refresh() } }
-    }
-
-    private var header: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Météo").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
-                Text("Choisis ta ville — l'afficheur se met à jour toutes les 15 min quand l'app est activée.")
-                    .font(.caption).foregroundStyle(Theme.textSecondary)
+        SheetScaffold("Météo",
+                      subtitle: "Choisis ta ville — l'afficheur se met à jour toutes les 15 min quand l'app est activée.",
+                      height: 380,
+                      live: true,
+                      content: {
+            VStack(alignment: .leading, spacing: 0) {
+                searchBar
+                if !results.isEmpty { resultsList }
+                if weatherStation.hasLocation { currentBlock }
+                Spacer(minLength: 0)
             }
-            Spacer()
+        }, accessory: {
             if busy { ProgressView().controlSize(.small) }
-            Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title2) }
-                .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
-        }
-        .padding(.bottom, 14)
+        })
+        .task { if weatherStation.hasLocation && weatherStation.weather == nil { await weatherStation.refresh() } }
     }
 
     private var searchBar: some View {

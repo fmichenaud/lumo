@@ -11,14 +11,8 @@ struct AddDeviceSheet: View {
     @State private var notAwtrix = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Ajouter un afficheur")
-                .font(.title3.weight(.semibold))
-
-            Text("Saisis l'adresse IP de ton AWTRIX (visible dans l'app Ulanzi ou ta box).")
-                .font(.callout)
-                .foregroundStyle(Theme.textSecondary)
-
+        SheetScaffold("Ajouter un afficheur",
+                      subtitle: "Saisis l'adresse IP de ton AWTRIX (visible dans l'app Ulanzi ou ta box).") {
             TextField("192.168.1.41", text: $host)
                 .textFieldStyle(.roundedBorder)
                 .onSubmit { Task { await connect() } }
@@ -41,19 +35,17 @@ struct AddDeviceSheet: View {
             HStack {
                 Spacer()
                 Button("Annuler") { dismiss() }
+                    .buttonStyle(PillButtonStyle(prominent: false))
                 Button {
                     Task { await connect() }
                 } label: {
                     if isChecking { ProgressView().controlSize(.small) }
                     else { Text("Connecter") }
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(Theme.accent)
+                .buttonStyle(PillButtonStyle())
                 .disabled(host.isEmpty || isChecking)
             }
         }
-        .padding(22)
-        .frame(width: 420)
     }
 
     private func connect() async {

@@ -2,21 +2,26 @@
   "sourceLanguage": "fr",
   "strings": {
     "": {
-      "shouldTranslate": false
-    },
-    "%@ %@%@": {
-      "shouldTranslate": false
-    },
-    "%@ restantes": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ left"
+            "value": ""
           }
         }
-      }
+      },
+      "shouldTranslate": false
+    },
+    "%@ %@%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %@%@"
+          }
+        }
+      },
+      "shouldTranslate": false
     },
     "%@ à %@": {
       "localizations": {
@@ -35,7 +40,57 @@
       }
     },
     "%lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
+        }
+      },
       "shouldTranslate": false
+    },
+    "%lld h %lld min": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld h %lld min"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld h %2$lld min"
+          }
+        }
+      }
+    },
+    "%lld j %lld h": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld d %lld h"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld j %2$lld h"
+          }
+        }
+      }
+    },
+    "%lld messages reçus": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld messages received"
+          }
+        }
+      }
     },
     "%lld min": {
       "localizations": {
@@ -47,60 +102,58 @@
         }
       }
     },
-    "%lld s": {
-      "shouldTranslate": false
+    "%lld s / app": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s / app"
+          }
+        }
+      }
     },
     "%lld%%": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld%%"
+          }
+        }
+      },
       "shouldTranslate": false
     },
+    "1 message reçu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 message received"
+          }
+        }
+      }
+    },
     "192.168.1.41": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "192.168.1.41"
+          }
+        }
+      },
       "shouldTranslate": false
     },
     "8787": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "8787"
+          }
+        }
+      },
       "shouldTranslate": false
-    },
-    "APERÇU LIVE": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "LIVE PREVIEW"
-          }
-        }
-      }
-    },
-    "API personnalisée": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Custom API"
-          }
-        }
-      }
-    },
-    "AUTRES APPS": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OTHER APPS"
-          }
-        }
-      }
-    },
-    "Abonnés GitHub": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "GitHub followers"
-          }
-        }
-      }
     },
     "Accès refusé — Réglages Système → Confidentialité → Calendriers": {
       "localizations": {
@@ -112,45 +165,12 @@
         }
       }
     },
-    "Actif en ce moment": {
-      "extractionState": "stale",
+    "Active « Calendrier » dans la section Écran pour l'ajouter à la rotation.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Active right now"
-          }
-        }
-      }
-    },
-    "Action": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Action"
-          }
-        }
-      }
-    },
-    "Actions manuelles (notification ponctuelle, LED)": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manual actions (one-off notification, LEDs)"
-          }
-        }
-      }
-    },
-    "Active": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Active"
+            "value": "Turn on “Calendar” in the Screen section to add it to the rotation."
           }
         }
       }
@@ -201,34 +221,12 @@
         }
       }
     },
-    "Affichage normal restauré": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Normal display restored"
-          }
-        }
-      }
-    },
     "Affiche brièvement un message sur l'afficheur AWTRIX, comme une notification.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Briefly shows a message on the AWTRIX display, like a notification."
-          }
-        }
-      }
-    },
-    "Affiche des graphiques, le cours d'une crypto ou les stats de ton Mac.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show charts, a crypto price, or your Mac's stats."
           }
         }
       }
@@ -243,45 +241,22 @@
         }
       }
     },
-    "Affiche l'utilisation de tes limites — session (5 h) et semaine — mise à jour toutes les 60 s.": {
-      "extractionState": "stale",
+    "Afficher ${message} en continu": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Shows how much of your limits you've used — session (5 h) and week — refreshed every 60 s."
+            "value": "Show ${message} continuously"
           }
         }
       }
     },
-    "Affiche la météo de ta ville sur l'écran, avec mise à jour automatique possible.": {
-      "extractionState": "stale",
+    "Afficher maintenant": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Show your city's weather on the screen, with optional auto-refresh."
-          }
-        }
-      }
-    },
-    "Affiche un message par-dessus l'écran quelques secondes, puis disparaît. Pour une alerte ponctuelle.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Shows a message over the screen for a few seconds, then disappears. For a one-off alert."
-          }
-        }
-      }
-    },
-    "Afficher": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show"
+            "value": "Show now"
           }
         }
       }
@@ -306,6 +281,16 @@
         }
       }
     },
+    "Agrandir l'aperçu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expand preview"
+          }
+        }
+      }
+    },
     "Ajoute le texte comme app permanente dans la rotation de l'afficheur et l'affiche immédiatement.": {
       "localizations": {
         "en": {
@@ -322,16 +307,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Add by IP"
-          }
-        }
-      }
-    },
-    "Ajouter un afficheur": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add a display"
           }
         }
       }
@@ -366,17 +341,6 @@
         }
       }
     },
-    "Ajuste selon le capteur de lumière ambiante": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Adjusts to the ambient light sensor"
-          }
-        }
-      }
-    },
     "Alerte en cours": {
       "localizations": {
         "en": {
@@ -393,38 +357,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Scheduled alert"
-          }
-        }
-      }
-    },
-    "Alerte testée": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alert tested"
-          }
-        }
-      }
-    },
-    "Alertes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alerts"
-          }
-        }
-      }
-    },
-    "Allume la dalle si elle est éteinte": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turns the panel on if it's off"
           }
         }
       }
@@ -459,83 +391,6 @@
         }
       }
     },
-    "Allumé": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "On"
-          }
-        }
-      }
-    },
-    "Altitude ISS": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ISS altitude"
-          }
-        }
-      }
-    },
-    "Ambiance": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mood light"
-          }
-        }
-      }
-    },
-    "Ambiance allumée": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mood light on"
-          }
-        }
-      }
-    },
-    "Anecdote féline": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Feline trivia"
-          }
-        }
-      }
-    },
-    "Animation derrière le texte": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Animation behind the text"
-          }
-        }
-      }
-    },
-    "Animation entre deux apps": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Animation between two apps"
-          }
-        }
-      }
-    },
     "Annuler": {
       "localizations": {
         "en": {
@@ -546,13 +401,12 @@
         }
       }
     },
-    "App personnalisée": {
-      "extractionState": "stale",
+    "App personnalisée — créée dans Studio ou via l'API": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Custom app"
+            "value": "Custom app — created in Studio or via the API"
           }
         }
       }
@@ -573,49 +427,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Device"
-          }
-        }
-      }
-    },
-    "Apparence": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Appearance"
-          }
-        }
-      }
-    },
-    "Apps": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apps"
-          }
-        }
-      }
-    },
-    "Apps de l'afficheur": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Built-in apps"
-          }
-        }
-      }
-    },
-    "Apps intégrées": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Built-in apps"
           }
         }
       }
@@ -660,28 +471,6 @@
         }
       }
     },
-    "Aucun appareil joignable à cette adresse.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No device reachable at this address."
-          }
-        }
-      }
-    },
-    "Aucun connecteur": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No connector"
-          }
-        }
-      }
-    },
     "Aucun jour coché = tous les jours.": {
       "localizations": {
         "en": {
@@ -722,16 +511,6 @@
         }
       }
     },
-    "Aucune app dans la rotation.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No apps in the rotation."
-          }
-        }
-      }
-    },
     "Aucune icône trouvée": {
       "localizations": {
         "en": {
@@ -752,46 +531,22 @@
         }
       }
     },
-    "Aucune ville trouvée": {
-      "extractionState": "stale",
+    "Autorise Lumo dans Réglages Système → Confidentialité → Calendriers.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No city found"
+            "value": "Allow Lumo in System Settings → Privacy → Calendars."
           }
         }
       }
     },
-    "Authentification": {
-      "extractionState": "stale",
+    "Basculer sur l'app ${appName}": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Authentication"
-          }
-        }
-      }
-    },
-    "Auto": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
-          }
-        }
-      }
-    },
-    "Autres apps": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Other apps"
+            "value": "Switch to the ${appName} app"
           }
         }
       }
@@ -807,7 +562,7 @@
       }
     },
     "Batterie": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -837,39 +592,6 @@
         }
       }
     },
-    "Blague": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Joke"
-          }
-        }
-      }
-    },
-    "Branche des sources de données — ton Mac, les cryptos ou n'importe quelle API — et affiche-les en direct.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plug in data sources — your Mac, crypto prices or any API — and show them live."
-          }
-        }
-      }
-    },
-    "Branche ta propre API ou une API externe (cours, capteurs, compteurs…).": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connect your own API or a third-party one (prices, sensors, counters…)."
-          }
-        }
-      }
-    },
     "Branche ton afficheur AWTRIX sur le même réseau,\nLumo le trouve automatiquement.": {
       "localizations": {
         "en": {
@@ -880,23 +602,12 @@
         }
       }
     },
-    "CE QUI TOURNE À L'ÉCRAN": {
+    "Brancher un service externe (compte ou clé API)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "WHAT'S ON SCREEN"
-          }
-        }
-      }
-    },
-    "CENTRE DE CONTRÔLE": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CONTROL CENTER"
+            "value": "Connect an external service (account or API key)"
           }
         }
       }
@@ -912,7 +623,6 @@
       }
     },
     "Calendrier": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -922,13 +632,13 @@
         }
       }
     },
-    "Ce qui se passe pendant la nuit": {
-      "extractionState": "stale",
+    "Capteur interne de l'afficheur": {
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "What happens during the night"
+            "value": "The display's built-in sensor"
           }
         }
       }
@@ -939,49 +649,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "This display must be running AWTRIX — see how to install it"
-          }
-        }
-      }
-    },
-    "Cet appareil répond, mais ne semble pas être sous AWTRIX.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This device responds but doesn't seem to be running AWTRIX."
-          }
-        }
-      }
-    },
-    "Charge processeur · mise à jour toutes les 5 s": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CPU load · updated every 5 s"
-          }
-        }
-      }
-    },
-    "Chemin JSON": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "JSON path"
-          }
-        }
-      }
-    },
-    "Cherche, clique : l'icône part directement sur l'afficheur.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Search, click: the icon goes straight to the display."
           }
         }
       }
@@ -1016,32 +683,12 @@
         }
       }
     },
-    "Choisis ta ville — l'afficheur se met à jour toutes les 15 min quand l'app est activée.": {
+    "Choisis une ville pour commencer (✎)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pick your city — the display refreshes every 15 min while the app is on."
-          }
-        }
-      }
-    },
-    "Choisis un modèle — tout reste ajustable ensuite.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pick a template — everything stays adjustable afterwards."
-          }
-        }
-      }
-    },
-    "Choisis une ville pour commencer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pick a city to get started"
+            "value": "Choose a city to get started (✎)"
           }
         }
       }
@@ -1052,50 +699,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Client ID"
-          }
-        }
-      }
-    },
-    "Client Secret (optionnel)": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Client Secret (optional)"
-          }
-        }
-      }
-    },
-    "Clé API": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "API key"
-          }
-        }
-      }
-    },
-    "Clé API (en-tête)": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "API key (header)"
-          }
-        }
-      }
-    },
-    "Clé API Stripe": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stripe API key"
           }
         }
       }
@@ -1140,27 +743,6 @@
         }
       }
     },
-    "Colle cette URL de redirection dans l'app créée :": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Paste this redirect URI in the app you created:"
-          }
-        }
-      }
-    },
-    "Composer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Compose"
-          }
-        }
-      }
-    },
     "Composer un affichage": {
       "localizations": {
         "en": {
@@ -1171,34 +753,12 @@
         }
       }
     },
-    "Compte à rebours affiché sur la matrice, sonnerie à zéro.": {
+    "Configurer": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Countdown shown on the matrix, chime at zero."
-          }
-        }
-      }
-    },
-    "Condition": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Condition"
-          }
-        }
-      }
-    },
-    "Connecte n'importe quelle API (la tienne ou une externe) et affiche-la en direct.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connect any API (yours or third-party) and display it live."
+            "value": "Configure"
           }
         }
       }
@@ -1209,17 +769,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Connect your %@ account in one click."
-          }
-        }
-      }
-    },
-    "Connecte ton compte en un clic. Un « Client ID » (gratuit, fourni par le service) peut être requis.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connect your account in one click. A “Client ID” (free, provided by the service) may be required."
           }
         }
       }
@@ -1244,17 +793,6 @@
         }
       }
     },
-    "Connecteurs API": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "API connectors"
-          }
-        }
-      }
-    },
     "Connecté": {
       "localizations": {
         "en": {
@@ -1271,39 +809,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Connect to %@"
-          }
-        }
-      }
-    },
-    "Conseil du jour": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Advice of the day"
-          }
-        }
-      }
-    },
-    "Contrôles": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Controls"
-          }
-        }
-      }
-    },
-    "Copie le « Client ID » et colle-le ci-dessous :": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Copy the “Client ID” and paste it below:"
           }
         }
       }
@@ -1338,89 +843,12 @@
         }
       }
     },
-    "Cours ADA en euros": {
-      "extractionState": "stale",
+    "Cours crypto (CoinGecko)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "ADA price in euros"
-          }
-        }
-      }
-    },
-    "Cours BTC en euros": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "BTC price in euros"
-          }
-        }
-      }
-    },
-    "Cours DOGE en euros": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "DOGE price in euros"
-          }
-        }
-      }
-    },
-    "Cours ETH en euros": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ETH price in euros"
-          }
-        }
-      }
-    },
-    "Cours SOL en euros": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "SOL price in euros"
-          }
-        }
-      }
-    },
-    "Cours XRP en euros": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XRP price in euros"
-          }
-        }
-      }
-    },
-    "Cours en direct · mise à jour toutes les 60 s": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Live price · updated every 60 s"
-          }
-        }
-      }
-    },
-    "Cours mis à jour toutes les 60 s (CoinGecko).": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Price refreshed every 60 s (CoinGecko)."
+            "value": "Crypto price (CoinGecko)"
           }
         }
       }
@@ -1435,27 +863,6 @@
         }
       }
     },
-    "Crée un affichage (texte, couleur, icône) et sauvegarde tes compositions en scènes.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Create a display (text, color, icon) and save your compositions as scenes."
-          }
-        }
-      }
-    },
-    "Crée un affichage permanent (texte, couleur, icône) ajouté à la rotation de l'écran.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Create a permanent display (text, color, icon) added to the screen rotation."
-          }
-        }
-      }
-    },
     "Créer la clé": {
       "localizations": {
         "en": {
@@ -1466,35 +873,44 @@
         }
       }
     },
-    "Custom": {
-      "extractionState": "stale",
+    "Créer un affichage dans Studio": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Custom"
+            "value": "Create a display in Studio"
           }
         }
       }
     },
-    "Dad joke (en-tête Accept)": {
-      "extractionState": "stale",
+    "Dans la rotation": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dad joke (Accept header)"
+            "value": "In the rotation"
           }
         }
       }
     },
     "Date": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Date"
+          }
+        }
+      }
+    },
+    "Date du jour": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's date"
           }
         }
       }
@@ -1509,26 +925,6 @@
         }
       }
     },
-    "Dessin": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drawing"
-          }
-        }
-      }
-    },
-    "Dessine pixel par pixel et envoie ton image sur la matrice.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Draw pixel by pixel and send your image to the matrix."
-          }
-        }
-      }
-    },
     "Devise": {
       "localizations": {
         "en": {
@@ -1539,74 +935,27 @@
         }
       }
     },
-    "Devises": {
-      "extractionState": "stale",
+    "Disponibles": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Currencies"
+            "value": "Available"
           }
         }
       }
     },
-    "Donnée absente pour le moment": {
-      "extractionState": "stale",
+    "Durée d'affichage de chaque app avant de passer à la suivante": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No data right now"
-          }
-        }
-      }
-    },
-    "Donnée à afficher": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data to display"
-          }
-        }
-      }
-    },
-    "Données": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data"
-          }
-        }
-      }
-    },
-    "Downloads/semaine d'un paquet": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A package's weekly downloads"
-          }
-        }
-      }
-    },
-    "Durée par app": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time per app"
+            "value": "How long each app stays on screen before the next one"
           }
         }
       }
     },
     "Défilement auto": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1636,54 +985,28 @@
         }
       }
     },
-    "Désactivée": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Disabled"
-          }
-        }
-      }
-    },
-    "Développeur": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Developer"
-          }
-        }
-      }
-    },
     "EUR": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EUR"
+          }
+        }
+      },
       "shouldTranslate": false
     },
-    "Effet de fond": {
-      "extractionState": "stale",
+    "Effet de transition entre deux apps": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Background effect"
-          }
-        }
-      }
-    },
-    "Effet de transition": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Transition effect"
+            "value": "Transition effect between two apps"
           }
         }
       }
     },
     "En attente de données…": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1713,13 +1036,12 @@
         }
       }
     },
-    "Encaissements nets cumulés (remboursements et frais Stripe déduits), reconstitués depuis l'historique des transactions.": {
-      "extractionState": "stale",
+    "Encaissements Stripe": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cumulative net revenue (refunds and Stripe fees deducted), rebuilt from the transaction history."
+            "value": "Stripe payouts"
           }
         }
       }
@@ -1744,28 +1066,6 @@
         }
       }
     },
-    "Enregistrer et tester": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save and test"
-          }
-        }
-      }
-    },
-    "Enregistrer la scène": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save the scene"
-          }
-        }
-      }
-    },
     "Envoyer": {
       "localizations": {
         "en": {
@@ -1776,22 +1076,22 @@
         }
       }
     },
+    "Envoyer ${message} sur l'afficheur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send ${message} to the display"
+          }
+        }
+      }
+    },
     "Envoyer la météo": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Send the weather"
-          }
-        }
-      }
-    },
-    "Envoyer la notification": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send the notification"
           }
         }
       }
@@ -1836,17 +1136,6 @@
         }
       }
     },
-    "Espace": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Space"
-          }
-        }
-      }
-    },
     "Exemple : « si le CPU du Mac dépasse 90 %, affiche une alerte rouge ».": {
       "localizations": {
         "en": {
@@ -1857,33 +1146,12 @@
         }
       }
     },
-    "Exemples d'utilisation": {
+    "Fermer (Échap)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Usage examples"
-          }
-        }
-      }
-    },
-    "Fait sur les chats": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cat fact"
-          }
-        }
-      }
-    },
-    "Fermer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Close"
+            "value": "Close (Esc)"
           }
         }
       }
@@ -1898,39 +1166,6 @@
         }
       }
     },
-    "Followers d'un utilisateur": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A user's followers"
-          }
-        }
-      }
-    },
-    "Format affiché": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Displayed format"
-          }
-        }
-      }
-    },
-    "Fun": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fun"
-          }
-        }
-      }
-    },
     "Gain total Stripe": {
       "localizations": {
         "en": {
@@ -1941,12 +1176,12 @@
         }
       }
     },
-    "Galerie d'icônes": {
+    "Galerie": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Icon gallery"
+            "value": "Gallery"
           }
         }
       }
@@ -1981,16 +1216,6 @@
         }
       }
     },
-    "Glisse les apps pour changer leur ordre — appliqué immédiatement.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drag apps to change their order — applied immediately."
-          }
-        }
-      }
-    },
     "Gomme": {
       "localizations": {
         "en": {
@@ -2001,34 +1226,24 @@
         }
       }
     },
-    "Gère la rotation : affiche ou supprime les apps présentes sur le device.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manage the rotation: show or delete the apps on the device."
-          }
-        }
-      }
-    },
-    "HORS LIGNE": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OFFLINE"
-          }
-        }
-      }
-    },
     "Heure": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Time"
+          }
+        }
+      }
+    },
+    "Horloge de l'afficheur": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The display's clock"
           }
         }
       }
@@ -2044,7 +1259,7 @@
       }
     },
     "Humidité": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2065,6 +1280,14 @@
       }
     },
     "ID": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ID"
+          }
+        }
+      },
       "shouldTranslate": false
     },
     "Icône": {
@@ -2073,17 +1296,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Icon"
-          }
-        }
-      }
-    },
-    "Icône (ID)": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Icon (ID)"
           }
         }
       }
@@ -2108,67 +1320,12 @@
         }
       }
     },
-    "Inactive": {
-      "extractionState": "stale",
+    "Intégration désactivée": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Inactive"
-          }
-        }
-      }
-    },
-    "Indicateur %lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indicator %lld"
-          }
-        }
-      }
-    },
-    "Indicateurs LED": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "LED indicators"
-          }
-        }
-      }
-    },
-    "Indice de sentiment crypto": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Crypto sentiment index"
-          }
-        }
-      }
-    },
-    "Intégrations": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Integrations"
-          }
-        }
-      }
-    },
-    "L'afficheur redémarre pour appliquer les changements…": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The display is rebooting to apply the changes…"
+            "value": "Integration turned off"
           }
         }
       }
@@ -2213,88 +1370,12 @@
         }
       }
     },
-    "La « route » vers la valeur dans la réponse JSON. Laisse vide si la réponse est déjà la valeur.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The “route” to the value in the JSON response. Leave empty if the response is already the value."
-          }
-        }
-      }
-    },
-    "Lampe d'ambiance": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mood light"
-          }
-        }
-      }
-    },
-    "Les 3 petites LED sur le bord de l'écran. Pratiques comme témoins de statut (ex. rouge = alerte).": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The 3 small LEDs on the edge of the screen. Handy as status lights (e.g. red = alert)."
-          }
-        }
-      }
-    },
-    "Lit le token de Claude Code dans le Trousseau (macOS demandera d'autoriser l'accès une fois — choisis « Toujours autoriser »). Affiche le quota session (5 h) et semaine, avec une couleur selon le niveau.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reads the Claude Code token from the Keychain (macOS will ask you to allow access once — pick “Always Allow”). Shows the session (5 h) and weekly quota, colored by level."
-          }
-        }
-      }
-    },
-    "Luminosité": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brightness"
-          }
-        }
-      }
-    },
     "Luminosité (%)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Brightness (%)"
-          }
-        }
-      }
-    },
-    "Luminosité automatique": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatic brightness"
-          }
-        }
-      }
-    },
-    "Luminosité nocturne": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Night brightness"
           }
         }
       }
@@ -2320,18 +1401,15 @@
       }
     },
     "Lumo": {
-      "shouldTranslate": false
-    },
-    "Lumo lit le token de Claude Code dans le Trousseau (macOS te demandera d'autoriser l'accès une fois — choisis « Toujours autoriser »). Aucune clé à saisir.": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lumo reads the Claude Code token from the Keychain (macOS will ask you to allow access once — pick “Always Allow”). No key to paste."
+            "value": "Lumo"
           }
         }
-      }
+      },
+      "shouldTranslate": false
     },
     "MES AFFICHEURS": {
       "localizations": {
@@ -2343,45 +1421,12 @@
         }
       }
     },
-    "MES SCÈNES": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MY SCENES"
-          }
-        }
-      }
-    },
     "MRR Stripe": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Stripe MRR"
-          }
-        }
-      }
-    },
-    "MRR calculé en agrégeant tes abonnements actifs, normalisés au mois.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MRR computed by aggregating your active subscriptions, normalized to a month."
-          }
-        }
-      }
-    },
-    "Maison": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Home"
           }
         }
       }
@@ -2446,13 +1491,12 @@
         }
       }
     },
-    "Met à jour la météo sur l'afficheur toutes les 15 min (même fenêtre fermée, via la menu-bar)": {
-      "extractionState": "stale",
+    "Mettre l'écran sur ${on}": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Updates the weather on the display every 15 min (even with the window closed, via the menu bar)"
+            "value": "Set the screen to ${on}"
           }
         }
       }
@@ -2477,6 +1521,16 @@
         }
       }
     },
+    "Mis à jour automatiquement.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updated automatically."
+          }
+        }
+      }
+    },
     "Mise à jour auto (15 min)": {
       "localizations": {
         "en": {
@@ -2497,67 +1551,22 @@
         }
       }
     },
-    "Mode nuit programmé": {
-      "extractionState": "stale",
+    "Moments": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Scheduled night mode"
+            "value": "Moments"
           }
         }
       }
     },
-    "Mon API": {
-      "extractionState": "stale",
+    "Mémoire utilisée du Mac": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "My API"
-          }
-        }
-      }
-    },
-    "Mon Mac & marchés": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "My Mac & markets"
-          }
-        }
-      }
-    },
-    "MÉTÉO": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "WEATHER"
-          }
-        }
-      }
-    },
-    "Mémoire utilisée · mise à jour toutes les 5 s": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Memory used · updated every 5 s"
-          }
-        }
-      }
-    },
-    "Méthode": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Method"
+            "value": "Mac memory usage"
           }
         }
       }
@@ -2582,35 +1591,13 @@
         }
       }
     },
-    "NOUVELLE SCÈNE": {
-      "extractionState": "stale",
+    "Niveau de batterie de l'afficheur": {
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "NEW SCENE"
-          }
-        }
-      }
-    },
-    "Native": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Built-in"
-          }
-        }
-      }
-    },
-    "Nom (ex. Compteurs)": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Name (e.g. Counters)"
+            "value": "The display's battery level"
           }
         }
       }
@@ -2621,17 +1608,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "App name"
-          }
-        }
-      }
-    },
-    "Nom d'une mélodie présente sur l'appareil": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Name of a melody on the device"
           }
         }
       }
@@ -2666,13 +1642,12 @@
         }
       }
     },
-    "Nom de l'en-tête": {
-      "extractionState": "stale",
+    "Nom de l'app dans la rotation — sert aussi de nom de scène": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Header name"
+            "value": "App name in the rotation — also used as the scene name"
           }
         }
       }
@@ -2687,78 +1662,12 @@
         }
       }
     },
-    "Notification": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notification"
-          }
-        }
-      }
-    },
-    "Notification envoyée": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notification sent"
-          }
-        }
-      }
-    },
     "Notification envoyée sur l'afficheur.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Notification sent to the display."
-          }
-        }
-      }
-    },
-    "Nouveau connecteur": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New connector"
-          }
-        }
-      }
-    },
-    "Nuit": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Night"
-          }
-        }
-      }
-    },
-    "OAuth 2.0": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OAuth 2.0"
-          }
-        }
-      }
-    },
-    "OAuth 2.0 (client requis)": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OAuth 2.0 (client required)"
           }
         }
       }
@@ -2773,26 +1682,6 @@
         }
       }
     },
-    "Ordonner": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reorder"
-          }
-        }
-      }
-    },
-    "Ordre de la rotation": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rotation order"
-          }
-        }
-      }
-    },
     "Oublier ce device": {
       "localizations": {
         "en": {
@@ -2803,45 +1692,12 @@
         }
       }
     },
-    "Outils": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tools"
-          }
-        }
-      }
-    },
-    "Ouvre Stripe avec le formulaire pré-rempli : nom « Lumo », permission Subscriptions en lecture": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opens Stripe with the form pre-filled: name “Lumo”, Subscriptions read permission"
-          }
-        }
-      }
-    },
     "Ouvre Stripe avec le formulaire pré-rempli : nom « Lumo », permissions Subscriptions et Balance en lecture": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Opens Stripe with the form pre-filled: name “Lumo”, Subscriptions and Balance read permissions"
-          }
-        }
-      }
-    },
-    "Ouvre l'espace développeur et crée une app (gratuit).": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open the developer portal and create an app (free)."
           }
         }
       }
@@ -2866,43 +1722,12 @@
         }
       }
     },
-    "Parcourir la galerie / importer une icône": {
+    "Parcourir la galerie LaMetric ou importer un fichier": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Browse the gallery / import an icon"
-          }
-        }
-      }
-    },
-    "Pars d'une page vierge": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start from a blank page"
-          }
-        }
-      }
-    },
-    "Passerelle": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gateway"
-          }
-        }
-      }
-    },
-    "Passerelle de notifications": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notification gateway"
+            "value": "Browse the LaMetric gallery or import a file"
           }
         }
       }
@@ -2913,17 +1738,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pause"
-          }
-        }
-      }
-    },
-    "Pause · %@ restantes": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Break · %@ left"
           }
         }
       }
@@ -2948,17 +1762,6 @@
         }
       }
     },
-    "Peut traverser minuit": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Can span past midnight"
-          }
-        }
-      }
-    },
     "Pinceau": {
       "localizations": {
         "en": {
@@ -2969,56 +1772,42 @@
         }
       }
     },
-    "Plage horaire": {
-      "extractionState": "stale",
+    "Pixel art": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Time window"
+            "value": "Pixel art"
           }
         }
       }
     },
-    "Planifiée": {
-      "extractionState": "stale",
+    "Port d'écoute": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Scheduled"
+            "value": "Listening port"
           }
         }
       }
     },
-    "Port": {
+    "Port d'écoute et exemples d'utilisation": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Port"
+            "value": "Listening port and usage examples"
           }
         }
       }
     },
-    "Quand": {
-      "extractionState": "stale",
+    "Prochain événement de tes calendriers": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "When"
-          }
-        }
-      }
-    },
-    "Quand ça se déclenche": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "When it triggers"
+            "value": "Next event from your calendars"
           }
         }
       }
@@ -3034,7 +1823,6 @@
       }
     },
     "Quota Claude Code": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3084,17 +1872,6 @@
         }
       }
     },
-    "ROTATION ACTUELLE": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CURRENT ROTATION"
-          }
-        }
-      }
-    },
     "Rafraîchir toutes les %lld s": {
       "localizations": {
         "en": {
@@ -3111,17 +1888,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Looking for your display…"
-          }
-        }
-      }
-    },
-    "Recherche indisponible (vérifie ta connexion).": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Search unavailable (check your connection)."
           }
         }
       }
@@ -3166,56 +1932,12 @@
         }
       }
     },
-    "Recommandé : une clé restreinte (Dashboard → Développeurs → Clés API → Clé restreinte) avec la seule permission « Subscriptions : lecture ».": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recommended: a restricted key (Dashboard → Developers → API keys → Restricted key) with only the “Subscriptions: read” permission."
-          }
-        }
-      }
-    },
-    "Recommandé : une clé restreinte avec la seule permission « Subscriptions : lecture ».": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recommended: a restricted key with only the “Subscriptions: read” permission."
-          }
-        }
-      }
-    },
-    "Recommandé : une clé restreinte en lecture seule (« Subscriptions » + « Balance ») — la même clé sert aux deux connecteurs Stripe.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recommended: a read-only restricted key (“Subscriptions” + “Balance”) — the same key works for both Stripe connectors."
-          }
-        }
-      }
-    },
     "Reconnecter": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Reconnect"
-          }
-        }
-      }
-    },
-    "Redirection à autoriser côté service : lumo://oauth": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Redirect URI to allow on the service side: lumo://oauth"
           }
         }
       }
@@ -3230,55 +1952,42 @@
         }
       }
     },
-    "Reste jusqu'à appui sur le bouton central": {
-      "extractionState": "stale",
+    "Revenu mensuel Stripe": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Stays until you press the middle button"
+            "value": "Stripe monthly revenue"
           }
         }
       }
     },
-    "Revenu mensuel récurrent, calculé depuis tes abonnements actifs · mise à jour toutes les 30 min.": {
-      "extractionState": "stale",
+    "Reçois des messages d'autres apps (Raccourcis, scripts, curl…) et affiche-les sur la matrice.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Monthly recurring revenue, computed from your active subscriptions · refreshed every 30 min."
+            "value": "Receive messages from other apps (Shortcuts, scripts, curl…) and show them on the matrix."
           }
         }
       }
     },
-    "Reçois des messages d'autres apps (Raccourcis, scripts, curl…) et affiche-les sur la matrice. La passerelle n'écoute que sur cet ordinateur (127.0.0.1).": {
+    "Rien dans la rotation — active une source ci-dessous.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Receive messages from other apps (Shortcuts, scripts, curl…) and show them on the matrix. The gateway only listens on this computer (127.0.0.1)."
+            "value": "Nothing in the rotation — turn on a source below."
           }
         }
       }
     },
-    "Rotation entre les apps": {
-      "extractionState": "stale",
+    "Rotation": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rotation between apps"
-          }
-        }
-      }
-    },
-    "Règle d'alerte": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alert rule"
+            "value": "Rotation"
           }
         }
       }
@@ -3293,22 +2002,12 @@
         }
       }
     },
-    "Règles d'alerte": {
+    "Réduire l'aperçu": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alert rules"
-          }
-        }
-      }
-    },
-    "Réglages": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
+            "value": "Collapse preview"
           }
         }
       }
@@ -3323,6 +2022,16 @@
         }
       }
     },
+    "Régler": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adjust"
+          }
+        }
+      }
+    },
     "Régler la luminosité": {
       "localizations": {
         "en": {
@@ -3333,55 +2042,12 @@
         }
       }
     },
-    "Réordonner la rotation": {
+    "Régler la luminosité à ${brightness} %": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reorder the rotation"
-          }
-        }
-      }
-    },
-    "Réveiller l'écran": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wake the screen"
-          }
-        }
-      }
-    },
-    "S'applique automatiquement à l'heure choisie": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Applies automatically at the chosen time"
-          }
-        }
-      }
-    },
-    "Saisis l'adresse IP de ton AWTRIX (visible dans l'app Ulanzi ou ta box).": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enter your AWTRIX's IP address (visible in the Ulanzi app or your router)."
-          }
-        }
-      }
-    },
-    "Sans nom": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Untitled"
+            "value": "Set brightness to ${brightness}%"
           }
         }
       }
@@ -3396,72 +2062,6 @@
         }
       }
     },
-    "Sauvegarde tes compositions et renvoie-les en 1 clic. Elles survivent au redémarrage du device.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save your compositions and resend them in one click. They survive a device reboot."
-          }
-        }
-      }
-    },
-    "Scope": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scope"
-          }
-        }
-      }
-    },
-    "Scène": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scene"
-          }
-        }
-      }
-    },
-    "Scène enregistrée": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scene saved"
-          }
-        }
-      }
-    },
-    "Scène « %@ » enregistrée": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scene “%@” saved"
-          }
-        }
-      }
-    },
-    "Scènes": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scenes"
-          }
-        }
-      }
-    },
     "Se connecter": {
       "localizations": {
         "en": {
@@ -3472,63 +2072,22 @@
         }
       }
     },
-    "Semaine": {
-      "extractionState": "stale",
+    "Se déclenchera à l'heure prévue": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Week"
+            "value": "Will trigger at the scheduled time"
           }
         }
       }
     },
-    "Services": {
-      "extractionState": "stale",
+    "Service connecté": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Services"
-          }
-        }
-      }
-    },
-    "Session %@ · Semaine %@": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Session %@ · Week %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "Session %1$@ · Semaine %2$@"
-          }
-        }
-      }
-    },
-    "Session (5 h)": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Session (5 h)"
-          }
-        }
-      }
-    },
-    "Session + semaine": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Session + week"
+            "value": "Connected service"
           }
         }
       }
@@ -3539,16 +2098,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Threshold"
-          }
-        }
-      }
-    },
-    "Seuil franchi": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Threshold crossed"
           }
         }
       }
@@ -3573,78 +2122,12 @@
         }
       }
     },
-    "Signaux ponctuels : une notification qui s'affiche puis disparaît, et les 3 LED témoins.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One-off signals: a notification that appears then disappears, and the 3 indicator LEDs."
-          }
-        }
-      }
-    },
-    "Son": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sound"
-          }
-        }
-      }
-    },
     "Son (ex. alarm, optionnel)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Sound (e.g. alarm, optional)"
-          }
-        }
-      }
-    },
-    "Source": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Source"
-          }
-        }
-      }
-    },
-    "Spotify – titre en cours": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Spotify – now playing"
-          }
-        }
-      }
-    },
-    "Stars d'un dépôt (édite l'URL)": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A repo's stars (edit the URL)"
-          }
-        }
-      }
-    },
-    "Station spatiale en direct": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Space station, live"
           }
         }
       }
@@ -3659,12 +2142,42 @@
         }
       }
     },
-    "Surveille des seuils (CPU, batterie, connecteurs…) et déclenche notification ou LED automatiquement.": {
+    "Studio": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Watches thresholds (CPU, battery, connectors…) and automatically triggers a notification or LED."
+            "value": "Studio"
+          }
+        }
+      }
+    },
+    "Supprimer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        }
+      }
+    },
+    "Supprimer de l'afficheur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove from the display"
+          }
+        }
+      }
+    },
+    "Supprimée, elle disparaît de la rotation ; renvoie-la depuis Studio pour la retrouver.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once removed it leaves the rotation; send it again from Studio to bring it back."
           }
         }
       }
@@ -3679,63 +2192,8 @@
         }
       }
     },
-    "Système": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "System"
-          }
-        }
-      }
-    },
-    "Taux EUR/GBP": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EUR/GBP rate"
-          }
-        }
-      }
-    },
-    "Taux EUR/JPY": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EUR/JPY rate"
-          }
-        }
-      }
-    },
-    "Taux EUR/USD": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EUR/USD rate"
-          }
-        }
-      }
-    },
-    "Temps d'affichage avant de passer à la suivante": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "How long each app stays on screen before the next one"
-          }
-        }
-      }
-    },
     "Température": {
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3781,28 +2239,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Text shown continuously in the app “%@”."
-          }
-        }
-      }
-    },
-    "Token": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Token"
-          }
-        }
-      }
-    },
-    "Token Bearer": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bearer token"
           }
         }
       }
@@ -3857,16 +2293,6 @@
         }
       }
     },
-    "Tout ce qui s'affiche à l'écran : active, configure et organise les apps de la rotation.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Everything shown on screen: enable, configure and organize the rotation's apps."
-          }
-        }
-      }
-    },
     "Tout effacer": {
       "localizations": {
         "en": {
@@ -3877,13 +2303,12 @@
         }
       }
     },
-    "Toutes les %lld s": {
-      "extractionState": "stale",
+    "Tout est déjà dans la rotation.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Every %lld s"
+            "value": "Everything is already in the rotation."
           }
         }
       }
@@ -3918,52 +2343,16 @@
         }
       }
     },
-    "Téléchargements npm": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "npm downloads"
-          }
-        }
-      }
-    },
-    "URL d'autorisation": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Authorization URL"
-          }
-        }
-      }
-    },
-    "URL de token": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Token URL"
-          }
-        }
-      }
-    },
     "USD": {
-      "shouldTranslate": false
-    },
-    "Une phrase de sagesse": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A bit of wisdom"
+            "value": "USD"
           }
         }
-      }
+      },
+      "shouldTranslate": false
     },
     "Une seule fois, en 3 étapes :": {
       "localizations": {
@@ -3971,6 +2360,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "One time, in 3 steps:"
+          }
+        }
+      }
+    },
+    "Usage processeur du Mac": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac CPU usage"
           }
         }
       }
@@ -3985,17 +2384,6 @@
         }
       }
     },
-    "Valeur de la clé": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Key value"
-          }
-        }
-      }
-    },
     "Ville (Paris, Lyon, Bordeaux…)": {
       "localizations": {
         "en": {
@@ -4006,46 +2394,32 @@
         }
       }
     },
-    "Vitesse ISS": {
-      "extractionState": "stale",
+    "Vitesse de la transition (%lld ms)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "ISS speed"
+            "value": "Transition speed (%lld ms)"
           }
         }
       }
     },
-    "Vitesse de transition": {
-      "extractionState": "stale",
+    "appliqué en direct": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Transition speed"
+            "value": "applied live"
           }
         }
       }
     },
-    "Vitesse orbitale": {
-      "extractionState": "stale",
+    "aucun message reçu": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Orbital speed"
-          }
-        }
-      }
-    },
-    "data.price ou items[0].value": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "data.price or items[0].value"
+            "value": "no messages received"
           }
         }
       }
@@ -4080,17 +2454,6 @@
         }
       }
     },
-    "ex. 72761": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "e.g. 72761"
-          }
-        }
-      }
-    },
     "ex. alarm": {
       "localizations": {
         "en": {
@@ -4101,30 +2464,26 @@
         }
       }
     },
-    "fourni par le service": {
-      "extractionState": "stale",
+    "lumo": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "provided by the service"
+            "value": "lumo"
           }
         }
       }
     },
     "lumo://oauth": {
-      "shouldTranslate": false
-    },
-    "rarement nécessaire": {
-      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "rarely needed"
+            "value": "lumo://oauth"
           }
         }
-      }
+      },
+      "shouldTranslate": false
     },
     "rk_live_… ou sk_live_…": {
       "localizations": {
@@ -4136,58 +2495,22 @@
         }
       }
     },
-    "votre clé": {
-      "extractionState": "stale",
+    "À l'écran": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "your key"
+            "value": "On screen"
           }
         }
       }
     },
-    "votre token d'accès": {
-      "extractionState": "stale",
+    "À l'écran : %@": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "your access token"
-          }
-        }
-      }
-    },
-    "« {value} » est remplacé par la valeur récupérée.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“{value}” is replaced by the fetched value."
-          }
-        }
-      }
-    },
-    "· AWTRIX %@": {
-      "shouldTranslate": false
-    },
-    "À heure fixe": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "At a set time"
-          }
-        }
-      }
-    },
-    "À l'écran maintenant": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "On screen now"
+            "value": "On screen: %@"
           }
         }
       }
@@ -4198,61 +2521,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "PIXEL ART EDITOR"
-          }
-        }
-      }
-    },
-    "Échec de l'ajout": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add failed"
-          }
-        }
-      }
-    },
-    "Échec de l'envoi": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send failed"
-          }
-        }
-      }
-    },
-    "Échec de l'envoi du dessin": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drawing send failed"
-          }
-        }
-      }
-    },
-    "Échec de l'import du fichier.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "File import failed"
-          }
-        }
-      }
-    },
-    "Échec de la notification": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notification failed"
           }
         }
       }
@@ -4297,55 +2565,12 @@
         }
       }
     },
-    "Écran éteint": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Screen off"
-          }
-        }
-      }
-    },
     "Écran éteint.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Screen turned off."
-          }
-        }
-      }
-    },
-    "Écran, luminosité, défilement, apps intégrées et lampe d'ambiance.": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Screen, brightness, transitions, built-in apps and mood light."
-          }
-        }
-      }
-    },
-    "Écran, luminosité, défilement, durée par app et lampe d'ambiance.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Screen, brightness, rotation, per-app duration and mood light."
-          }
-        }
-      }
-    },
-    "État d'un capteur (token)": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A sensor's state (token)"
           }
         }
       }
@@ -4370,35 +2595,12 @@
         }
       }
     },
-    "Éteint": {
-      "extractionState": "stale",
+    "— glisse pour ordonner": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Off"
-          }
-        }
-      }
-    },
-    "Étoiles GitHub": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "GitHub stars"
-          }
-        }
-      }
-    },
-    "Évolution sur 24 h": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "24h change"
+            "value": "— drag to reorder"
           }
         }
       }
@@ -4414,6 +2616,14 @@
       }
     },
     "→": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "→"
+          }
+        }
+      },
       "shouldTranslate": false
     },
     "→ « %@ »": {

@@ -23,26 +23,15 @@ struct TemplatePicker: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Ajouter un connecteur").font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
-                        Text("Choisis un modèle — tout reste ajustable ensuite.")
-                            .font(.caption).foregroundStyle(Theme.textSecondary)
-                    }
-                    Spacer()
-                    Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title2) }
-                        .buttonStyle(.plain).foregroundStyle(Theme.textSecondary)
-                }
-                HStack(spacing: 8) {
-                    Image(systemName: "magnifyingglass").foregroundStyle(Theme.textSecondary)
-                    TextField("Rechercher un modèle…", text: $query).textFieldStyle(.plain)
-                }
-                .padding(10)
-                .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 10))
+        SheetScaffold("Ajouter un connecteur",
+                      subtitle: "Choisis un modèle — tout reste ajustable ensuite.",
+                      width: 600, height: 560) {
+            HStack(spacing: 8) {
+                Image(systemName: "magnifyingglass").foregroundStyle(Theme.textSecondary)
+                TextField("Rechercher un modèle…", text: $query).textFieldStyle(.plain)
             }
-            .padding(20)
+            .padding(10)
+            .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 10))
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
@@ -62,12 +51,9 @@ struct TemplatePicker: View {
                             .frame(maxWidth: .infinity).padding(.top, 30)
                     }
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 20)
+                .padding(.bottom, 4)
             }
         }
-        .frame(width: 600, height: 560)
-        .background(Theme.background)
     }
 
     private func card(_ t: ConnectorTemplate) -> some View {
@@ -118,11 +104,10 @@ struct ConnectorEditor: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 18) {
-                Text(connector.name.isEmpty ? "Nouveau connecteur" : connector.name)
-                    .font(.title3.weight(.bold)).foregroundStyle(Theme.textPrimary)
-
+        SheetScaffold(connector.name.isEmpty ? "Nouveau connecteur" : connector.name,
+                      height: 620) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 18) {
                 group("Source") {
                     field("Nom", "Mon API", text: $connector.name)
                     switch connector.special {
@@ -139,10 +124,8 @@ struct ConnectorEditor: View {
 
                 if connector.special == nil {
                     group("Authentification") {
-                        Picker("Méthode", selection: $connector.auth.kind) {
-                            ForEach(AuthConfig.Kind.allCases) { Text($0.label).tag($0) }
-                        }
-                        .pickerStyle(.segmented)
+                        PillPicker(selection: $connector.auth.kind,
+                                   options: AuthConfig.Kind.allCases.map { ($0, $0.label) })
                         authFields
                     }
                 } else if connector.isStripe {
@@ -189,11 +172,9 @@ struct ConnectorEditor: View {
 
                 Divider().overlay(Theme.stroke)
                 actions
+                }
             }
-            .padding(22)
         }
-        .frame(width: 540, height: 620)
-        .background(Theme.background)
         .sheet(isPresented: $showIconPicker) {
             IconImportSheet(device: device) { connector.icon = $0 }
         }
@@ -300,29 +281,29 @@ struct ConnectorEditor: View {
     }
 
     private var actions: some View {
-        HStack(spacing: 10) {
-            Button {
-                testing = true
-                Task { testResult = await connectors.test(connector); testing = false }
-            } label: {
-                if testing { ProgressView().controlSize(.small) }
-                else { Label("Tester", systemImage: "checkmark.circle") }
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 10) {
+                Button {
+                    testing = true
+                    Task { testResult = await connectors.test(connector); testing = false }
+                } label: {
+                    if testing { ProgressView().controlSize(.small) }
+                    else { Label("Tester", systemImage: "checkmark.circle") }
+                }
+                .buttonStyle(PillButtonStyle(prominent: false))
+                if let r = testResult {
+                    Text("→ « \(connector.renderedText(value: r)) »").font(.caption).foregroundStyle(Theme.accent)
+                } else if let e = connectors.lastError[connector.id] {
+                    Text(e).font(.caption).foregroundStyle(.red)
+                }
+                Spacer()
             }
-            .buttonStyle(PillButtonStyle(prominent: false))
-            if let r = testResult {
-                Text("→ « \(connector.renderedText(value: r)) »").font(.caption).foregroundStyle(Theme.accent)
-            } else if let e = connectors.lastError[connector.id] {
-                Text(e).font(.caption).foregroundStyle(.red)
-            }
-            Spacer()
-            if connectors.connectors.contains(where: { $0.id == connector.id }) {
-                Button(role: .destructive) { connectors.remove(connector); dismiss() } label: {
-                    Image(systemName: "trash")
-                }.buttonStyle(.plain).foregroundStyle(.red)
-            }
-            Button("Annuler") { dismiss() }.buttonStyle(PillButtonStyle(prominent: false))
-            Button("Enregistrer") { save() }.buttonStyle(PillButtonStyle())
-                .disabled(connector.special == nil && connector.url.isEmpty)
+            EditorButtons(
+                onDelete: connectors.connectors.contains(where: { $0.id == connector.id })
+                    ? { connectors.remove(connector); dismiss() } : nil,
+                saveDisabled: connector.special == nil && connector.url.isEmpty,
+                onSave: { save() }
+            )
         }
     }
 
