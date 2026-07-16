@@ -19,7 +19,6 @@ struct NowPlayingBar: View {
                 miniMatrix
                 identity
                 Spacer()
-                statChips
                 expandButton
             }
             if expanded {
@@ -76,24 +75,6 @@ struct NowPlayingBar: View {
                 }
             }
         }
-    }
-
-    /// Batterie / température / humidité du capteur, tant que la section Appareil
-    /// n'a pas pris le relais (retirés d'ici à l'étape « Appareil »).
-    @ViewBuilder private var statChips: some View {
-        HStack(spacing: 8) {
-            if let bat = stats?.bat { chip("battery.100", "\(bat)%") }
-            if let t = stats?.temp { chip("thermometer.medium", "\(Int(t))°") }
-            if let h = stats?.hum { chip("humidity", "\(Int(h))%") }
-        }
-    }
-
-    private func chip(_ icon: String, _ text: String) -> some View {
-        Label(text, systemImage: icon)
-            .font(.caption2.weight(.medium))
-            .padding(.horizontal, 8).padding(.vertical, 4)
-            .background(Theme.surfaceHover, in: Capsule())
-            .foregroundStyle(Theme.textSecondary)
     }
 
     private var expandButton: some View {
