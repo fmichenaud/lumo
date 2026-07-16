@@ -12,6 +12,7 @@ struct DeviceScreenView: View {
     @EnvironmentObject var connectors: ConnectorsStation
     @EnvironmentObject var weatherStation: WeatherStation
     @EnvironmentObject var calendarStation: CalendarStation
+    @EnvironmentObject var pomodoro: PomodoroStation
     var onResult: (String) -> Void = { _ in }
 
     // Rotation (loop du device), rafraîchie en continu.
@@ -34,6 +35,7 @@ struct DeviceScreenView: View {
     @State private var showWeatherConfig = false
     @State private var showCryptoConfig = false
     @State private var showCalendarConfig = false
+    @State private var showTimerSheet = false
     @State private var editingCustom: CustomAppSelection?
 
     private struct CustomAppSelection: Identifiable {
@@ -89,6 +91,9 @@ struct DeviceScreenView: View {
         .sheet(isPresented: $showCalendarConfig) {
             CalendarConfigSheet().environmentObject(calendarStation)
         }
+        .sheet(isPresented: $showTimerSheet) {
+            PomodoroSheet().environmentObject(pomodoro)
+        }
         .sheet(item: $editingCustom) { selection in
             CustomAppSheet(name: selection.name,
                            client: client,
@@ -106,7 +111,7 @@ struct DeviceScreenView: View {
     private struct SourceRow: Identifiable {
         enum Kind {
             case native(key: String)
-            case weather, calendar, cpu, ram, crypto
+            case weather, calendar, cpu, ram, crypto, timer
             case connector(Connector)
             case custom(String)
         }
@@ -171,6 +176,17 @@ struct DeviceScreenView: View {
                 isOn: nativeOn[n.key] ?? false,
                 subtitle: n.desc, liveValue: false,
                 hasEditor: false, toggleDisabled: false))
+        }
+
+        // Minuteur : visible ici uniquement quand il tourne (l'app « timer » est
+        // alors dans la loop) — la liste doit refléter tout ce qui défile réellement.
+        // Son foyer de réglage reste la section Moments.
+        if pomodoro.isActive || loopPositions["timer"] != nil {
+            rows.append(SourceRow(
+                kind: .timer, loopName: "timer", title: String(localized: "Minuteur"), icon: "timer",
+                isOn: true,
+                subtitle: pomodoro.statusText, liveValue: pomodoro.isActive,
+                hasEditor: true, toggleDisabled: false))
         }
 
         // Apps personnalisées : celles de la loop + celles masquées pendant la session.
@@ -444,6 +460,9 @@ struct DeviceScreenView: View {
         case .cpu:      live.setCPU(on)
         case .ram:      live.setRAM(on)
         case .crypto:   live.setCrypto(on)
+        case .timer:
+            // Éteindre la ligne = arrêter le minuteur (l'app « timer » quitte la loop).
+            if !on { pomodoro.stop() }
         case .connector(let c): connectors.setEnabled(c, on)
         case .native(let key):
             nativeOn[key] = on
@@ -466,6 +485,7 @@ struct DeviceScreenView: View {
         case .weather:  showWeatherConfig = true
         case .calendar: showCalendarConfig = true
         case .crypto:   showCryptoConfig = true
+        case .timer:    showTimerSheet = true
         case .connector(let c): editingConnector = c
         case .custom(let name): editingCustom = CustomAppSelection(name: name)
         case .cpu, .ram, .native: break
