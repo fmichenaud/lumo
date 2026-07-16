@@ -14,17 +14,18 @@ Récupérez le `.dmg` dans la page [Releases](../../releases). L'app n'est pas n
 
 ## ✨ Fonctionnalités
 
+L'app s'organise en quatre sections : **Écran · Studio · Moments · Appareil**.
+
 - **Découverte automatique** des afficheurs sur le réseau (scan, sans mDNS) + ajout manuel par IP, multi-device.
-- **Aperçu live** de la matrice 32×8, fluide et fidèle.
-- **Composer** : texte, couleur, icône → app permanente dans la rotation.
+- **Écran — la rotation éditée comme une playlist** : tout ce qui défile est dans une liste ordonnée (glisser pour réordonner, app courante marquée « À l'écran »), les sources éteintes attendent en dessous, un toggle les fait passer d'une zone à l'autre. Aperçu live compact de la matrice 32×8, déployable.
+- **Sources prêtes à l'emploi** : météo (Open-Meteo, sans clé), calendrier Apple, CPU/RAM du Mac, cours crypto, apps natives du firmware (heure, date, capteurs).
+- **Connecteurs** : branchez n'importe quelle API (la vôtre ou externe), extraction par chemin JSON, gabarit d'affichage, auth (Clé API / Bearer / **OAuth 2.0 + PKCE**), catalogue de modèles prêts à l'emploi (GitHub CI, Plausible, AQI, Tempo EDF, YouTube, Spotify, Stripe, quota Claude Code…).
+- **Studio** : compositions texte (couleur, icône) et **pixel art 32×8**, scènes sauvegardées renvoyables en 1 clic (persistantes après reboot).
 - **Galerie d'icônes intégrée** : recherche LaMetric, import en 1 clic, conversion/upload automatique (animations préservées).
-- **Scènes** : compositions sauvegardées et renvoyables en 1 clic (persistantes après reboot).
-- **Météo** (Open-Meteo, sans clé) avec mise à jour automatique.
-- **Données live** : CPU/RAM du Mac, cours crypto — apps auto-rafraîchies.
-- **Intégrations / connecteurs** : branchez n'importe quelle API (la vôtre ou externe), extraction par chemin JSON, gabarit d'affichage, auth (Clé API / Bearer / **OAuth 2.0 + PKCE**), catalogue de modèles prêts à l'emploi.
-- **Dessin** : éditeur pixel art 32×8.
-- **Alertes** : notifications, indicateurs LED, mood light.
-- **Mode menu-bar** : rafraîchissement des données en arrière-plan, fenêtre fermée.
+- **Moments** : notification ponctuelle, **règles d'alerte** (seuils CPU/RAM/batterie/température/connecteur, ou à heure fixe), **minuteur/Pomodoro** affiché sur la matrice, LED témoins, **passerelle de notifications** (curl, Raccourcis, `lumo://notify`).
+- **Appareil** : luminosité (manuelle/auto), **mode nuit programmé**, lampe d'ambiance, fiche capteurs.
+- **Mode menu-bar** : météo, quotas, minuteur et power sans ouvrir la fenêtre ; données rafraîchies en arrière-plan.
+- **Raccourcis / App Intents** en français, interface **FR/EN**.
 
 ## 🛠️ Prérequis
 
@@ -66,10 +67,11 @@ Lumo/
   Models/       Device, AwtrixStats/Settings, PushPayload, Scene, Connector…
   Networking/   AwtrixClient (API REST AWTRIX), DeviceDiscovery, NetworkUtils
   Services/     DeviceStore, WeatherStation, LiveAppsStation, ConnectorsStation,
-                OAuthService, IconConverter, ScreenStreamer…
-  Views/        Sidebar, DeviceDetail, LivePreview, Compose, Scenes, Weather,
-                Data, Integrations, Alerts, Draw, Apps…
-  Design/       Theme (Liquid Glass, couleurs), VisualEffectView
+                AlertsStation, PomodoroStation, NightModeStation, CalendarStation,
+                NotificationGateway, OAuthService, IconConverter, ScreenStreamer…
+  Views/        Sidebar, DeviceDetail, NowPlayingBar, DeviceScreen (rotation),
+                Studio (Compose + Draw + scènes), Moments, DeviceSettings, sheets…
+  Design/       Theme (Liquid Glass, couleurs), SheetScaffold, VisualEffectView
 ```
 
 Le projet Xcode est **généré** par XcodeGen : on versionne `project.yml`, pas le `.xcodeproj`.
