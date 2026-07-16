@@ -241,31 +241,67 @@ struct DeviceScreenView: View {
             .help("Durée d'affichage de chaque app avant de passer à la suivante")
 
             // Effet et vitesse de transition : proposés une fois la liste chargée depuis le device.
+            // Menu explicite plutôt que Picker : le popup du Picker perdait les titres
+            // de ses items (rangées vides) dans ce contexte glassEffect sur macOS 26.
             if !transitions.isEmpty {
-                Picker("", selection: Binding(get: { transitionEffect }, set: { value in
-                    transitionEffect = value
-                    Task { try? await client.updateSettings(["TEFF": value]) }
-                })) {
+                Menu {
                     ForEach(Array(transitions.enumerated()), id: \.offset) { index, name in
-                        Text(name).tag(index)
+                        Button {
+                            transitionEffect = index
+                            Task { try? await client.updateSettings(["TEFF": index]) }
+                        } label: {
+                            if index == transitionEffect {
+                                Label(name, systemImage: "checkmark")
+                            } else {
+                                Text(name)
+                            }
+                        }
                     }
+                } label: {
+                    HStack(spacing: 5) {
+                        Text(transitions.indices.contains(transitionEffect)
+                             ? transitions[transitionEffect] : "—")
+                            .font(.callout)
+                        Image(systemName: "chevron.up.chevron.down")
+                            .font(.caption2)
+                    }
+                    .foregroundStyle(Theme.textPrimary)
                 }
-                .labelsHidden()
-                .frame(width: 130)
+                .menuStyle(.button).buttonStyle(.plain)
+                .padding(.horizontal, 10).padding(.vertical, 5)
+                .background(Color.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
+                .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Theme.stroke))
                 .help("Effet de transition entre deux apps")
 
-                Slider(value: $transitionSpeed, in: 100...2000, step: 50) { editing in
-                    if !editing { Task { try? await client.updateSettings(["TSPEED": Int(transitionSpeed)]) } }
+                HStack(spacing: 8) {
+                    Slider(value: $transitionSpeed, in: 100...2000, step: 50) { editing in
+                        if !editing { Task { try? await client.updateSettings(["TSPEED": Int(transitionSpeed)]) } }
+                    }
+                    .tint(Theme.accent)
+                    .frame(width: 110)
+                    .controlSize(.small)
+                    Text("Durée · \(speedText)")
+                        .font(.caption.monospacedDigit())
+                        .foregroundStyle(Theme.textSecondary)
+                        .frame(width: 90, alignment: .leading)
                 }
-                .tint(Theme.accent)
-                .frame(width: 110)
-                .help("Vitesse de la transition (\(Int(transitionSpeed)) ms)")
+                .frame(height: 24)
+                .help("Durée de l'animation de transition entre deux apps")
             }
 
             Spacer(minLength: 0)
         }
         .padding(.horizontal, 18).padding(.vertical, 12)
         .glassEffect(.regular, in: RoundedRectangle(cornerRadius: Theme.corner))
+    }
+
+    /// Durée de transition lisible : « 800 ms » ou « 1,2 s ».
+    private var speedText: String {
+        let ms = Int(transitionSpeed)
+        if ms >= 1000 {
+            return String(format: "%.1f s", transitionSpeed / 1000).replacingOccurrences(of: ".", with: ",")
+        }
+        return "\(ms) ms"
     }
 
     // MARK: - Cartes

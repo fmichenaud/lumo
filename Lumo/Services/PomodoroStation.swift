@@ -104,7 +104,7 @@ final class PomodoroStation: ObservableObject {
         stopTicker()
         state = .paused(remaining: rem)
         remaining = rem
-        Task { await pushTimer(seconds: Int(rem.rounded())) }
+        enqueueDeviceOp { [weak self] in await self?.pushTimer(seconds: Int(rem.rounded())) }
     }
 
     /// Reprend là où le décompte s'était arrêté.
@@ -121,7 +121,7 @@ final class PomodoroStation: ObservableObject {
         remaining = 0
         onBreak = false
         cycleCount = 0
-        Task { await removeFromDevice() }
+        enqueueDeviceOp { [weak self] in await self?.removeFromDevice() }
     }
 
     // MARK: - Phases
@@ -133,9 +133,9 @@ final class PomodoroStation: ObservableObject {
         remaining = total
         state = .running(endDate: Date().addingTimeInterval(total))
         startTicker()
-        Task {
-            await pushTimer(seconds: Int(total))
-            await switchToTimer()
+        enqueueDeviceOp { [weak self] in
+            await self?.pushTimer(seconds: Int(total))
+            await self?.switchToTimer()
         }
     }
 
@@ -158,8 +158,11 @@ final class PomodoroStation: ObservableObject {
             stopTicker()
             state = .idle
             remaining = 0
-            await notifyEnd(text: endMessage.isEmpty ? "Terminé !" : endMessage)
-            await removeFromDevice()
+            let text = endMessage.isEmpty ? "Terminé !" : endMessage
+            enqueueDeviceOp { [weak self] in
+                await self?.notifyEnd(text: text)
+                await self?.removeFromDevice()
+            }
         }
     }
 
@@ -189,14 +192,30 @@ final class PomodoroStation: ObservableObject {
             await finish()
         } else {
             remaining = rem
-            await pushTimer(seconds: Int(rem.rounded()))
+            let seconds = Int(rem.rounded())
+            enqueueDeviceOp { [weak self] in await self?.pushTimer(seconds: seconds) }
         }
     }
 
     // MARK: - Device
 
+    /// Chaîne FIFO des opérations réseau vers l'app "timer" : un tick dont le push
+    /// était déjà en vol ne peut plus réinsérer l'app APRÈS le retrait demandé par
+    /// stop() — le retrait est mis en file derrière le push en cours.
+    private var deviceOps: Task<Void, Never>?
+
+    private func enqueueDeviceOp(_ op: @escaping @MainActor () async -> Void) {
+        let previous = deviceOps
+        deviceOps = Task { @MainActor in
+            await previous?.value
+            await op()
+        }
+    }
+
     /// Pousse l'app "timer" : temps MM:SS, couleur selon le pourcentage restant, barre de progression.
     private func pushTimer(seconds: Int) async {
+        // Un push retardataire ne doit rien envoyer si le minuteur vient d'être arrêté.
+        guard isActive else { return }
         guard let device = store?.selectedDevice else { return }
         let pct = Self.percentRemaining(remaining: TimeInterval(seconds), total: totalDuration)
         let color = Self.colorHex(forPercentRemaining: pct)

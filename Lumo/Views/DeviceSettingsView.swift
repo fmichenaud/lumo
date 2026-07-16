@@ -157,13 +157,19 @@ struct DeviceSettingsView: View {
             rowDivider
             infoRow("clock.arrow.circlepath", "Allumé depuis", uptimeText)
             rowDivider
-            infoRow("battery.100", "Batterie", stats?.bat.map { "\($0) %" } ?? "—")
+            infoRow("battery.100", "Batterie", stats?.bat.map { "≈ \($0) %" } ?? "—")
+                .help("Estimation par la tension de la batterie — peu précise, et faussée quand l'appareil est branché en USB (la charge n'est pas détectable sur le TC001).")
             rowDivider
             infoRow("thermometer.medium", "Température", stats?.temp.map { "\(Int($0)) °C" } ?? "—")
             rowDivider
             infoRow("humidity", "Humidité", stats?.hum.map { "\(Int($0)) %" } ?? "—")
             rowDivider
             infoRow("wifi", "Signal Wi-Fi", stats?.wifiSignal.map { "\($0) dBm" } ?? "—")
+
+            Text("Batterie : estimation d'après la tension, peu précise — et surestimée quand l'appareil est branché en USB. Le TC001 ne sait pas détecter la charge.")
+                .font(.caption2).foregroundStyle(Theme.textSecondary.opacity(0.8))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 12)
         }
         .card()
     }
