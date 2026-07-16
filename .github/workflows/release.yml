@@ -25,10 +25,70 @@ jobs:
       - name: Générer le projet
         run: xcodegen generate
 
+      # --- Signature : import du certificat Developer ID dans un trousseau jetable ---
+      - name: Importer le certificat Developer ID
+        env:
+          CERT_P12_BASE64: ${{ secrets.DEVELOPER_ID_CERT_P12_BASE64 }}
+          CERT_PASSWORD: ${{ secrets.DEVELOPER_ID_CERT_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          CERT_PATH="$RUNNER_TEMP/cert.p12"
+          KEYCHAIN_PATH="$RUNNER_TEMP/app-signing.keychain-db"
+          echo "$CERT_P12_BASE64" | base64 --decode > "$CERT_PATH"
+
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security import "$CERT_PATH" -P "$CERT_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security list-keychain -d user -s "$KEYCHAIN_PATH" login.keychain-db
+
       - name: Build (Release)
         run: |
           xcodebuild -project Lumo.xcodeproj -scheme Lumo \
             -configuration Release -derivedDataPath build build
+
+      # --- Signature de l'app : Developer ID + hardened runtime + timestamp sécurisé ---
+      - name: Signer Lumo.app
+        run: |
+          APP="build/Build/Products/Release/Lumo.app"
+          FW="$APP/Contents/Frameworks"
+          # Signer d'abord le code imbriqué (frameworks/dylibs) s'il y en a
+          if [ -d "$FW" ]; then
+            find "$FW" -depth -type d -name "*.framework" -print0 | while IFS= read -r -d '' f; do
+              codesign --force --options runtime --timestamp --sign "Developer ID Application" "$f"
+            done
+            find "$FW" -type f -name "*.dylib" -print0 | while IFS= read -r -d '' d; do
+              codesign --force --options runtime --timestamp --sign "Developer ID Application" "$d"
+            done
+          fi
+          codesign --force --options runtime --timestamp \
+            --entitlements Lumo/Lumo.entitlements \
+            --sign "Developer ID Application" "$APP"
+          codesign --verify --strict --verbose=2 "$APP"
+
+      # --- Notarisation : on soumet un zip de l'app, puis on agrafe le ticket sur l'app ---
+      - name: Notariser et agrafer
+        env:
+          AC_API_KEY_ID: ${{ secrets.AC_API_KEY_ID }}
+          AC_API_ISSUER_ID: ${{ secrets.AC_API_ISSUER_ID }}
+          AC_API_KEY_P8_BASE64: ${{ secrets.AC_API_KEY_P8_BASE64 }}
+        run: |
+          APP="build/Build/Products/Release/Lumo.app"
+          KEY_PATH="$RUNNER_TEMP/ac_api_key.p8"
+          echo "$AC_API_KEY_P8_BASE64" | base64 --decode > "$KEY_PATH"
+
+          ditto -c -k --keepParent "$APP" "$RUNNER_TEMP/Lumo.zip"
+          xcrun notarytool submit "$RUNNER_TEMP/Lumo.zip" \
+            --key "$KEY_PATH" \
+            --key-id "$AC_API_KEY_ID" \
+            --issuer "$AC_API_ISSUER_ID" \
+            --wait
+
+          # Agrafe le ticket sur l'app elle-même (fonctionne hors-ligne, même une fois glissée)
+          xcrun stapler staple "$APP"
+          xcrun stapler validate "$APP"
+          spctl -a -t exec -vv "$APP"
 
       - name: Empaqueter le .dmg
         run: |
@@ -42,10 +102,7 @@ jobs:
         with:
           files: Lumo.dmg
           body: |
-            ### Lumo — build non signée
+            ### Lumo
 
-            Téléchargez `Lumo.dmg`, glissez Lumo dans Applications.
-
-            ⚠️ Au **premier lancement** : clic droit sur Lumo → **Ouvrir**
-            (ou Réglages Système → Confidentialité et sécurité → « Ouvrir quand même »).
-            C'est normal pour une app non notarisée.
+            Téléchargez `Lumo.dmg`, glissez Lumo dans Applications, et lancez-la.
+            App signée et notarisée par Apple — aucun avertissement au lancement.
