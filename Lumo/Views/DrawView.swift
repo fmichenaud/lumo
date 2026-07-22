@@ -83,11 +83,14 @@ struct DrawView: View {
             }
         }
         guard !commands.isEmpty else { return }
+        // Le compte est relevé avant l'envoi : le dictionnaire est cédé à la requête,
+        // on ne peut plus relire `commands` ensuite (concurrence stricte).
+        let count = commands.count
         let json: [String: Any] = ["draw": commands, "duration": 15]
         do {
             try await client.upsertCustomAppRaw(name: "pixelart", json: json)
             try await client.switchApp(name: "pixelart")
-            onResult("Dessin envoyé (\(commands.count) pixels)")
+            onResult("Dessin envoyé (\(count) pixels)")
         } catch {
             onResult("Échec de l'envoi du dessin")
         }
