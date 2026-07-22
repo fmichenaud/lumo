@@ -4,8 +4,8 @@ import SwiftUI
 /// lampe d'ambiance, et fiche d'identité du device (IP, version, capteurs).
 struct DeviceSettingsView: View {
     let device: Device
-    @EnvironmentObject var store: DeviceStore
-    @EnvironmentObject var nightMode: NightModeStation
+    @Environment(DeviceStore.self) var store
+    @Environment(NightModeStation.self) var nightMode
     var onResult: (String) -> Void = { _ in }
 
     @State private var stats: AwtrixStats?

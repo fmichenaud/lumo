@@ -7,17 +7,19 @@ import SwiftUI
 /// vivent juste au-dessus de la liste.
 struct DeviceScreenView: View {
     let device: Device
-    @EnvironmentObject var store: DeviceStore
-    @EnvironmentObject var live: LiveAppsStation
-    @EnvironmentObject var connectors: ConnectorsStation
-    @EnvironmentObject var weatherStation: WeatherStation
-    @EnvironmentObject var calendarStation: CalendarStation
-    @EnvironmentObject var pomodoro: PomodoroStation
+    @Environment(DeviceStore.self) var store
+    @Environment(LiveAppsStation.self) var live
+    @Environment(ConnectorsStation.self) var connectors
+    @Environment(WeatherStation.self) var weatherStation
+    @Environment(CalendarStation.self) var calendarStation
+    @Environment(PomodoroStation.self) var pomodoro
+    @Environment(DevicePoller.self) var poller
     var onResult: (String) -> Void = { _ in }
 
-    // Rotation (loop du device), rafraîchie en continu.
-    @State private var loopPositions: [String: Int] = [:]
-    @State private var currentApp: String?
+    // Rotation (loop du device) : sondée par DevicePoller, partagée avec la barre « à l'écran ».
+    private var loopPositions: [String: Int] { poller.loop }
+    private var currentApp: String? { poller.currentApp }
+
     @State private var nativeOn: [String: Bool] = [:]
     /// Customs masquées pendant la session (show:false) : restent proposées dans « Disponibles ».
     @State private var hiddenCustoms: Set<String> = []
@@ -57,19 +59,15 @@ struct DeviceScreenView: View {
                                              "time", "date", "temperature", "humidity", "battery", "notification"]
 
     var body: some View {
+        // Une seule construction des lignes par passe de rendu, partagée par les deux cartes.
+        let sources = partitionedSources()
         VStack(spacing: 14) {
             rotationSettingsBar
-            rotationCard
-            availableCard
+            rotationCard(sources.inRotation)
+            availableCard(sources.available)
             addRow
         }
-        .task(id: device.id) {
-            await loadSettings()
-            while !Task.isCancelled {
-                await refreshLoop()
-                try? await Task.sleep(nanoseconds: 3_000_000_000)
-            }
-        }
+        .task(id: device.id) { await loadSettings() }
         .sheet(isPresented: $showTemplates) {
             TemplatePicker { template in
                 showTemplates = false
@@ -78,30 +76,33 @@ struct DeviceScreenView: View {
         }
         .sheet(item: $editingConnector) { connector in
             ConnectorEditor(device: device, connector: connector)
-                .environmentObject(connectors)
+                .environment(connectors)
         }
         .sheet(isPresented: $showWeatherConfig) {
             WeatherConfigSheet(device: device, onResult: onResult)
-                .environmentObject(store)
-                .environmentObject(weatherStation)
+                .environment(store)
+                .environment(weatherStation)
         }
         .sheet(isPresented: $showCryptoConfig) {
-            CryptoConfigSheet().environmentObject(live)
+            CryptoConfigSheet().environment(live)
         }
         .sheet(isPresented: $showCalendarConfig) {
-            CalendarConfigSheet().environmentObject(calendarStation)
+            CalendarConfigSheet().environment(calendarStation)
         }
         .sheet(isPresented: $showTimerSheet) {
-            PomodoroSheet().environmentObject(pomodoro)
+            PomodoroSheet().environment(pomodoro)
         }
         .sheet(item: $editingCustom) { selection in
             CustomAppSheet(name: selection.name,
                            client: client,
-                           onShown: { currentApp = selection.name; onResult("Affichage : « \(selection.name.capitalized) »") },
+                           onShown: {
+                               onResult("Affichage : « \(selection.name.capitalized) »")
+                               Task { await poller.refreshNow(host: device.host) }
+                           },
                            onDeleted: {
                                hiddenCustoms.remove(selection.name.lowercased())
                                onResult("« \(selection.name.capitalized) » supprimée de l'afficheur")
-                               Task { await refreshLoop() }
+                               Task { await poller.refreshNow(host: device.host) }
                            })
         }
     }
@@ -206,93 +207,128 @@ struct DeviceScreenView: View {
         return rows
     }
 
-    private var inRotation: [SourceRow] {
-        allSources.filter(\.isOn).sorted {
+    /// Sépare les sources en une seule passe : `allSources` est coûteuse (localisation,
+    /// sous-titres vivants) et était reconstruite deux fois par rendu.
+    private func partitionedSources() -> (inRotation: [SourceRow], available: [SourceRow]) {
+        var inRotation: [SourceRow] = []
+        var available: [SourceRow] = []
+        for row in allSources {
+            if row.isOn { inRotation.append(row) } else { available.append(row) }
+        }
+        inRotation.sort {
             (loopPositions[$0.loopName] ?? Int.max) < (loopPositions[$1.loopName] ?? Int.max)
         }
-    }
-
-    private var available: [SourceRow] {
-        allSources.filter { !$0.isOn }
+        return (inRotation, available)
     }
 
     // MARK: - Réglages de la rotation
 
+    /// Barre des réglages de rotation, adaptative : une ligne quand la fenêtre est
+    /// assez large, sinon deux (les libellés ne se coupent jamais en pleine lettre).
     private var rotationSettingsBar: some View {
-        HStack(spacing: 18) {
-            Label("Rotation", systemImage: "arrow.triangle.2.circlepath")
-                .font(.caption.weight(.semibold)).tracking(0.6)
-                .foregroundStyle(Theme.textSecondary)
-
-            Toggle(isOn: Binding(get: { autoTransition }, set: { value in
-                autoTransition = value
-                Task { try? await client.setAutoTransition(value) }
-            })) { Text("Défilement auto").font(.callout) }
-
-            HStack(spacing: 8) {
-                Text("\(appTime) s / app")
-                    .font(.callout.weight(.semibold).monospacedDigit())
-                    .foregroundStyle(Theme.textPrimary)
-                Stepper("", value: Binding(get: { appTime }, set: { value in
-                    appTime = value
-                    Task { try? await client.updateSettings(["ATIME": value]) }
-                }), in: 1...60).labelsHidden()
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 18) {
+                rotationLabel
+                autoTransitionToggle
+                appTimeStepper
+                transitionControls
+                Spacer(minLength: 0)
             }
-            .help("Durée d'affichage de chaque app avant de passer à la suivante")
-
-            // Effet et vitesse de transition : proposés une fois la liste chargée depuis le device.
-            // Menu explicite plutôt que Picker : le popup du Picker perdait les titres
-            // de ses items (rangées vides) dans ce contexte glassEffect sur macOS 26.
-            if !transitions.isEmpty {
-                Menu {
-                    ForEach(Array(transitions.enumerated()), id: \.offset) { index, name in
-                        Button {
-                            transitionEffect = index
-                            Task { try? await client.updateSettings(["TEFF": index]) }
-                        } label: {
-                            if index == transitionEffect {
-                                Label(name, systemImage: "checkmark")
-                            } else {
-                                Text(name)
-                            }
-                        }
-                    }
-                } label: {
-                    HStack(spacing: 5) {
-                        Text(transitions.indices.contains(transitionEffect)
-                             ? transitions[transitionEffect] : "—")
-                            .font(.callout)
-                        Image(systemName: "chevron.up.chevron.down")
-                            .font(.caption2)
-                    }
-                    .foregroundStyle(Theme.textPrimary)
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(spacing: 18) {
+                    rotationLabel
+                    autoTransitionToggle
+                    appTimeStepper
+                    Spacer(minLength: 0)
                 }
-                .menuStyle(.button).buttonStyle(.plain)
-                .padding(.horizontal, 10).padding(.vertical, 5)
-                .background(Color.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
-                .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Theme.stroke))
-                .help("Effet de transition entre deux apps")
-
-                HStack(spacing: 8) {
-                    Slider(value: $transitionSpeed, in: 100...2000, step: 50) { editing in
-                        if !editing { Task { try? await client.updateSettings(["TSPEED": Int(transitionSpeed)]) } }
-                    }
-                    .tint(Theme.accent)
-                    .frame(width: 110)
-                    .controlSize(.small)
-                    Text("Durée · \(speedText)")
-                        .font(.caption.monospacedDigit())
-                        .foregroundStyle(Theme.textSecondary)
-                        .frame(width: 90, alignment: .leading)
+                HStack(spacing: 18) {
+                    transitionControls
+                    Spacer(minLength: 0)
                 }
-                .frame(height: 24)
-                .help("Durée de l'animation de transition entre deux apps")
             }
-
-            Spacer(minLength: 0)
         }
         .padding(.horizontal, 18).padding(.vertical, 12)
         .glassEffect(.regular, in: RoundedRectangle(cornerRadius: Theme.corner))
+    }
+
+    private var rotationLabel: some View {
+        Label("Rotation", systemImage: "arrow.triangle.2.circlepath")
+            .font(.caption.weight(.semibold)).tracking(0.6)
+            .foregroundStyle(Theme.textSecondary)
+            .fixedSize()
+    }
+
+    private var autoTransitionToggle: some View {
+        Toggle(isOn: Binding(get: { autoTransition }, set: { value in
+            autoTransition = value
+            Task { try? await client.setAutoTransition(value) }
+        })) { Text("Défilement auto").font(.callout).fixedSize() }
+    }
+
+    private var appTimeStepper: some View {
+        HStack(spacing: 8) {
+            Text("\(appTime) s / app")
+                .font(.callout.weight(.semibold).monospacedDigit())
+                .foregroundStyle(Theme.textPrimary)
+                .fixedSize()
+            Stepper("", value: Binding(get: { appTime }, set: { value in
+                appTime = value
+                Task { try? await client.updateSettings(["ATIME": value]) }
+            }), in: 1...60).labelsHidden()
+        }
+        .help("Durée d'affichage de chaque app avant de passer à la suivante")
+    }
+
+    // Effet et vitesse de transition : proposés une fois la liste chargée depuis le device.
+    // Menu explicite plutôt que Picker : le popup du Picker perdait les titres
+    // de ses items (rangées vides) dans ce contexte glassEffect sur macOS 26.
+    @ViewBuilder private var transitionControls: some View {
+        if !transitions.isEmpty {
+            Menu {
+                ForEach(Array(transitions.enumerated()), id: \.offset) { index, name in
+                    Button {
+                        transitionEffect = index
+                        Task { try? await client.updateSettings(["TEFF": index]) }
+                    } label: {
+                        if index == transitionEffect {
+                            Label(name, systemImage: "checkmark")
+                        } else {
+                            Text(name)
+                        }
+                    }
+                }
+            } label: {
+                HStack(spacing: 5) {
+                    Text(transitions.indices.contains(transitionEffect)
+                         ? transitions[transitionEffect] : "—")
+                        .font(.callout)
+                        .fixedSize()
+                    Image(systemName: "chevron.up.chevron.down")
+                        .font(.caption2)
+                }
+                .foregroundStyle(Theme.textPrimary)
+            }
+            .menuStyle(.button).buttonStyle(.plain)
+            .padding(.horizontal, 10).padding(.vertical, 5)
+            .background(Color.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 8))
+            .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Theme.stroke))
+            .help("Effet de transition entre deux apps")
+
+            HStack(spacing: 8) {
+                Slider(value: $transitionSpeed, in: 100...2000, step: 50) { editing in
+                    if !editing { Task { try? await client.updateSettings(["TSPEED": Int(transitionSpeed)]) } }
+                }
+                .tint(Theme.accent)
+                .frame(width: 110)
+                .controlSize(.small)
+                Text("Durée · \(speedText)")
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(Theme.textSecondary)
+                    .frame(width: 90, alignment: .leading)
+            }
+            .frame(height: 24)
+            .help("Durée de l'animation de transition entre deux apps")
+        }
     }
 
     /// Durée de transition lisible : « 800 ms » ou « 1,2 s ».
@@ -306,7 +342,7 @@ struct DeviceScreenView: View {
 
     // MARK: - Cartes
 
-    private var rotationCard: some View {
+    private func rotationCard(_ inRotation: [SourceRow]) -> some View {
         VStack(spacing: 10) {
             HStack {
                 Text(String(localized: "Dans la rotation").uppercased())
@@ -333,7 +369,7 @@ struct DeviceScreenView: View {
                             .listRowSeparatorTint(Theme.stroke)
                             .listRowInsets(EdgeInsets(top: 6, leading: 4, bottom: 6, trailing: 4))
                     }
-                    .onMove(perform: moveRows)
+                    .onMove { source, destination in moveRows(inRotation, from: source, to: destination) }
                 }
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)
@@ -344,7 +380,7 @@ struct DeviceScreenView: View {
         .card()
     }
 
-    private var availableCard: some View {
+    private func availableCard(_ available: [SourceRow]) -> some View {
         VStack(spacing: 10) {
             HStack {
                 Text(String(localized: "Disponibles").uppercased())
@@ -467,7 +503,7 @@ struct DeviceScreenView: View {
     }
 
     private func connectorSubtitle(_ c: Connector) -> String {
-        if c.enabled, let v = connectors.lastValue[c.id] { return c.renderedText(value: v) }
+        if c.enabled, let v = connectors.lastValue[c.id] { return connectors.renderedText(c, value: v) }
         switch c.special {
         case .claudeQuota: return String(localized: "Quota Claude Code")
         case .stripeMRR:   return String(localized: "Revenu mensuel Stripe")
@@ -505,13 +541,13 @@ struct DeviceScreenView: View {
             Task {
                 try? await client.updateSettings([key: on])
                 try? await client.setNativeAppVisible(row.loopName, show: on)
-                await refreshLoop()
+                await poller.refreshNow(host: device.host)
             }
         case .custom(let name):
             if on { hiddenCustoms.remove(name.lowercased()) } else { hiddenCustoms.insert(name.lowercased()) }
             Task {
                 try? await client.setNativeAppVisible(name, show: on)
-                await refreshLoop()
+                await poller.refreshNow(host: device.host)
             }
         }
     }
@@ -529,19 +565,19 @@ struct DeviceScreenView: View {
     }
 
     /// Réordonnancement inline : pousse l'ordre complet de la loop sur le device.
-    private func moveRows(from source: IndexSet, to destination: Int) {
-        var rows = inRotation
+    private func moveRows(_ rows: [SourceRow], from source: IndexSet, to destination: Int) {
+        var rows = rows
         rows.move(fromOffsets: source, toOffset: destination)
         // Seules les apps réellement présentes dans la loop sont envoyées.
         let order = rows.map(\.loopName).filter { loopPositions[$0] != nil }
         // Mise à jour optimiste des positions pour un rendu immédiat.
-        for (index, name) in order.enumerated() { loopPositions[name] = index }
+        poller.applyOptimisticOrder(order)
         Task {
             do {
                 try await client.setLoopOrder(order)
                 onResult("Ordre de la rotation mis à jour")
             } catch {
-                await refreshLoop()
+                await poller.refreshNow(host: device.host)
                 onResult("Impossible d'appliquer l'ordre : \(error.localizedDescription)")
             }
         }
@@ -559,11 +595,5 @@ struct DeviceScreenView: View {
                         "HUM": s.HUM ?? false, "BAT": s.BAT ?? false]
         }
         if let list = try? await client.fetchTransitions() { transitions = list }
-    }
-
-    private func refreshLoop() async {
-        guard let loop = try? await client.fetchLoop() else { return }
-        loopPositions = loop
-        currentApp = try? await client.fetchStats().app
     }
 }

@@ -2,30 +2,32 @@ import SwiftUI
 
 @main
 struct LumoApp: App {
-    @StateObject private var store = DeviceStore()
-    @StateObject private var weatherStation = WeatherStation()
-    @StateObject private var calendarStation = CalendarStation()
-    @StateObject private var sceneStore = SceneStore()
-    @StateObject private var liveApps = LiveAppsStation()
-    @StateObject private var connectors = ConnectorsStation()
-    @StateObject private var alerts = AlertsStation()
-    @StateObject private var nightMode = NightModeStation()
-    @StateObject private var pomodoro = PomodoroStation()
-    @StateObject private var gateway = NotificationGateway()
+    @State private var store = DeviceStore()
+    @State private var weatherStation = WeatherStation()
+    @State private var calendarStation = CalendarStation()
+    @State private var sceneStore = SceneStore()
+    @State private var liveApps = LiveAppsStation()
+    @State private var connectors = ConnectorsStation()
+    @State private var alerts = AlertsStation()
+    @State private var nightMode = NightModeStation()
+    @State private var pomodoro = PomodoroStation()
+    @State private var gateway = NotificationGateway()
+    @State private var poller = DevicePoller()
 
     var body: some Scene {
         WindowGroup("Lumo", id: "main") {
             RootView()
-                .environmentObject(store)
-                .environmentObject(weatherStation)
-                .environmentObject(calendarStation)
-                .environmentObject(sceneStore)
-                .environmentObject(liveApps)
-                .environmentObject(connectors)
-                .environmentObject(alerts)
-                .environmentObject(nightMode)
-                .environmentObject(pomodoro)
-                .environmentObject(gateway)
+                .environment(store)
+                .environment(weatherStation)
+                .environment(calendarStation)
+                .environment(sceneStore)
+                .environment(liveApps)
+                .environment(connectors)
+                .environment(alerts)
+                .environment(nightMode)
+                .environment(pomodoro)
+                .environment(gateway)
+                .environment(poller)
                 .frame(minWidth: 940, minHeight: 620)
                 .preferredColorScheme(.dark)
                 .task {
@@ -39,10 +41,10 @@ struct LumoApp: App {
 
         MenuBarExtra("Lumo", systemImage: "rays") {
             MenuBarView()
-                .environmentObject(store)
-                .environmentObject(weatherStation)
-                .environmentObject(connectors)
-                .environmentObject(pomodoro)
+                .environment(store)
+                .environment(weatherStation)
+                .environment(connectors)
+                .environment(pomodoro)
         }
         .menuBarExtraStyle(.window)
     }

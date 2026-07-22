@@ -6,8 +6,8 @@ struct ComposeView: View {
     let device: Device
     var onResult: (String) -> Void = { _ in }
 
-    @EnvironmentObject var store: DeviceStore
-    @EnvironmentObject var sceneStore: SceneStore
+    @Environment(DeviceStore.self) var store
+    @Environment(SceneStore.self) var sceneStore
 
     @State private var text = "1012"
     @State private var color = Theme.accent
@@ -100,7 +100,7 @@ struct ComposeView: View {
             IconImportSheet(device: device) { importedName in
                 iconID = importedName
             }
-            .environmentObject(store)
+            .environment(store)
         }
     }
 

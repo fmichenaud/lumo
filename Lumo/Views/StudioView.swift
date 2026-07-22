@@ -7,7 +7,7 @@ struct StudioView: View {
     let device: Device
     var onResult: (String) -> Void = { _ in }
 
-    @EnvironmentObject var sceneStore: SceneStore
+    @Environment(SceneStore.self) var sceneStore
     @AppStorage("studioTab") private var tab = "text"
 
     var body: some View {
@@ -35,8 +35,8 @@ struct ScenesCard: View {
     let device: Device
     var onResult: (String) -> Void = { _ in }
 
-    @EnvironmentObject var store: DeviceStore
-    @EnvironmentObject var sceneStore: SceneStore
+    @Environment(DeviceStore.self) var store
+    @Environment(SceneStore.self) var sceneStore
     @State private var sendingSceneID: UUID?
 
     private var client: AwtrixClient { store.client(for: device) }

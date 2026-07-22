@@ -2,7 +2,7 @@ import SwiftUI
 
 /// Ajout manuel d'un device par IP, avec validation via /api/stats.
 struct AddDeviceSheet: View {
-    @EnvironmentObject var store: DeviceStore
+    @Environment(DeviceStore.self) var store
     @Environment(\.dismiss) private var dismiss
 
     @State private var host = ""

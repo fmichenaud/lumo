@@ -2,10 +2,10 @@ import SwiftUI
 
 /// Contenu de la menu-bar : aperçu rapide et actions sans ouvrir la fenêtre.
 struct MenuBarView: View {
-    @EnvironmentObject var store: DeviceStore
-    @EnvironmentObject var weatherStation: WeatherStation
-    @EnvironmentObject var connectors: ConnectorsStation
-    @EnvironmentObject var pomodoro: PomodoroStation
+    @Environment(DeviceStore.self) var store
+    @Environment(WeatherStation.self) var weatherStation
+    @Environment(ConnectorsStation.self) var connectors
+    @Environment(PomodoroStation.self) var pomodoro
     @Environment(\.openWindow) private var openWindow
 
     @State private var sending = false
@@ -87,6 +87,13 @@ struct MenuBarView: View {
                         Text(Self.claudeLine(session: session, weekly: weekly))
                             .font(.caption.monospacedDigit())
                             .lineLimit(1)
+                    }
+                    if let reset = Self.claudeResetLine(connectors.claudeQuota) {
+                        Text(reset)
+                            .font(.caption2.monospacedDigit())
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                            .padding(.leading, 13)
                     }
                 }
                 if mrr != nil || total != nil {
@@ -244,6 +251,15 @@ struct MenuBarView: View {
         if let s = session { parts.append("session \(Int(s.rounded())) %") }
         if let w = weekly { parts.append("semaine \(Int(w.rounded())) %") }
         return "Claude : " + parts.joined(separator: " · ")
+    }
+
+    /// « Reset : session dans 2h19 · semaine dans 1j 4h » — nil si aucune heure de reset connue.
+    nonisolated static func claudeResetLine(_ quota: ClaudeQuotaSource.Quota?, now: Date = Date()) -> String? {
+        guard let quota else { return nil }
+        var parts: [String] = []
+        if let s = quota.sessionReset { parts.append("session dans \(ClaudeQuotaSource.countdown(to: s, from: now))") }
+        if let w = quota.weeklyReset { parts.append("semaine dans \(ClaudeQuotaSource.countdown(to: w, from: now))") }
+        return parts.isEmpty ? nil : "Reset : " + parts.joined(separator: " · ")
     }
 
     /// « MRR 1234€ · Total 12345€ » — n'affiche que les valeurs disponibles.

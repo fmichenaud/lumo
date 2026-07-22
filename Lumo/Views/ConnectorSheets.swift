@@ -83,7 +83,7 @@ struct TemplatePicker: View {
 /// Éditeur d'un connecteur, organisé par sections claires.
 struct ConnectorEditor: View {
     let device: Device
-    @EnvironmentObject var connectors: ConnectorsStation
+    @Environment(ConnectorsStation.self) var connectors
     @Environment(\.dismiss) private var dismiss
     @State var connector: Connector
     @State private var testing = false
@@ -151,15 +151,35 @@ struct ConnectorEditor: View {
                         caption("La « route » vers la valeur dans la réponse JSON. Laisse vide si la réponse est déjà la valeur.")
                     }
                     field("Format affiché", "{value}€", text: $connector.template)
-                    caption("« {value} » est remplacé par la valeur récupérée.")
+                    if connector.special == .claudeQuota {
+                        caption("Jetons disponibles : {session} et {week} (% consommés), {reset} et {weekReset} (temps avant remise à zéro, ex. « 2h19 »), {value} (le résumé complet).")
+                        formatPresets
+                    } else {
+                        caption("« {value} » est remplacé par la valeur récupérée.")
+                    }
                 }
 
                 group("Apparence") {
+                    if connector.supportsLevelColor {
+                        Toggle(isOn: Binding(
+                            get: { connector.usesLevelColor },
+                            set: { connector.levelColor = $0 }
+                        )) { Text("Couleur selon le niveau").font(.callout) }
+                            .foregroundStyle(Theme.textPrimary)
+                        caption("Vert sous 70 %, orange sous 90 %, rouge au-delà. Décoche pour imposer ta couleur.")
+                    }
                     HStack(spacing: 12) {
                         ColorPicker("Couleur", selection: Binding(
                             get: { Color(hex: connector.colorHex) },
-                            set: { connector.colorHex = $0.hexString }
-                        ), supportsOpacity: false).foregroundStyle(Theme.textPrimary)
+                            set: { newColor in
+                                let hex = newColor.hexString
+                                guard hex != connector.colorHex else { return }
+                                connector.colorHex = hex
+                                // Choisir une couleur = la vouloir : on sort du mode automatique.
+                                if connector.supportsLevelColor { connector.levelColor = false }
+                            }
+                        ), supportsOpacity: false)
+                            .foregroundStyle(connector.usesLevelColor ? Theme.textSecondary : Theme.textPrimary)
                         Spacer()
                         IconThumbnail(host: device.host, iconID: connector.icon)
                         Button("Choisir une icône") { showIconPicker = true }
@@ -292,7 +312,7 @@ struct ConnectorEditor: View {
                 }
                 .buttonStyle(PillButtonStyle(prominent: false))
                 if let r = testResult {
-                    Text("→ « \(connector.renderedText(value: r)) »").font(.caption).foregroundStyle(Theme.accent)
+                    Text("→ « \(connectors.renderedText(connector, value: r)) »").font(.caption).foregroundStyle(Theme.accent)
                 } else if let e = connectors.lastError[connector.id] {
                     Text(e).font(.caption).foregroundStyle(.red)
                 }
@@ -314,6 +334,50 @@ struct ConnectorEditor: View {
             connectors.add(connector)
         }
         dismiss()
+    }
+
+    // MARK: - Formats du quota Claude
+
+    private static let claudePresets: [(label: String, template: String)] = [
+        ("Tout", "CC {session} · {reset} · 7j {week}"),
+        ("Session + reset", "CC {session} · {reset}"),
+        ("Reset seul", "CC reset {reset}"),
+        ("Semaine", "7j {week} · {weekReset}")
+    ]
+
+    private var formatPresets: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            // Une rangée si la feuille est assez large, sinon deux — les pilules ne se coupent jamais.
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 6) { presetButtons(Self.claudePresets) }
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(spacing: 6) { presetButtons(Array(Self.claudePresets.prefix(2))) }
+                    HStack(spacing: 6) { presetButtons(Array(Self.claudePresets.suffix(2))) }
+                }
+            }
+            Text("Aperçu : \(claudePreview)")
+                .font(.caption2.monospacedDigit()).foregroundStyle(Theme.accent)
+                .lineLimit(1).truncationMode(.middle)
+        }
+    }
+
+    @ViewBuilder
+    private func presetButtons(_ presets: [(label: String, template: String)]) -> some View {
+        ForEach(presets, id: \.template) { preset in
+            Button(preset.label) { connector.template = preset.template }
+                .buttonStyle(PillButtonStyle(prominent: connector.template == preset.template))
+                .controlSize(.small)
+        }
+    }
+
+    /// Aperçu du format avec le dernier relevé si on en a un, sinon des valeurs d'exemple.
+    private var claudePreview: String {
+        let quota = connectors.claudeQuota
+            ?? ClaudeQuotaSource.Quota(session: 42, weekly: 60,
+                                       sessionReset: Date().addingTimeInterval(8_340),
+                                       weeklyReset: Date().addingTimeInterval(100_800))
+        let summary = ClaudeQuotaSource.valueText(session: quota.session, weekly: quota.weekly)
+        return connector.renderedText(value: summary, tokens: ClaudeQuotaSource.tokens(quota))
     }
 
     // MARK: - Composants

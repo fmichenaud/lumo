@@ -1,20 +1,21 @@
 import Foundation
-import Combine
+import Observation
 
 /// Moteur des "apps live" : des sources de données (CPU, RAM, crypto) qu'on branche sur l'afficheur
 /// et que Lumo maintient à jour automatiquement en arrière-plan (tant que le process vit, via la menu-bar).
 /// Pas de `save` (flash) car mises à jour fréquentes : l'app est gardée vivante par re-push.
 @MainActor
-final class LiveAppsStation: ObservableObject {
-    @Published var cpuOn: Bool
-    @Published var ramOn: Bool
-    @Published var cryptoOn: Bool
-    @Published var coinID: String
-    @Published var currency: String
+@Observable
+final class LiveAppsStation {
+    var cpuOn: Bool
+    var ramOn: Bool
+    var cryptoOn: Bool
+    var coinID: String
+    var currency: String
 
-    @Published var cpuValue = 0
-    @Published var ramValue = 0
-    @Published var cryptoPrice: Double?
+    var cpuValue = 0
+    var ramValue = 0
+    var cryptoPrice: Double?
 
     private weak var store: DeviceStore?
     private var ticker: Task<Void, Never>?
@@ -115,7 +116,7 @@ final class LiveAppsStation: ObservableObject {
 
     // MARK: - Device
 
-    private func push(_ name: String, _ json: [String: Any]) async {
+    private func push(_ name: String, _ json: sending [String: Any]) async {
         guard let device = store?.selectedDevice else { return }
         try? await AwtrixClient(host: device.host).upsertCustomAppRaw(name: name, json: json)
     }

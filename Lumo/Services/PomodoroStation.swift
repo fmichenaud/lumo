@@ -1,11 +1,12 @@
 import Foundation
-import Combine
+import Observation
 
 /// Minuteur / Pomodoro affiché sur la matrice : une app custom "timer" est mise à jour chaque
 /// seconde (temps restant + barre de progression), et une notification sonore part à zéro.
 /// Vit au niveau de l'app (comme les autres stations) pour continuer via la menu-bar.
 @MainActor
-final class PomodoroStation: ObservableObject {
+@Observable
+final class PomodoroStation {
 
     /// État du minuteur.
     enum TimerState: Equatable {
@@ -15,15 +16,15 @@ final class PomodoroStation: ObservableObject {
     }
 
     /// Durées rapides proposées dans l'UI (minutes).
-    static let presets = [5, 15, 25, 45]
+    nonisolated static let presets = [5, 15, 25, 45]
 
-    @Published private(set) var state: TimerState = .idle
-    @Published private(set) var remaining: TimeInterval = 0  // temps restant pour l'UI, mis à jour chaque seconde
-    @Published private(set) var cycleCount = 0               // cycles de travail terminés (mode Pomodoro)
-    @Published private(set) var onBreak = false              // phase "pause" du mode Pomodoro
-    @Published private(set) var customMinutes: Int
-    @Published private(set) var pomodoroMode: Bool
-    @Published private(set) var endMessage: String
+    private(set) var state: TimerState = .idle
+    private(set) var remaining: TimeInterval = 0  // temps restant pour l'UI, mis à jour chaque seconde
+    private(set) var cycleCount = 0               // cycles de travail terminés (mode Pomodoro)
+    private(set) var onBreak = false              // phase "pause" du mode Pomodoro
+    private(set) var customMinutes: Int
+    private(set) var pomodoroMode: Bool
+    private(set) var endMessage: String
 
     private var totalDuration: TimeInterval = 1              // durée totale de la phase en cours (s)
     private weak var store: DeviceStore?
@@ -34,7 +35,7 @@ final class PomodoroStation: ObservableObject {
     private static let workMinutes = 25
     private static let breakMinutes = 5
     /// Sonnerie de fin courte (~1,5 s), format RTTTL : nom:défauts:notes.
-    static let endMelody = "lumo:d=16,o=6,b=180:c,e,g,8c7,8p,c,e,g,8c7"
+    nonisolated static let endMelody = "lumo:d=16,o=6,b=180:c,e,g,8c7,8p,c,e,g,8c7"
 
     init() {
         let saved = defaults.integer(forKey: "lumo.timer.minutes")

@@ -4,7 +4,8 @@ import SwiftUI
 /// puis la section choisie dans la sidebar (Écran, Studio, Moments, Appareil).
 struct DeviceDetailView: View {
     let device: Device
-    @EnvironmentObject var store: DeviceStore
+    @Environment(DeviceStore.self) var store
+    @Environment(DevicePoller.self) var poller
 
     @State private var banner: String?
 
@@ -29,6 +30,9 @@ struct DeviceDetailView: View {
         .background(Theme.backgroundGradient)
         .navigationTitle(device.name)
         .overlay(alignment: .top) { bannerView }
+        // Une seule boucle de sondage pour tout le détail (barre « à l'écran » + sections),
+        // annulée automatiquement quand la vue disparaît ou que l'afficheur change.
+        .task(id: device.host) { await poller.run(host: device.host) }
     }
 
     @ViewBuilder private var sectionContent: some View {

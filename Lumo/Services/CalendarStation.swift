@@ -1,5 +1,5 @@
 import Foundation
-import Combine
+import Observation
 import EventKit
 
 /// Événement minimal pour la logique pure (testable sans accès EventKit réel).
@@ -13,10 +13,11 @@ struct CalendarEventInfo {
 /// et l'affiche sur la matrice via une app custom `calendar`.
 /// Rafraîchit toutes les 5 min tant que le process vit (menu-bar comprise).
 @MainActor
-final class CalendarStation: ObservableObject {
-    @Published private(set) var enabled: Bool
-    @Published private(set) var nextEventText: String?
-    @Published private(set) var lastError: String?
+@Observable
+final class CalendarStation {
+    private(set) var enabled: Bool
+    private(set) var nextEventText: String?
+    private(set) var lastError: String?
 
     private let eventStore = EKEventStore()
     private weak var store: DeviceStore?

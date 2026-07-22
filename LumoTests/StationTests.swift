@@ -14,6 +14,63 @@ struct ClaudeQuotaSourceTests {
         #expect(ClaudeQuotaSource.color(forPercent: 70) == "#FFC400")
         #expect(ClaudeQuotaSource.color(forPercent: 95) == "#FF5555")
     }
+
+    @Test func countdownFormats() {
+        let now = Date(timeIntervalSince1970: 0)
+        #expect(ClaudeQuotaSource.countdown(to: now.addingTimeInterval(-60), from: now) == "0min")
+        #expect(ClaudeQuotaSource.countdown(to: now.addingTimeInterval(30), from: now) == "1min")
+        #expect(ClaudeQuotaSource.countdown(to: now.addingTimeInterval(8 * 60), from: now) == "8min")
+        #expect(ClaudeQuotaSource.countdown(to: now.addingTimeInterval(2 * 3600 + 19 * 60), from: now) == "2h19")
+        #expect(ClaudeQuotaSource.countdown(to: now.addingTimeInterval(3 * 3600 + 5 * 60), from: now) == "3h05")
+        #expect(ClaudeQuotaSource.countdown(to: now.addingTimeInterval(28 * 3600), from: now) == "1j 4h")
+    }
+
+    @Test func parsesISO8601WithAndWithoutFraction() {
+        // Format réellement renvoyé par l'API (6 décimales, décalage +00:00) : la seconde
+        // près suffit, la fraction peut être tronquée selon le chemin de repli.
+        let withFraction = ClaudeQuotaSource.parseDate("2026-07-22T13:39:59.974707+00:00")
+        #expect(withFraction.map { abs($0.timeIntervalSince1970 - 1_784_727_599) < 1 } == true)
+        #expect(ClaudeQuotaSource.parseDate("2026-07-22T13:39:59Z") == Date(timeIntervalSince1970: 1_784_727_599))
+        #expect(ClaudeQuotaSource.parseDate("pas une date") == nil)
+    }
+
+    @Test func templateTokens() {
+        let quota = ClaudeQuotaSource.Quota(session: 42, weekly: 60,
+                                            sessionReset: Date(timeIntervalSince1970: 8340),
+                                            weeklyReset: Date(timeIntervalSince1970: 100_800))
+        let tokens = ClaudeQuotaSource.tokens(quota, now: Date(timeIntervalSince1970: 0))
+        #expect(tokens["session"] == "42%")
+        #expect(tokens["week"] == "60%")
+        #expect(tokens["reset"] == "2h19")
+        #expect(tokens["weekReset"] == "1j 4h")
+
+        var connector = Connector(template: "CC {session} · {reset} · 7j {week}")
+        #expect(connector.renderedText(value: "x", tokens: tokens) == "CC 42% · 2h19 · 7j 60%")
+        connector.template = "CC {value}"
+        #expect(connector.renderedText(value: "42% · 7j 60%", tokens: tokens) == "CC 42% · 7j 60%")
+    }
+}
+
+struct ConnectorColorTests {
+    @Test func claudeQuotaDefaultsToLevelColor() {
+        var claude = Connector()
+        claude.special = .claudeQuota
+        #expect(claude.usesLevelColor)
+        #expect(claude.supportsLevelColor)
+    }
+
+    @Test func chosenColorWinsOnceLevelColorIsOff() {
+        var claude = Connector(colorHex: "#41BDF5")
+        claude.special = .claudeQuota
+        claude.levelColor = false
+        #expect(!claude.usesLevelColor)
+    }
+
+    @Test func plainConnectorsAlwaysUseTheirColor() {
+        let api = Connector(colorHex: "#FFC400")
+        #expect(!api.usesLevelColor)
+        #expect(!api.supportsLevelColor)
+    }
 }
 
 struct StripeMRRSourceTests {

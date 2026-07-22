@@ -1,14 +1,15 @@
 import Foundation
-import Combine
+import Observation
 
 /// Moteur des règles d'alerte : évalue les métriques surveillées à intervalle régulier
 /// et déclenche notification / LED au franchissement d'un seuil (une seule fois par
 /// franchissement — la règle se réarme quand la valeur repasse du bon côté).
 @MainActor
-final class AlertsStation: ObservableObject {
-    @Published var rules: [AlertRule] = []
-    @Published var lastValues: [UUID: Double] = [:]
-    @Published private(set) var active: Set<UUID> = []
+@Observable
+final class AlertsStation {
+    var rules: [AlertRule] = []
+    var lastValues: [UUID: Double] = [:]
+    private(set) var active: Set<UUID> = []
 
     private weak var store: DeviceStore?
     private weak var connectorsStation: ConnectorsStation?

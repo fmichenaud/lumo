@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct SidebarView: View {
-    @EnvironmentObject var store: DeviceStore
-    @ObservedObject var discovery: DeviceDiscovery
+    @Environment(DeviceStore.self) var store
+    let discovery: DeviceDiscovery
     var onScan: () -> Void
     @State private var showAddSheet = false
 

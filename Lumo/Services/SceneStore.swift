@@ -1,10 +1,11 @@
 import Foundation
-import Combine
+import Observation
 
 /// Persistance des scènes de l'utilisateur (presets).
 @MainActor
-final class SceneStore: ObservableObject {
-    @Published var scenes: [DisplayScene] = []
+@Observable
+final class SceneStore {
+    var scenes: [DisplayScene] = []
     private let storageKey = "lumo.scenes.v1"
 
     init() { load() }

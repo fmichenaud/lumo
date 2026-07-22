@@ -3,7 +3,7 @@ import SwiftUI
 /// Éditeur pixel art 32×8 : peins au glissé, puis envoie sur l'afficheur via commandes `draw`.
 struct DrawView: View {
     let device: Device
-    @EnvironmentObject var store: DeviceStore
+    @Environment(DeviceStore.self) var store
     var onResult: (String) -> Void = { _ in }
 
     @State private var pixels = [Color?](repeating: nil, count: 256)

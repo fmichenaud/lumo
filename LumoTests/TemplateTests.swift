@@ -15,7 +15,9 @@ struct ConnectorTemplateTests {
     @Test func allTemplatesBuildValidConnectors() {
         for template in ConnectorTemplate.all {
             let c = template.build()
-            #expect(c.template.contains("{value}"))
+            // Au moins un jeton : {value} partout, ou les jetons propres à une source spéciale.
+            #expect(c.template.contains("{value}")
+                    || (c.special == .claudeQuota && c.template.contains("{session}")))
             #expect(c.intervalSeconds > 0)
             #expect(ConnectorTemplate.categoryOrder.contains(template.category))
         }
