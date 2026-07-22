@@ -24,7 +24,7 @@ struct MomentsView: View {
 /// afficheur, désormais au premier niveau (elle était repliée dans un disclosure).
 private struct NotificationCard: View {
     let device: Device
-    @EnvironmentObject var store: DeviceStore
+    @Environment(DeviceStore.self) var store
     var onResult: (String) -> Void = { _ in }
 
     @State private var text = ""
@@ -105,8 +105,8 @@ private struct NotificationCard: View {
 
 private struct RulesCard: View {
     let device: Device
-    @EnvironmentObject var alerts: AlertsStation
-    @EnvironmentObject var connectors: ConnectorsStation
+    @Environment(AlertsStation.self) var alerts
+    @Environment(ConnectorsStation.self) var connectors
     var onResult: (String) -> Void = { _ in }
 
     @State private var editing: AlertRule?
@@ -138,8 +138,8 @@ private struct RulesCard: View {
         .card()
         .sheet(item: $editing) { rule in
             RuleEditor(device: device, rule: rule)
-                .environmentObject(alerts)
-                .environmentObject(connectors)
+                .environment(alerts)
+                .environment(connectors)
         }
     }
 
@@ -189,7 +189,7 @@ private struct RulesCard: View {
 // MARK: - Minuteur
 
 private struct TimerCard: View {
-    @EnvironmentObject var pomodoro: PomodoroStation
+    @Environment(PomodoroStation.self) var pomodoro
     @State private var showSheet = false
 
     var body: some View {
@@ -226,7 +226,7 @@ private struct TimerCard: View {
             }
         }
         .card()
-        .sheet(isPresented: $showSheet) { PomodoroSheet().environmentObject(pomodoro) }
+        .sheet(isPresented: $showSheet) { PomodoroSheet().environment(pomodoro) }
     }
 }
 
@@ -234,7 +234,7 @@ private struct TimerCard: View {
 
 private struct IndicatorsCard: View {
     let device: Device
-    @EnvironmentObject var store: DeviceStore
+    @Environment(DeviceStore.self) var store
     var onResult: (String) -> Void = { _ in }
 
     @State private var indicatorColors: [Color] = [.red, .green, Theme.accent]
@@ -266,7 +266,7 @@ private struct IndicatorsCard: View {
 /// La passerelle reçoit des messages d'autres apps (Raccourcis, scripts, curl…)
 /// et les affiche : une source de « moments ». Port et exemples dans sa sheet.
 private struct GatewayCard: View {
-    @EnvironmentObject var gateway: NotificationGateway
+    @Environment(NotificationGateway.self) var gateway
     @State private var showConfig = false
 
     var body: some View {
@@ -280,7 +280,7 @@ private struct GatewayCard: View {
                 .labelsHidden().tint(Theme.accent)
         }
         .card()
-        .sheet(isPresented: $showConfig) { GatewaySheet().environmentObject(gateway) }
+        .sheet(isPresented: $showConfig) { GatewaySheet().environment(gateway) }
     }
 
     private var subtitle: String {
@@ -300,7 +300,7 @@ private struct GatewayCard: View {
 
 /// Réglage de la passerelle : port d'écoute + exemples prêts à copier.
 private struct GatewaySheet: View {
-    @EnvironmentObject var gateway: NotificationGateway
+    @Environment(NotificationGateway.self) var gateway
     @State private var portText = ""
     @FocusState private var portFocused: Bool
 
@@ -384,8 +384,8 @@ private func optionRow<Trailing: View>(_ title: String, _ desc: String, @ViewBui
 /// Éditeur d'une règle d'alerte.
 struct RuleEditor: View {
     let device: Device
-    @EnvironmentObject var alerts: AlertsStation
-    @EnvironmentObject var connectors: ConnectorsStation
+    @Environment(AlertsStation.self) var alerts
+    @Environment(ConnectorsStation.self) var connectors
     @Environment(\.dismiss) private var dismiss
     @State var rule: AlertRule
     @State private var color: Color

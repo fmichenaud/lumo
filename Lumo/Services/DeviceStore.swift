@@ -1,5 +1,5 @@
 import Foundation
-import Combine
+import Observation
 
 /// Les sous-sections d'un afficheur, affichées sous l'appareil dans la barre latérale.
 enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
@@ -27,10 +27,11 @@ enum DeviceSection: String, CaseIterable, Identifiable, Sendable {
 
 /// Source de vérité des devices : persistance locale et sélection courante.
 @MainActor
-final class DeviceStore: ObservableObject {
-    @Published var devices: [Device] = []
-    @Published var selectedID: Device.ID?
-    @Published var selectedSection: DeviceSection = .screen
+@Observable
+final class DeviceStore {
+    var devices: [Device] = []
+    var selectedID: Device.ID?
+    var selectedSection: DeviceSection = .screen
 
     private let storageKey = "lumo.devices.v1"
 

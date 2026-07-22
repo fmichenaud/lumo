@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct RootView: View {
-    @EnvironmentObject var store: DeviceStore
-    @EnvironmentObject var gateway: NotificationGateway
-    @StateObject private var discovery = DeviceDiscovery()
+    @Environment(DeviceStore.self) var store
+    @Environment(NotificationGateway.self) var gateway
+    @State private var discovery = DeviceDiscovery()
 
     var body: some View {
         NavigationSplitView {
@@ -45,7 +45,7 @@ struct RootView: View {
 
 /// Écran d'accueil quand aucun device n'est connu : auto-recherche guidée + ajout manuel.
 struct OnboardingView: View {
-    @ObservedObject var discovery: DeviceDiscovery
+    let discovery: DeviceDiscovery
     var onScan: () -> Void
     @State private var showAddSheet = false
 

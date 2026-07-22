@@ -1,19 +1,23 @@
 import Foundation
-import Combine
+import Observation
 
 /// État météo partagé au niveau de l'app : persiste la ville, rafraîchit, et pousse sur l'afficheur.
 /// Vit aussi longtemps que le process (donc continue en tâche de fond via la menu-bar).
 @MainActor
-final class WeatherStation: ObservableObject {
-    @Published private(set) var locationLabel: String
-    @Published private(set) var weather: WeatherNow?
-    @Published private(set) var autoEnabled: Bool
+@Observable
+final class WeatherStation {
+    private(set) var locationLabel: String
+    private(set) var weather: WeatherNow?
+    private(set) var autoEnabled: Bool
 
     private var latitude: Double
     private var longitude: Double
     private weak var store: DeviceStore?
     private var task: Task<Void, Never>?
     private let defaults = UserDefaults.standard
+    /// Icônes déjà téléversées, par afficheur ("host#icône") : inutile de re-télécharger
+    /// chez LaMetric et de re-téléverser la même icône à chaque rafraîchissement.
+    private var uploadedIcons: Set<String> = []
 
     init() {
         locationLabel = defaults.string(forKey: "lumo.weather.label") ?? ""
@@ -51,10 +55,7 @@ final class WeatherStation: ObservableObject {
         guard let weather, let device = store?.selectedDevice else { return }
         let client = AwtrixClient(host: device.host)
         let condition = weather.condition
-        if let data = try? await LaMetricService.fetchIcon(id: condition.iconID),
-           let gif = IconConverter.awtrixGIF(from: data) {
-            try? await client.uploadIcon(id: condition.iconID, data: gif, ext: "gif")
-        }
+        await ensureIcon(condition.iconID, host: device.host, client: client)
         var payload = PushPayload()
         payload.text = weather.tempText
         payload.icon = condition.iconID
@@ -71,6 +72,16 @@ final class WeatherStation: ObservableObject {
         task?.cancel()
         task = nil
         if on { startAuto() } else { Task { await removeFromDevice() } }
+    }
+
+    /// Téléverse l'icône météo une seule fois par afficheur (elle reste en flash ensuite).
+    private func ensureIcon(_ id: String, host: String, client: AwtrixClient) async {
+        let key = "\(host)#\(id)"
+        guard !uploadedIcons.contains(key) else { return }
+        guard let data = try? await LaMetricService.fetchIcon(id: id),
+              let gif = IconConverter.awtrixGIF(from: data) else { return }
+        try? await client.uploadIcon(id: id, data: gif, ext: "gif")
+        uploadedIcons.insert(key)
     }
 
     private func removeFromDevice() async {

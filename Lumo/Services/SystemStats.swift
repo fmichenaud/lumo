@@ -14,17 +14,20 @@ enum SystemStats {
             }
         }
         guard result == KERN_SUCCESS else { return 0 }
-        let pageSize = UInt64(vm_page_size)
+        // sysconf plutôt que la globale `vm_page_size` (variable mutable côté Darwin).
+        let pageSize = UInt64(sysconf(_SC_PAGESIZE))
         let used = (UInt64(stats.active_count) + UInt64(stats.wire_count) + UInt64(stats.compressor_page_count)) * pageSize
         let total = ProcessInfo.processInfo.physicalMemory
         guard total > 0 else { return 0 }
         return min(100, Int(Double(used) / Double(total) * 100))
     }
 
-    private static var previousCPU: host_cpu_load_info?
+    /// Relevé précédent, gardé pour calculer un delta. Isolé sur le main actor :
+    /// les seuls appelants (stations d'affichage et d'alertes) y vivent déjà.
+    @MainActor private static var previousCPU: host_cpu_load_info?
 
     /// Pourcentage d'utilisation CPU (différence entre deux relevés ; appeler ~2× à 0,5 s d'écart).
-    static func cpuUsagePercent() -> Int {
+    @MainActor static func cpuUsagePercent() -> Int {
         var count = mach_msg_type_number_t(MemoryLayout<host_cpu_load_info>.size / MemoryLayout<integer_t>.size)
         var info = host_cpu_load_info()
         let result = withUnsafeMutablePointer(to: &info) {

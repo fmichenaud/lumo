@@ -1,6 +1,6 @@
 import Foundation
 import Network
-import Combine
+import Observation
 
 /// Passerelle de notifications : mini serveur HTTP local (loopback uniquement) qui reçoit
 /// des messages depuis n'importe quel outil (curl, Raccourcis, scripts…) et les relaie
@@ -10,13 +10,14 @@ import Combine
 /// - `POST /notify` avec corps JSON `{"text": "...", "title"?, "color"?, "icon"?, "hold"?, "duration"?}`
 /// - `GET /notify?text=...&color=%23RRGGBB` (query string percent-encodée)
 @MainActor
-final class NotificationGateway: ObservableObject {
-    @Published private(set) var enabled: Bool
-    @Published private(set) var port: Int
-    @Published private(set) var isRunning = false
-    @Published private(set) var lastMessage: String?
-    @Published private(set) var receivedCount = 0
-    @Published private(set) var lastError: String?
+@Observable
+final class NotificationGateway {
+    private(set) var enabled: Bool
+    private(set) var port: Int
+    private(set) var isRunning = false
+    private(set) var lastMessage: String?
+    private(set) var receivedCount = 0
+    private(set) var lastError: String?
 
     nonisolated static let defaultPort = 8787
 
@@ -95,9 +96,12 @@ final class NotificationGateway: ObservableObject {
                     }
                 }
             }
-            listener.newConnectionHandler = { [weak self] connection in
-                Self.serve(connection) { payload in
-                    Task { @MainActor [weak self] in self?.deliver(payload) }
+            listener.newConnectionHandler = { connection in
+                // La capture faible vit sur la closure de livraison elle-même : imbriquer
+                // deux `[weak self]` fait référencer une variable capturée depuis un
+                // contexte concurrent (refusé par la vérification stricte de Swift 6).
+                Self.serve(connection) { [weak self] payload in
+                    Task { @MainActor in self?.deliver(payload) }
                 }
             }
             listener.start(queue: .global(qos: .utility))

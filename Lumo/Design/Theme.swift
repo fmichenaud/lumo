@@ -16,16 +16,13 @@ enum Theme {
     static let corner: CGFloat = 14
 
     /// Dégradé doré pour les éléments proéminents (boutons, logo).
-    static var accentGradient: LinearGradient {
-        LinearGradient(colors: [Color(hex: "FFD24D"), Color(hex: "FFB300")],
-                       startPoint: .top, endPoint: .bottom)
-    }
+    /// `let` et non `var` : ces dégradés sont relus à chaque rendu, inutile de les reconstruire.
+    static let accentGradient = LinearGradient(colors: [Color(hex: "FFD24D"), Color(hex: "FFB300")],
+                                               startPoint: .top, endPoint: .bottom)
 
     /// Dégradé de fond de la fenêtre principale.
-    static var backgroundGradient: LinearGradient {
-        LinearGradient(colors: [Color(hex: "14141B"), Color(hex: "0B0B0F")],
-                       startPoint: .topLeading, endPoint: .bottomTrailing)
-    }
+    static let backgroundGradient = LinearGradient(colors: [Color(hex: "14141B"), Color(hex: "0B0B0F")],
+                                                   startPoint: .topLeading, endPoint: .bottomTrailing)
 
 }
 

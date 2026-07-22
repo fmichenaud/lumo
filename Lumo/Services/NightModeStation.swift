@@ -1,5 +1,5 @@
 import Foundation
-import Combine
+import Observation
 
 /// Action appliquée à l'afficheur pendant la plage nocturne.
 enum NightAction: String, CaseIterable, Sendable {
@@ -12,15 +12,16 @@ enum NightAction: String, CaseIterable, Sendable {
 /// requête par transition (pas de renvoi à chaque tick). Gère les plages qui
 /// traversent minuit (ex. 23 h → 7 h). Vit aussi longtemps que le process.
 @MainActor
-final class NightModeStation: ObservableObject {
-    @Published private(set) var enabled: Bool
-    @Published private(set) var startMinutes: Int   // minutes depuis minuit
-    @Published private(set) var endMinutes: Int     // minutes depuis minuit
-    @Published private(set) var action: NightAction
-    @Published private(set) var dimPercent: Int     // 1…100, utilisé si action == .dim
+@Observable
+final class NightModeStation {
+    private(set) var enabled: Bool
+    private(set) var startMinutes: Int   // minutes depuis minuit
+    private(set) var endMinutes: Int     // minutes depuis minuit
+    private(set) var action: NightAction
+    private(set) var dimPercent: Int     // 1…100, utilisé si action == .dim
 
     /// Vrai si l'action nocturne est actuellement appliquée sur le device.
-    @Published private(set) var applied: Bool
+    private(set) var applied: Bool
 
     private weak var store: DeviceStore?
     private var task: Task<Void, Never>?

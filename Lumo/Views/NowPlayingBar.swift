@@ -7,11 +7,9 @@ import SwiftUI
 struct NowPlayingBar: View {
     let device: Device
 
-    @StateObject private var screen = ScreenStreamer()
+    @Environment(DevicePoller.self) var poller
+    @State private var screen = ScreenStreamer()
     @AppStorage("nowPlayingExpanded") private var expanded = false
-    @State private var stats: AwtrixStats?
-
-    private var client: AwtrixClient { AwtrixClient(host: device.host) }
 
     var body: some View {
         VStack(spacing: 14) {
@@ -28,13 +26,12 @@ struct NowPlayingBar: View {
             }
         }
         .card()
+        // L'app courante vient du sondage partagé (DevicePoller) : plus d'appel /api/stats ici.
         .task(id: device.id) {
+            screen.setExpanded(expanded)
             screen.start(host: device.host)
-            while !Task.isCancelled {
-                stats = try? await client.fetchStats()
-                try? await Task.sleep(nanoseconds: 3_000_000_000)
-            }
         }
+        .onChange(of: expanded) { _, value in screen.setExpanded(value) }
         .onDisappear { screen.stop() }
     }
 
@@ -65,7 +62,7 @@ struct NowPlayingBar: View {
                 .foregroundStyle(Theme.textPrimary)
             }
             HStack(spacing: 6) {
-                if let app = stats?.app, !app.isEmpty {
+                if let app = poller.currentApp, !app.isEmpty {
                     Image(systemName: "dot.radiowaves.left.and.right")
                         .font(.caption2).foregroundStyle(Theme.accent)
                     Text("À l'écran : \(app.capitalized)")

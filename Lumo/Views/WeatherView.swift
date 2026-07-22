@@ -4,8 +4,8 @@ import SwiftUI
 /// L'état (ville, météo, auto) est porté par WeatherStation, partagé avec la menu-bar.
 struct WeatherConfigSheet: View {
     let device: Device
-    @EnvironmentObject var store: DeviceStore
-    @EnvironmentObject var weatherStation: WeatherStation
+    @Environment(DeviceStore.self) var store
+    @Environment(WeatherStation.self) var weatherStation
     @Environment(\.dismiss) private var dismiss
     var onResult: (String) -> Void = { _ in }
 

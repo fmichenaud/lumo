@@ -37,7 +37,7 @@ struct AwtrixClient: Sendable {
         return data
     }
 
-    private func post(_ path: String, json: Any, timeout: TimeInterval = 5) async throws {
+    private func post(_ path: String, json: sending Any, timeout: TimeInterval = 5) async throws {
         var req = URLRequest(url: url(path))
         req.httpMethod = "POST"
         req.timeoutInterval = timeout
@@ -102,7 +102,7 @@ struct AwtrixClient: Sendable {
 
     // MARK: - Réglages
 
-    func updateSettings(_ values: [String: Any]) async throws {
+    func updateSettings(_ values: sending [String: Any]) async throws {
         try await post("/api/settings", json: values)
     }
 
@@ -155,7 +155,7 @@ struct AwtrixClient: Sendable {
     }
 
     /// Envoi d'une app custom avec un JSON arbitraire (graphiques, dessin, etc.).
-    func upsertCustomAppRaw(name: String, json: [String: Any]) async throws {
+    func upsertCustomAppRaw(name: String, json: sending [String: Any]) async throws {
         try await post("/api/custom?name=\(encodedName(name))", json: json)
     }
 

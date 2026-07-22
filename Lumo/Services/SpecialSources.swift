@@ -10,14 +10,25 @@ import Security
 enum ClaudeQuotaSource {
     struct SourceError: Error { let message: String }
 
+    /// Dernier relevé : pourcentages consommés + heures de remise à zéro.
+    struct Quota: Equatable {
+        var session: Double?
+        var weekly: Double?
+        var sessionReset: Date?
+        var weeklyReset: Date?
+    }
+
     private struct UsageResponse: Decodable {
-        struct Bucket: Decodable { let utilization: Double? }
+        struct Bucket: Decodable {
+            let utilization: Double?
+            let resets_at: String?
+        }
         let five_hour: Bucket?
         let seven_day: Bucket?
     }
 
-    /// (texte affichable, session %, semaine %)
-    static func fetch() async throws -> (value: String, session: Double?, weekly: Double?) {
+    /// (texte affichable, relevé complet)
+    static func fetch() async throws -> (value: String, quota: Quota) {
         guard let token = keychainToken() else {
             throw SourceError(message: String(localized: "Token introuvable — ouvre Claude Code une fois, puis autorise Lumo dans le Trousseau."))
         }
@@ -33,9 +44,11 @@ enum ClaudeQuotaSource {
             throw SourceError(message: "HTTP \(http.statusCode)")
         }
         let decoded = try JSONDecoder().decode(UsageResponse.self, from: data)
-        let session = decoded.five_hour?.utilization
-        let weekly = decoded.seven_day?.utilization
-        return (valueText(session: session, weekly: weekly), session, weekly)
+        let quota = Quota(session: decoded.five_hour?.utilization,
+                          weekly: decoded.seven_day?.utilization,
+                          sessionReset: decoded.five_hour?.resets_at.flatMap(parseDate),
+                          weeklyReset: decoded.seven_day?.resets_at.flatMap(parseDate))
+        return (valueText(session: quota.session, weekly: quota.weekly), quota)
     }
 
     /// Texte compact pour la matrice, ex. "59% · 7j 13%".
@@ -43,6 +56,41 @@ enum ClaudeQuotaSource {
         let s = session.map { "\(Int($0))%" } ?? "—"
         let w = weekly.map { "\(Int($0))%" } ?? "—"
         return "\(s) · 7j \(w)"
+    }
+
+    /// Jetons de format d'un connecteur quota ({session}, {reset}…), déjà mis en forme.
+    static func tokens(_ q: Quota, now: Date = Date()) -> [String: String] {
+        [
+            "session": q.session.map { "\(Int($0))%" } ?? "—",
+            "week": q.weekly.map { "\(Int($0))%" } ?? "—",
+            "reset": q.sessionReset.map { countdown(to: $0, from: now) } ?? "—",
+            "weekReset": q.weeklyReset.map { countdown(to: $0, from: now) } ?? "—"
+        ]
+    }
+
+    /// Temps restant compact, taillé pour une matrice 32×8 : "8min", "2h19", "1j 4h".
+    static func countdown(to date: Date, from now: Date = Date()) -> String {
+        let seconds = Int(date.timeIntervalSince(now))
+        if seconds <= 0 { return "0min" }
+        let minutes = seconds / 60
+        if minutes < 60 { return "\(max(1, minutes))min" }
+        let hours = minutes / 60
+        if hours < 24 { return String(format: "%dh%02d", hours, minutes % 60) }
+        return "\(hours / 24)j \(hours % 24)h"
+    }
+
+    /// ISO 8601 avec ou sans fraction de seconde (l'API renvoie 6 décimales).
+    static func parseDate(_ string: String) -> Date? {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        if let date = formatter.date(from: string) { return date }
+        formatter.formatOptions = [.withInternetDateTime]
+        if let date = formatter.date(from: string) { return date }
+        // Fraction trop longue pour ISO8601DateFormatter → on la retire avant de réessayer.
+        guard let dot = string.firstIndex(of: "."),
+              let end = string[dot...].firstIndex(where: { $0 == "+" || $0 == "-" || $0 == "Z" })
+        else { return nil }
+        return formatter.date(from: string.replacingCharacters(in: dot..<end, with: ""))
     }
 
     /// Vert tant qu'on est large, orange quand ça chauffe, rouge près de la limite.

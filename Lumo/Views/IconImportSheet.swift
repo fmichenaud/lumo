@@ -5,7 +5,7 @@ import UniformTypeIdentifiers
 /// Galerie d'icônes intégrée : recherche LaMetric en direct, clic = envoi sur l'afficheur.
 /// Les icônes animées sont uploadées telles quelles (GIF 8×8) ; les statiques sont converties.
 struct IconImportSheet: View {
-    @EnvironmentObject var store: DeviceStore
+    @Environment(DeviceStore.self) var store
     @Environment(\.dismiss) private var dismiss
     let device: Device
     var onImported: (String) -> Void

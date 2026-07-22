@@ -3,7 +3,7 @@ import SwiftUI
 /// Sheet du minuteur : durées rapides ou custom, mode Pomodoro, message de fin,
 /// temps restant en grand et bouton Démarrer/Arrêter.
 struct PomodoroSheet: View {
-    @EnvironmentObject var pomodoro: PomodoroStation
+    @Environment(PomodoroStation.self) var pomodoro
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -81,7 +81,7 @@ struct PomodoroSheet: View {
 
 /// Sheet de configuration de l'intégration Crypto : choix de la devise et de la monnaie.
 struct CryptoConfigSheet: View {
-    @EnvironmentObject var live: LiveAppsStation
+    @Environment(LiveAppsStation.self) var live
 
     var body: some View {
         SheetScaffold("Crypto",
@@ -109,7 +109,7 @@ struct CryptoConfigSheet: View {
 /// Sheet de statut de l'intégration Calendrier : accès, prochain événement, actualisation.
 /// (Le calendrier n'a pas de réglage : il affiche le prochain événement à venir.)
 struct CalendarConfigSheet: View {
-    @EnvironmentObject var calendarStation: CalendarStation
+    @Environment(CalendarStation.self) var calendarStation
     @State private var refreshing = false
 
     var body: some View {

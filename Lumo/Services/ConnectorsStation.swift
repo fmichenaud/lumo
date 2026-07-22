@@ -1,16 +1,19 @@
 import Foundation
-import Combine
+import Observation
 
 /// Moteur des connecteurs : stocke la liste, rafraîchit chaque connecteur actif sur son intervalle,
 /// pousse le résultat sur l'afficheur, et permet de tester un connecteur à la volée.
 @MainActor
-final class ConnectorsStation: ObservableObject {
-    @Published var connectors: [Connector] = []
-    @Published var lastValue: [UUID: String] = [:]
-    @Published var lastError: [UUID: String] = [:]
+@Observable
+final class ConnectorsStation {
+    var connectors: [Connector] = []
+    var lastValue: [UUID: String] = [:]
+    var lastError: [UUID: String] = [:]
     /// Métriques numériques des sources spéciales, pour les règles d'alerte
     /// (clés : "claude.session", "claude.weekly", "stripe.mrr").
-    @Published var specialMetrics: [String: Double] = [:]
+    var specialMetrics: [String: Double] = [:]
+    /// Dernier relevé de quota Claude (pourcentages + heures de reset).
+    var claudeQuota: ClaudeQuotaSource.Quota?
 
     private weak var store: DeviceStore?
     private var ticker: Task<Void, Never>?
@@ -51,12 +54,19 @@ final class ConnectorsStation: ObservableObject {
 
     // MARK: - Boucle
 
+    /// Au plus 4 connecteurs interrogés de front : assez pour ne pas se bloquer les uns
+    /// les autres, pas assez pour saturer le réseau ni l'afficheur.
+    private static let maxParallelRefresh = 4
+
     private func startTicker() {
         guard ticker == nil else { return }
         ticker = Task { [weak self] in
             while !Task.isCancelled {
                 await self?.tick()
-                try? await Task.sleep(nanoseconds: 5_000_000_000)
+                // Se réveiller à la prochaine échéance plutôt que toutes les 5 s :
+                // avec des intervalles longs (30 min pour Stripe), inutile de tourner à vide.
+                let delay = self?.delayUntilNextDue() ?? 5_000_000_000
+                try? await Task.sleep(nanoseconds: delay)
             }
         }
     }
@@ -65,11 +75,36 @@ final class ConnectorsStation: ObservableObject {
         if !connectors.contains(where: { $0.enabled }) { ticker?.cancel(); ticker = nil }
     }
 
+    /// Attente avant le prochain connecteur dû, bornée à [1 s, 30 s] pour rester réactif
+    /// aux changements de configuration.
+    private func delayUntilNextDue(now: Date = Date()) -> UInt64 {
+        let waits = connectors.filter(\.enabled).map { c -> Double in
+            let interval = Double(max(10, c.intervalSeconds))
+            return max(0, interval - now.timeIntervalSince(lastRun[c.id] ?? .distantPast))
+        }
+        let next = waits.min() ?? 5
+        return UInt64(min(30, max(1, next)) * 1_000_000_000)
+    }
+
+    /// Rafraîchit les connecteurs échus en parallèle : un service lent (Stripe pagine,
+    /// une API peut timeouter à 8 s) ne doit pas retarder tous les autres.
     private func tick() async {
         let now = Date()
-        for c in connectors where c.enabled {
-            let due = now.timeIntervalSince(lastRun[c.id] ?? .distantPast) >= Double(max(10, c.intervalSeconds))
-            if due { await refresh(c) }
+        let due = connectors.filter { c in
+            c.enabled && now.timeIntervalSince(lastRun[c.id] ?? .distantPast) >= Double(max(10, c.intervalSeconds))
+        }
+        guard !due.isEmpty else { return }
+
+        await withTaskGroup(of: Void.self) { group in
+            var iterator = due.makeIterator()
+            for _ in 0..<min(Self.maxParallelRefresh, due.count) {
+                guard let c = iterator.next() else { break }
+                group.addTask { await self.refresh(c) }
+            }
+            while await group.next() != nil {
+                guard let c = iterator.next() else { continue }
+                group.addTask { await self.refresh(c) }
+            }
         }
     }
 
@@ -83,8 +118,9 @@ final class ConnectorsStation: ObservableObject {
         case .claudeQuota:
             do {
                 let usage = try await ClaudeQuotaSource.fetch()
-                if let s = usage.session { specialMetrics["claude.session"] = s }
-                if let w = usage.weekly { specialMetrics["claude.weekly"] = w }
+                claudeQuota = usage.quota
+                if let s = usage.quota.session { specialMetrics["claude.session"] = s }
+                if let w = usage.quota.weekly { specialMetrics["claude.weekly"] = w }
                 return (usage.value, nil)
             } catch let error as ClaudeQuotaSource.SourceError {
                 return (nil, error.message)
@@ -152,13 +188,24 @@ final class ConnectorsStation: ObservableObject {
         return nil
     }
 
+    /// Texte final envoyé à l'afficheur, jetons de la source compris.
+    func renderedText(_ c: Connector, value: String) -> String {
+        c.renderedText(value: value, tokens: tokens(for: c))
+    }
+
+    /// Jetons de format disponibles pour ce connecteur (vide hors sources spéciales).
+    private func tokens(for c: Connector) -> [String: String] {
+        guard c.special == .claudeQuota, let quota = claudeQuota else { return [:] }
+        return ClaudeQuotaSource.tokens(quota)
+    }
+
     private func refresh(_ c: Connector) async {
         lastRun[c.id] = Date()
         let (value, error) = await fetchValue(c)
         if let value {
             lastValue[c.id] = value
             lastError[c.id] = nil
-            await push(c, text: c.renderedText(value: value))
+            await push(c, text: renderedText(c, value: value))
         } else if !c.fallbackText.isEmpty {
             // Pas de donnée (ex. Spotify en pause) → on affiche le texte de repli au lieu de rester figé.
             lastValue[c.id] = nil
@@ -172,9 +219,10 @@ final class ConnectorsStation: ObservableObject {
     private func push(_ c: Connector, text: String) async {
         guard let device = store?.selectedDevice else { return }
         await ensureIcon(c, host: device.host)
-        // Quota Claude : la couleur suit le niveau (vert → orange → rouge) au lieu d'être fixe.
+        // Quota Claude en mode auto : la couleur suit le niveau (vert → orange → rouge).
+        // Sinon on respecte la couleur choisie dans l'éditeur.
         var color = c.colorHex
-        if c.special == .claudeQuota {
+        if c.usesLevelColor, c.special == .claudeQuota {
             let worst = max(specialMetrics["claude.session"] ?? 0, specialMetrics["claude.weekly"] ?? 0)
             color = ClaudeQuotaSource.color(forPercent: worst)
         }
@@ -186,13 +234,15 @@ final class ConnectorsStation: ObservableObject {
     }
 
     /// Téléverse l'icône par défaut (ID LaMetric numérique) une seule fois si elle n'est pas déjà sur le device.
+    /// La mémoire est indexée par afficheur : changer de device re-téléverse ce qu'il lui manque.
     private func ensureIcon(_ c: Connector, host: String) async {
         let icon = c.icon.trimmingCharacters(in: .whitespaces)
-        guard !icon.isEmpty, icon.allSatisfy(\.isNumber), !uploadedIcons.contains(icon) else { return }
+        let key = "\(host)#\(icon)"
+        guard !icon.isEmpty, icon.allSatisfy(\.isNumber), !uploadedIcons.contains(key) else { return }
         if let data = try? await LaMetricService.fetchIcon(id: icon),
            let gif = IconConverter.awtrixGIF(from: data) {
             try? await AwtrixClient(host: host).uploadIcon(id: icon, data: gif, ext: "gif")
-            uploadedIcons.insert(icon)
+            uploadedIcons.insert(key)
         }
     }
 

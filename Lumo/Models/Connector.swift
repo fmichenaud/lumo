@@ -57,9 +57,19 @@ struct Connector: Identifiable, Codable, Hashable {
     var template: String = "{value}"
     var fallbackText: String = ""   // affiché quand l'API ne renvoie aucune donnée (ex. Spotify en pause)
     var colorHex: String = "#FFC400"
+    /// Couleur pilotée par la valeur (vert → orange → rouge) plutôt que par `colorHex`.
+    /// Optionnel pour rester compatible avec les connecteurs déjà enregistrés :
+    /// nil = comportement historique (auto pour le quota Claude, fixe ailleurs).
+    var levelColor: Bool?
     var icon: String = ""
     var intervalSeconds: Int = 60
     var enabled: Bool = false
+
+    /// Vrai quand la couleur affichée suit le niveau au lieu de la couleur choisie.
+    var usesLevelColor: Bool { levelColor ?? (special == .claudeQuota) }
+
+    /// Vrai pour les sources dont la couleur peut suivre un niveau.
+    var supportsLevelColor: Bool { special == .claudeQuota }
 
     var appName: String {
         let cleaned = name.lowercased()
@@ -68,8 +78,13 @@ struct Connector: Identifiable, Codable, Hashable {
         return cleaned.isEmpty ? "api_\(id.uuidString.prefix(4))" : cleaned
     }
 
-    func renderedText(value: String) -> String {
-        template.replacingOccurrences(of: "{value}", with: value)
+    /// Applique le format : `{value}` plus les jetons propres à la source (ex. `{reset}`).
+    func renderedText(value: String, tokens: [String: String] = [:]) -> String {
+        var text = template.replacingOccurrences(of: "{value}", with: value)
+        for (key, replacement) in tokens {
+            text = text.replacingOccurrences(of: "{\(key)}", with: replacement)
+        }
+        return text
     }
 
     /// En-têtes finaux de la requête (auth + en-têtes additionnels).
@@ -97,13 +112,14 @@ struct Connector: Identifiable, Codable, Hashable {
 }
 
 /// Modèle de connecteur prêt à l'emploi.
-struct ConnectorTemplate: Identifiable {
+/// `Sendable` (et `build` avec lui) parce que le catalogue est une constante globale.
+struct ConnectorTemplate: Identifiable, Sendable {
     let id = UUID()
     let title: String
     let subtitle: String
     let symbol: String          // SF Symbol pour la vignette du modèle
     let category: String
-    let build: () -> Connector
+    let build: @Sendable () -> Connector
 
     /// Ordre d'affichage des catégories.
     static let categoryOrder = ["Crypto", "Devises", "Développeur", "Espace", "Fun", "Maison", "Services", "Social", "Custom"]
@@ -214,8 +230,9 @@ struct ConnectorTemplate: Identifiable {
         },
 
         // Services (sources spéciales / OAuth)
-        .init(title: "Quota Claude Code", subtitle: "Session 5 h + semaine, via le Trousseau — rien à configurer", symbol: "sparkles", category: "Services") {
-            var c = Connector(name: "Claude", template: "CC {value}", colorHex: "#3DD68C", intervalSeconds: 60)
+        .init(title: "Quota Claude Code", subtitle: "Session 5 h + semaine + temps avant reset, via le Trousseau", symbol: "sparkles", category: "Services") {
+            var c = Connector(name: "Claude", template: "CC {session} · {reset} · 7j {week}",
+                              colorHex: "#3DD68C", intervalSeconds: 60)
             c.special = .claudeQuota
             return c
         },
