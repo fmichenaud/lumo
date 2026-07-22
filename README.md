@@ -10,7 +10,9 @@ L'interface officielle est austère et demande des manipulations techniques ; Lu
 
 ## ⬇️ Télécharger
 
-Récupérez le `.dmg` dans la page [Releases](../../releases). L'app n'est pas notarisée (pas de compte Apple Developer payant) : au **premier lancement**, faites **clic droit → Ouvrir** (une seule fois). Ou compilez depuis les sources (voir plus bas).
+Récupérez le `.dmg` dans la page [Releases](../../releases) : l'app est signée Developer ID et notarisée par Apple, elle s'ouvre donc d'un simple double-clic. Ou compilez depuis les sources (voir plus bas).
+
+Les évolutions de chaque version sont dans le [CHANGELOG](CHANGELOG.md).
 
 ## ✨ Fonctionnalités
 
